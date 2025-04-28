@@ -1,0 +1,9 @@
+err:
+
+out:
+useWideChars: -1
+printInternalMessages: -1
+useMilitaryTime: -1
+useWideChars: 1
+printInternalMessages: 0
+useMilitaryTime: 0

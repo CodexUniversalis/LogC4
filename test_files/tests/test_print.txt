@@ -1,0 +1,33 @@
+char
+init
+010
+stderr
+print
+6
+TESTPRINT
+cool file.hehe
+awesome func name
+Hello world
+World, Hi!
+LogC4 is so cool and not a random heap. ;)
+lkasjflkasjflkasdjfalksjfalksdjf
+lkasdjflkasjf;lasdfj;lasd\\%fjklasdjfoijiojoi  2194821094 kljlkjl		alkjdflkasjf
+aasdkfl;	lajflasjflaksjfasjij13%\9809580980981./o7uol		
+stdout
+print
+1
+silly
+goose
+the goosiest of sillies
+is the silliest of gooses
+stderr
+do nothing with this line
+stdout
+stderr
+print
+2
+extra
+prin_t
+test
+This is is test
+The utmost of tests

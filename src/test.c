@@ -1,0 +1,770 @@
+/**
+  * @file test.c
+  * @author CodexUniversalis (codexuniversalisprime@gmail.com)
+  * @brief The entry point for testing the @a LogC4 library.
+  * @version 0.1.0
+  * @date 2025-04-24
+  * @copyright Copyright (c) 2025
+*/
+#include "logc4.h"
+#include <errno.h>
+#include <linux/limits.h>
+#include <locale.h>
+#include <stdarg.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <wchar.h>
+
+/**
+  * @brief A wide character string.
+*/
+// TODO: Determine if to change this to String struct containing a wide
+// character and a normal character string
+typedef struct{
+    /**
+      * @brief The wide character string.
+    */
+    wchar_t *str;
+    /**
+      * @brief The length of the wide character string.
+    */
+    size_t len;
+} WStr;
+
+/**
+  * @brief Frees all of the allocated memory of the given @a WStr and sets
+  * all of the properties to default values.
+  *
+  * @param wStr The @a WStr to free.
+*/
+static void freeWStr(WStr wStr){
+    free(wStr.str);
+    wStr.str = NULL;
+    wStr.len = 0;
+}
+
+/* Whether to use wide characters in the output for the test. */
+static bool wideChars = false;
+/* The test file stream pointer. */
+static FILE *testFilePtr = NULL;
+/* The output file for stdout output. */
+static FILE *stdoutput = NULL;
+/* The relative path of stdoutput file. */
+static char *stdoutputPath = "../out/prog_out/stdout.log";
+/* The output file for stdout output. */
+static FILE *stderrout = NULL;
+/* The relative path of stdoutput file. */
+static char *stderroutPath = "../out/prog_out/stderr.log";
+/* The standard log output file. */
+static FILE *logOut = NULL;
+/* The absolute path of the standard log output file. */
+static char *logOutPath = NULL;
+/* The error log output file. */
+static FILE *logErr = NULL;
+/* The absolute path of the error log output file. */
+static char *logErrPath = NULL;
+/* The max length (100) of the test file line. */
+static size_t LINE_LENGTH = 100;
+/* Whether a test file was given or not. */
+static bool hasTestFile = false;
+/* The absolute file path to the given test file. */
+static char *fullFilePath = NULL;
+/* The function aliases in the test file. */
+static WStr testFuncts[] = {
+    {L"char", 4},
+    {L"wchar", 5},
+    {L"init", 4},
+    {L"outputlog", 9},
+    {L"erroutlog", 9},
+    {L"uwc", 3},
+    {L"pim", 3},
+    {L"umt", 3},
+    {L"print", 5},
+    {0}
+};
+
+/*
+Checks if the given pointer has memory allocated to it.
+*/
+static int checkAlloc(void *ptr, int allocFunc){
+    if(!ptr || errno == ENOMEM){
+        char *alloc;
+        switch(allocFunc){
+            case 1:
+                alloc = "m";
+                break;
+            case 2:
+                alloc = "c";
+                break;
+            case 3:
+                alloc = "re";
+                break;
+            default:
+                alloc = "unknown_";
+                break;
+        }
+        if(wideChars){
+            fwprintf(stderr,
+                     L"{test.c} Error: Memory allocation function '%salloc()' "
+                     L"failed to allocate memory.\n", alloc);
+        }
+        else{
+            fprintf(stderr,
+                    "{test.c} Error: Memory allocation function '%salloc()' "
+                    "failed to allocate memory.\n", alloc);
+        }
+        exit(-allocFunc);
+    }
+    return 0;
+}
+
+/*
+Gets the current line for the test file.
+*/
+static WStr getLine(FILE *filePtr){
+    WStr line = {0};
+    wchar_t *temp = calloc(LINE_LENGTH, sizeof(wchar_t));
+    checkAlloc(temp, 2);
+    line.str = fgetws(temp, LINE_LENGTH, filePtr);
+    if(line.str != NULL){
+        line.len = wcslen(line.str) - 1;
+        line.str[line.len] = L'\0';
+        temp = realloc(line.str, (line.len + 1) * sizeof(wchar_t));
+        checkAlloc(temp, 3);
+        line.str = temp;
+    }
+    else{
+        free(temp);
+    }
+    return line;
+}
+
+/*
+Opens the test file.
+*/
+static void openTestFile(char *filePath){
+    if(!hasTestFile){
+        testFilePtr = fopen(filePath, "r");
+        fullFilePath = realpath(filePath, NULL);
+        if(fullFilePath == NULL){
+            fullFilePath = calloc(strlen(filePath) + 1, sizeof(char));
+            strncat(fullFilePath, filePath, strlen(filePath));
+        }
+        else{
+            char *temp = realloc(fullFilePath, strlen(fullFilePath) + 1);
+            checkAlloc(temp, 3);
+            fullFilePath = temp;
+        }
+        if(!testFilePtr){
+            if(wideChars){
+                fwprintf(stderr, L"{test.c} Error: Cannnot open test "
+                         "file: %s\n", fullFilePath);
+            }
+            else{
+                fprintf(stderr, "{test.c} Error: Cannnot open test file: %s\n",
+                        fullFilePath);
+            }
+            return;
+        }
+        hasTestFile = true;
+    }
+    else{
+        if(wideChars){
+            fwprintf(stderr, L"{test.c} Error: Already opened test file: %s\n",
+                     fullFilePath);
+        }
+        else{
+            fprintf(stderr, "{test.c} Error: Already opened test file: %s\n",
+                    fullFilePath);
+        }
+    }
+}
+
+/*
+This gets the function that is present in the given string.
+*/
+static WStr getFunc(WStr str){
+    int i = 0;
+    WStr func = {0};
+    while((func = testFuncts[i++]).len != 0){
+        if(wcscmp(str.str, func.str) == 0){
+            break;
+        }
+    }
+    return func;
+}
+
+/*
+Reads and interprets the test file line by line.
+*/
+static void runTestFile(){
+    if(!hasTestFile){
+        return;
+    }
+    bool wideChars = false;
+    WStr line;
+    while((line = getLine(testFilePtr)).len != 0){
+        WStr func = getFunc(line);
+        if(func.len != 0){
+            if(wcscmp(func.str, L"char") == 0){
+                wideChars = false;
+            }
+            else if(wcscmp(func.str, L"wchar") == 0){
+                wideChars = true;
+            }
+            else if(wcscmp(func.str, L"init") == 0){
+                freeWStr(line);
+                line = getLine(testFilePtr);
+
+                int uwc = (int)(line.str[0] - L'0');
+                int pim = line.len > 1 ? (int)(line.str[1] - L'0') : 0;
+                int umt = line.len > 2 ? (int)(line.str[2] - L'0') : 0;
+                logc4_init(uwc, pim, umt);
+            }
+            else if(wcscmp(func.str, L"outputlog") == 0){
+
+            }
+            else if(wcscmp(func.str, L"erroutlog") == 0){
+
+            }
+            else if(wcscmp(func.str, L"uwc") == 0){
+                if(wideChars){
+                    fwprintf(stdoutput, L"useWideChars: %d\n",
+                             logc4_logCharType());
+                }
+                else{
+                    fprintf(stdoutput, "useWideChars: %d\n",
+                            logc4_logCharType());
+                }
+            }
+            else if(wcscmp(func.str, L"pim") == 0){
+                if(wideChars){
+                    fwprintf(stdoutput, L"printInternalMessages: %d\n",
+                             logc4_logPrintIntMsgs());
+                }
+                else{
+                    fprintf(stdoutput, "printInternalMessages: %d\n",
+                            logc4_logPrintIntMsgs());
+                }
+            }
+            else if(wcscmp(func.str, L"umt") == 0){
+                if(wideChars){
+                    fwprintf(stdoutput, L"useMilitaryTime: %d\n",
+                             logc4_logTimeFormat());
+                }
+                else{
+                    fprintf(stdoutput, "useMilitaryTime: %d\n",
+                            logc4_logTimeFormat());
+                }
+            }
+            else if(wcscmp(func.str, L"print") == 0){
+                freeWStr(line);
+                line = getLine(testFilePtr);
+                int numLines = (int)wcstol(line.str, NULL, 10);
+                freeWStr(line);
+
+                WStr msgType = getLine(testFilePtr);
+                WStr fileName = getLine(testFilePtr);
+                WStr funcName = getLine(testFilePtr);
+
+                if(logOutPath != NULL){
+                    logc4_setLogFile(logOutPath, false);
+                }
+
+                for(int i = 0; i < numLines; i++){
+                    if(i != 0){
+                        freeWStr(line);
+                    }
+                    line = getLine(testFilePtr);
+                    logc4_print(true, msgType.str, fileName.str,
+                                funcName.str, L"%ls", line.str);
+                }
+                freeWStr(msgType);
+                freeWStr(fileName);
+                freeWStr(funcName);
+            }
+        }
+        freeWStr(line);
+    }
+}
+
+/*
+Closes the test file stream and frees all memory allocated during test file
+testing.
+*/
+static void closeTestFile(){
+    if(hasTestFile){
+        fclose(testFilePtr);
+        testFilePtr = NULL;
+        logc4_closeLogFiles();
+        hasTestFile = false;
+    }
+    if(fullFilePath != NULL){
+        free(fullFilePath);
+        fullFilePath = NULL;
+    }
+}
+
+/**
+  * @brief Create all parent directories and open a file descriptor for the
+  * given absolute/relative path.
+  *
+  * @param filePath The absolute/relative file to create and open.
+  * @return FILE* @a NULL if there was a problem creating the parent
+  * directories or opening the file, or the file descriptor of the given file.
+*/
+static FILE *createAndOpen(char *filePath){
+    return fopen(filePath, "r");
+}
+
+/**
+  * @brief Completely test the given test file.
+  *
+  * @param filePath The absolute/relative path of the test file.
+*/
+static void testFile(char *filePath){
+    stdoutput = createAndOpen(stdoutputPath);
+    stderrout = createAndOpen(stderroutPath);
+    openTestFile(filePath);
+    runTestFile();
+    closeTestFile();
+    fclose(stdoutput);
+    fclose(stderrout);
+}
+
+/**
+  * @brief Get the next @a wint_t character from the given string at the given
+  * position + 1.
+  *
+  * @param ch A pointer to a @a wint_t variable.
+  * @param string The @a WStr struct to get the character from.
+  * @param pos The current position within the string.
+  * @return bool @a false if there is no next character, @a true otherwise.
+*/
+static bool getNextChar(wint_t *ch, WStr string, size_t *pos){
+    if(*pos >= string.len){
+        logc4_printerr(false, LOGC4_ERROR, "test.c", "getNextChar",
+                       "Trying to access a character outside of the string's "
+                       "bounds.");
+        return false;
+    }
+    *ch = string.str[++(*pos)];
+    return true;
+}
+
+/**
+  * @brief Checks the given @a WStr from the given position if it matches any
+  * of the special escape characters.
+  *
+  * @param code The special escape code.
+  * @param string The @a WStr to check.
+  * @param pos The position of the first character check.
+  * @return int @a 1 if the check failed during escape code of @a '!', @a 2 if
+  * the check failed during escape code of @a '@', @a 0 otherwise.
+*/
+static int checkEsc(wint_t code, WStr string, size_t *pos){
+    wint_t prevChar = 0;
+    wint_t currChar = 0;
+    if(code == L'!'){
+        currChar = string.str[*pos];
+        if(currChar != L'0' && currChar != L'1'){
+            return 1;
+        }
+        prevChar = currChar;
+        if(!getNextChar(&currChar, string, pos)){
+            return 1;
+        }
+        switch(prevChar){
+            case L'0':
+                if(currChar <= L'0' || currChar > L'9'){
+                    return 1;
+                }
+                break;
+            case L'1':
+                if(currChar < L'0' || currChar > L'2'){
+                    return 1;
+                }
+                break;
+            default:
+                return 1;
+        }
+        for(int i = 0; i < 6; i++){
+            prevChar = currChar;
+            if(!getNextChar(&currChar, string, pos)){
+                return 1;
+            }
+            switch(i % 3){
+                case 0:
+                    if(currChar != L':'){
+                        return 1;
+                    }
+                    break;
+                case 1:
+                    if(currChar < L'0' || currChar > L'5'){
+                        return 1;
+                    }
+                    break;
+                case 2:
+                    if(currChar < L'0' || currChar > L'9'){
+                        return 1;
+                    }
+                    break;
+                default:
+                    return 1;
+            }
+        }
+        prevChar = currChar;
+        if(!getNextChar(&currChar, string, pos)){
+            return 1;
+        }
+        if(currChar != L' '){
+            return 1;
+        }
+        prevChar = currChar;
+        if(!getNextChar(&currChar, string, pos)){
+            return 1;
+        }
+        if(currChar != L'A' && currChar != L'P'){
+            return 1;
+        }
+        prevChar = currChar;
+        if(!getNextChar(&currChar, string, pos)){
+            return 1;
+        }
+        if(currChar != L'M'){
+            return 1;
+        }
+    }
+    else if(code == L'@'){
+        currChar = string.str[*pos];
+        if(currChar < L'0' || currChar > L'2'){
+            return 2;
+        }
+        prevChar = currChar;
+        if(!getNextChar(&currChar, string, pos)){
+            return 2;
+        }
+        switch(prevChar){
+            case L'0':
+            case L'1':
+                if(currChar < L'0' || currChar > L'9'){
+                    return 2;
+                }
+                break;
+            case L'2':
+                if(currChar < L'0' || currChar > L'3'){
+                    return 2;
+                }
+                break;
+            default:
+                return 2;
+        }
+        for(int i = 0; i < 6; i++){
+            prevChar = currChar;
+            if(!getNextChar(&currChar, string, pos)){
+                return 2;
+            }
+            switch(i % 3){
+                case 0:
+                    if(currChar != L':'){
+                        return 2;
+                    }
+                    break;
+                case 1:
+                    if(currChar < L'0' || currChar > L'5'){
+                        return 2;
+                    }
+                    break;
+                case 2:
+                    if(currChar < L'0' || currChar > L'9'){
+                        return 2;
+                    }
+                    break;
+                default:
+                    return 2;
+            }
+        }
+    }
+    return 0;
+}
+
+/* The wide character that denotes an escapable character may follow. */
+static wint_t spcEscCh = L'\\';
+/* An array of the special escape characters that can make up the test files
+being compared. */
+static WStr spcEsc = {L"!@", 2};
+
+/*
+Compares the given two files by either wide characters or normal characters.
+*/
+static int cmpFiles(const char *file1, const char *file2, const int wideChars){
+    FILE *file1_fd = fopen(file1, "r");
+    if(file1_fd == NULL){
+        logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpfiles", "Cannot open "
+                       "the first file: %s.", file1);
+        return -1;
+    }
+    FILE *file2_fd = fopen(file2, "r");
+    if(file2_fd == NULL){
+        logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpfiles", "Cannot open "
+                       "the second file: %s.", file2);
+        fclose(file1_fd);
+        return -1;
+    }
+    int numChars = 250;
+    wchar_t *line1 = calloc(numChars, sizeof(wchar_t));
+    wchar_t *l1Ret = NULL;
+    wchar_t *line2 = calloc(numChars, sizeof(wchar_t));
+    wchar_t *l2Ret = NULL;
+    while((l1Ret = fgetws(line1, numChars, file1_fd)) != NULL &&
+          (l2Ret = fgetws(line2, numChars, file2_fd)) != NULL){
+        size_t l1Len = wcslen(line1);
+        size_t l1Pos = 0;
+        size_t l2Len = wcslen(line2);
+        size_t l2Pos = 0;
+        wint_t ch1 = 0;
+        wint_t ch2 = 0;
+        int escIndex = -1;
+        while(l1Pos < l1Len && l2Pos < l2Len){
+            ch1 = line1[l1Pos];
+            ch2 = line2[l2Pos];
+            if(!wideChars){
+                if(ch1 > 127){
+                    logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
+                                   "The first file (%s) contains a non-ASCII "
+                                   "character.", file1);
+                    fclose(file1_fd);
+                    fclose(file2_fd);
+                    free(line1);
+                    free(line2);
+                    return 1;
+                }
+                else if(ch2 > 127){
+                    logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
+                                   "The second file (%s) contains a non-ASCII "
+                                   "character.", file1);
+                    fclose(file1_fd);
+                    fclose(file2_fd);
+                    free(line1);
+                    free(line2);
+                    return 1;
+                }
+                else if(ch1 != ch2){
+                    logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
+                                   "The first file (%s) and the second "
+                                   "file (%s) do not match ASCII characters.",
+                                   file1, file2);
+                    fclose(file1_fd);
+                    fclose(file2_fd);
+                    free(line1);
+                    free(line2);
+                    return 1;
+                }
+                l1Pos++;
+                l2Pos++;
+                continue;
+            }
+            if(ch1 == spcEscCh){
+                if(l1Pos < l1Len - 1){
+                    wint_t temp = line1[l1Pos + 1];
+                    for(size_t i = 0; i < spcEsc.len; i++){
+                        if(temp == (wint_t)spcEsc.str[i]){
+                            escIndex = i;
+                            break;
+                        }
+                    }
+                }
+                if(escIndex != -1){
+                    int retVal = checkEsc(spcEsc.str[escIndex], (WStr){
+                        line2, l2Len
+                    }, &l2Pos);
+                    switch(retVal){
+                        case 1:
+                            logc4_printerr(false, LOGC4_ERROR, "test.c",
+                                           "cmpFiles", "The second file (%s) "
+                                           "does not match the first "
+                                           "file (%s) because of a 12-hour "
+                                           "time format.", file2, file1);
+                            fclose(file1_fd);
+                            fclose(file2_fd);
+                            free(line1);
+                            free(line2);
+                            return 1;
+                        case 2:
+                            logc4_printerr(false, LOGC4_ERROR, "test.c",
+                                           "cmpFiles", "The second file (%s) "
+                                           "does not match the first "
+                                           "file (%s) because of a 24-hour "
+                                           "time format.", file2, file1);
+                            fclose(file1_fd);
+                            fclose(file2_fd);
+                            free(line1);
+                            free(line2);
+                            return 1;
+                        default:
+                            l1Pos += 2;
+                            l2Pos += 1;
+                            break;
+                    }
+                    escIndex = -1;
+                    continue;
+                }
+            }
+            if(ch2 == spcEscCh){
+                if(l2Pos < l2Len - 1){
+                    wint_t temp = line2[l2Pos + 1];
+                    for(size_t i = 0; i < spcEsc.len; i++){
+                        if(temp == (wint_t)spcEsc.str[i]){
+                            escIndex = i;
+                            break;
+                        }
+                    }
+                }
+                if(escIndex != -1){
+                    int retVal = checkEsc(spcEsc.str[escIndex], (WStr){
+                        line1, l1Len
+                    }, &l1Pos);
+                    switch(retVal){
+                        case 1:
+                            logc4_printerr(false, LOGC4_ERROR, "test.c",
+                                           "cmpFiles", "The first file (%s) "
+                                           "does not match the second "
+                                           "file (%s) because of a 12-hour "
+                                           "time format.", file1, file2);
+                            fclose(file1_fd);
+                            fclose(file2_fd);
+                            free(line1);
+                            free(line2);
+                            return 1;
+                        case 2:
+                            logc4_printerr(false, LOGC4_ERROR, "test.c",
+                                           "cmpFiles", "The first file (%s) "
+                                           "does not match the second "
+                                           "file (%s) because of a 24-hour "
+                                           "time format.", file1, file2);
+                            fclose(file1_fd);
+                            fclose(file2_fd);
+                            free(line1);
+                            free(line2);
+                            return 1;
+                        default:
+                            l2Pos += 2;
+                            l1Pos += 1;
+                            break;
+                    }
+                    escIndex = -1;
+                    continue;
+                }
+            }
+            if(ch1 != ch2){
+                logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
+                               "The first file (%s) and the second file (%s) "
+                               "do not match wide characters.", file1, file2);
+                fclose(file1_fd);
+                fclose(file2_fd);
+                free(line1);
+                free(line2);
+                return 1;
+            }
+            l1Pos++;
+            l2Pos++;
+        }
+        if(l1Pos == l1Len && l2Pos != l2Len){
+            logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
+                           "The second file (%s) does not match the first "
+                           "file (%s) because a line in the second file is "
+                           "longer.", file2, file1);
+            fclose(file1_fd);
+            fclose(file2_fd);
+            free(line1);
+            free(line2);
+            return 1;
+        }
+        else if(l1Pos != l1Len && l2Pos == l2Len){
+            logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
+                           "The first file (%s) does not match the second "
+                           "file (%s) because a line in the first file is "
+                           "longer.", file1, file2);
+            fclose(file1_fd);
+            fclose(file2_fd);
+            free(line1);
+            free(line2);
+            return 1;
+        }
+    }
+    if(l1Ret != NULL && l2Ret == NULL){
+        l1Ret = fgetws(line1, numChars, file1_fd);
+        if(l1Ret != NULL){
+            logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
+                           "The first file (%s) is longer than the second "
+                           "file (%s).", file1, file2);
+            fclose(file1_fd);
+            fclose(file2_fd);
+            free(line1);
+            free(line2);
+            return 2;
+        }
+    }
+    else if(l1Ret == NULL && l2Ret != NULL){
+        l2Ret = fgetws(line2, numChars, file2_fd);
+        if(l2Ret != NULL){
+            logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
+                           "The second file (%s) is longer than the first "
+                           "file (%s).", file2, file1);
+            fclose(file1_fd);
+            fclose(file2_fd);
+            free(line1);
+            free(line2);
+            return 2;
+        }
+    }
+    fclose(file1_fd);
+    fclose(file2_fd);
+    free(line1);
+    free(line2);
+    return 0;
+}
+
+/**
+  * @brief The main entry point of the program.
+  *
+  * @param argc The number of arguments passed to the program.
+  * @param argv The arguments passed to the program.
+  * @return int The exit code of the program.
+*/
+int main(int argc, char **argv){
+    if(argc <= 1){
+        printf("Usage: logc4_test (cmp | test) [FILE...].\n");
+        return -1;
+    }
+    setlocale(LC_ALL, "");
+    if(strcmp("cmp", argv[1]) == 0){
+        logc4_init(1, 1, 1);
+        if(argc <= 4){
+            printf("ERROR: The /cmp/ subcommand requires three (3) file "
+                   "paths. The first is the log output and the last two are "
+                   "the files to compare.\n");
+            return 2;
+        }
+        logc4_setLogFile(argv[2], 0);
+        logc4_setErrLogFile(argv[2], 0);
+        int retVal = cmpFiles(argv[3], argv[4], true);
+        logc4_closeLogFiles();
+        return retVal;
+    }
+    else if(strcmp("test", argv[1]) == 0){
+        if(argc == 2){
+            printf("ERROR: No file(s) passed to the /test/ subcommand.\n");
+            return 2;
+        }
+        // Assume all arguments after the second one to be test files.
+        for(int i = 2; i < argc; i++){
+            testFile(argv[i]);
+        }
+        return 0;
+    }
+    printf("ERROR: Unknown subcommand /%s/.\n", argv[1]);
+    return 1;
+}

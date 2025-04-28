@@ -1,0 +1,10 @@
+char
+stdout
+uwc
+pim
+umt
+init
+100
+uwc
+pim
+umt

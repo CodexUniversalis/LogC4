@@ -1,0 +1,94 @@
+.\" Copyright (c) 2024 CodexUniversalis (codexuniversalisprime@gmail.com)
+.\"
+.\" 2025-04-27 CodexUniversalis - Wrote the man page.
+.\"
+.TH LOGC4_STDLOG 3 2025-04-27 CodexUniversalis "LogC4 Library Manual"
+.SH NAME
+logc4_stdLog \- logs a formatted normal
+.RB ( ASCII )
+character string to standard output
+.SH SYNOPSIS
+.nf
+.B #include <logc4.h>
+.PP
+.BI "int logc4_stdLog(const logc4_msg_t " msgType ", const bool " charType \
+", const void *" format ", " ... );
+.fi
+.SH DESCRIPTION
+The
+.BR logc4_stdLog ()
+function logs the given format string to 
+.I stdout
+or
+.IR stderr ,
+depending on the message type.
+The format specifiers are equivalent to
+.IR printf (3).
+.PP
+The argument
+.I msgType
+specifies the type of log message using the
+.I logc4_msg_t
+enum.
+If the enum is
+.IR LOGC4_ERROR ,
+then the log message is printed to
+.IR stderr .
+.PP
+The argument
+.I charType
+specifies the type of the
+.I format
+string being either a normal or a wide string.
+If set to
+.IR false ,
+then nothing special happens. If set to
+.IR true ,
+then the given wide character string is converted to a normal string.
+If passed a wide character string then the given wide character string is \
+converted to a normal character string and printed.
+All
+.B non-ASCII
+characters are converted to their multi-byte equivalent.
+If viewing the file in an editor that accepts
+.B UTF-8
+characters, then the multi-byte character will be displayed properly.
+Otherwise, passed a normal character string, nothing happens other than \
+substitutions.
+.PP
+All subsequent arguments
+.RB ( ... )
+are substituted into the format string and the result is logged to the passed \
+log file.
+.SH RETURN VALUE
+Upon successful execution,
+.BR logc4_stdLog ()
+returns the number of characters printed to either
+.I stdout
+or
+.IR stderr .
+Otherwise,
+.I -1
+is returned and the most recent system error will be specified by
+.IR errno .
+.SH SEE ALSO
+.BR errno (3),
+.BR printf(3),
+.BR logc4_msg_t (7)
+.SH AUTHOR
+Written by CodexUniversalis
+.RI ( codexuniversalis@gmail.com ).
+.SH COPYRIGHT
+Copyright © 2025 CodexUniversalis. License
+.IR MIT .
+.SH GITHUB
+Here is a link to the GitHub repository for the
+.I LogC4
+library:
+\%https://github.com/CodexUniversalis/LogC4/.
+.SH COLOPHON
+This page is part of release 0.1.0 of the
+.I LogC4
+library. A description of the project, information about reporting bugs, and \
+the latest version of this page, can be found at
+\%https://projects.codexuniversalis.dev/C/LogC4/.

@@ -1,0 +1,51 @@
+.\" Copyright (c) 2024 CodexUniversalis (codexuniversalisprime@gmail.com)
+.\"
+.\" 2025-04-27 CodexUniversalis - Wrote the man page.
+.\"
+.TH LOGC4_FILECLOSE 3 2025-04-27 CodexUniversalis "LogC4 Library Manual"
+.SH NAME
+logc4_fileClose \- closes a file that was used for logging
+.SH SYNOPSIS
+.nf
+.B #include <logc4.h>
+.PP
+.BI "void logc4_fileClose(logc4_file_t *" logFile );
+.fi
+.SH DESCRIPTION
+The
+.BR logc4_fileOpen ()
+function uses
+.BR fclose ()
+to close the file stream associated with the passed
+.I logFile
+struct.
+All pointers and allocated memory from
+.BR logc4_fileOpen ()
+within the struct will be freed and set to NULL.
+.SH RETURN VALUE
+Upon execution,
+.BI logc4_fileClose ()
+returns nothing.
+.SH SEE ALSO
+.BR fclose (3),
+.BR logc4_fileOpen (3),
+.BR logc4_file_t (7)
+.SH AUTHOR
+Written by CodexUniversalis
+.RI ( codexuniversalis@gmail.com ).
+.SH COPYRIGHT
+Copyright © 2025 CodexUniversalis.
+License
+.IR MIT .
+.SH GITHUB
+Here is a link to the GitHub repository for the
+.I LogC4
+library:
+\%https://github.com/CodexUniversalis/LogC4/.
+.SH COLOPHON
+This page is part of release 0.1.0 of the
+.I LogC4
+library.
+A description of the project, information about reporting bugs, and the \
+latest version of this page, can be found at
+\%https://projects.codexuniversalis.dev/C/LogC4/.

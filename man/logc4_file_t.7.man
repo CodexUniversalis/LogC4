@@ -1,0 +1,44 @@
+.\" Copyright (c) 2024 CodexUniversalis (codexuniversalisprime@gmail.com)
+.\"
+.\" 2025-04-27 CodexUniversalis - Wrote the man page.
+.\"
+.TH LOGC4_FILE_T 7 2025-04-27 CodexUniversalis "LogC4 Library Manual"
+.SH NAME
+logc4_file_t \- the
+.I LogC4
+library log file data type
+.SH DESCRIPTION
+.TP
+.I logc4_file_t
+.PP
+.RS
+.IR Include : <logc4.h> .
+.PP
+.EX
+struct logc4_file_t {
+    FILE  file;     /* Log FILE pointer */
+    char *filePath; /* Absolute path of file */
+    bool  charType; /* Character type of log file */
+    bool  timeZone; /* Timezone of the log file */
+}
+.EE
+.PP
+This contains all required information for a log file.
+.RE
+.SH AUTHOR
+Written by CodexUniversalis
+.RI ( codexuniversalis@gmail.com ).
+.SH COPYRIGHT
+Copyright © 2025 CodexUniversalis. License
+.IR MIT .
+.SH GITHUB
+Here is a link to the GitHub repository for the
+.I LogC4
+library:
+\%https://github.com/CodexUniversalis/LogC4/.
+.SH COLOPHON
+This page is part of release 0.1.0 of the
+.I LogC4
+library. A description of the project, information about reporting bugs, and \
+the latest version of this page, can be found at
+\%https://projects.codexuniversalis.dev/C/LogC4/.

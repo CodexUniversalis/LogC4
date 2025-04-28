@@ -1,0 +1,12 @@
+err:
+
+out:
+\! [TESTPRINT](cool file.hehe/awesome func name) Hello world
+\! [TESTPRINT](cool file.hehe/awesome func name) World, Hi!
+\! [TESTPRINT](cool file.hehe/awesome func name) LogC4 is so cool and not a random heap. ;)
+\! [TESTPRINT](cool file.hehe/awesome func name) lkasjflkasjflkasdjfalksjfalksdjf
+\! [TESTPRINT](cool file.hehe/awesome func name) lkasdjflkasjf;lasdfj;lasd\\%fjklasdjfoijiojoi  2194821094 kljlkjl		alkjdflkasjf
+\! [TESTPRINT](cool file.hehe/awesome func name) aasdkfl;	lajflasjflaksjfasjij13%\9809580980981./o7uol		
+\! [silly](goose/the goosiest of sillies) is the silliest of gooses
+\! [extra](prin_t/test) This is is test
+\! [extra](prin_t/test) The utmost of tests

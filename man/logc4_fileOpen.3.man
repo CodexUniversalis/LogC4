@@ -1,0 +1,96 @@
+.\" Copyright (c) 2024 CodexUniversalis (codexuniversalisprime@gmail.com)
+.\"
+.\" 2025-04-27 CodexUniversalis - Wrote the man page.
+.\"
+.TH LOGC4_FILEOPEN 3 2025-04-27 CodexUniversalis "LogC4 Library Manual"
+.SH NAME
+logc4_fileOpen \- opens a file for logging
+.SH SYNOPSIS
+.nf
+.B #include <logc4.h>
+.PP
+.BI "logc4_file_t *logc4_fileOpen(const char *" filePath ", bool " append \
+", bool " charType ", bool " timeZone );
+.fi
+.SH DESCRIPTION
+The
+.BR logc4_fileOpen ()
+function uses
+.BR fopen ()
+to get a file stream from the given
+.I filePath
+and puts it into the returned struct.
+.PP
+The argument
+.I append
+is to set the logging to append (write at end of file) text.
+If set to
+.IR false ,
+then the file length is truncated and all previous text is overwritten, if it \
+existed. If set to
+.IR true ,
+then the file is appended to and all previous text is kept.
+.PP
+The argument
+.I charType
+is to set the logging to use wide
+.RB ( UTF-8 )
+characters instead of normal
+.RB ( ASCII )
+characters. If set to
+.IR false ,
+then normal characters are used when printing to the log file.
+If set to
+.IR true ,
+then wide characters are used when printing.
+.PP
+The argument
+.I timeZone
+is to set the desired timezone to be printed while logging.
+Currently, only
+.IR UTC ,
+i.e.
+.RI ( false ),
+and the computer's local time, i.e.
+.RI ( true ),
+are the only timezones implemented.
+Eventually, a set list of all recognized timezones will be implemented and \
+will be specified using a string constant passed to this function.
+.SH RETURN VALUE
+Upon successful execution,
+.BR logc4_fileOpen ()
+returns a
+.I logc4_file_t
+pointer.
+If the passed
+.I filePath
+has already been opened or
+.BR fopen ()
+encountered a problem, then NULL is returned and
+.I errno
+was set by
+.BR fopen ()
+to indicate the error.
+.SH SEE ALSO
+.BR errno (3),
+.BR fopen (3),
+.BR logc4_file_t (7)
+.SH AUTHOR
+Written by CodexUniversalis
+.RI ( codexuniversalis@gmail.com ).
+.SH COPYRIGHT
+Copyright © 2025 CodexUniversalis.
+License
+.IR MIT .
+.SH GITHUB
+Here is a link to the GitHub repository for the
+.I LogC4
+library:
+\%https://github.com/CodexUniversalis/LogC4/.
+.SH COLOPHON
+This page is part of release 0.1.0 of the
+.I LogC4
+library.
+A description of the project, information about reporting bugs, and the \
+latest version of this page, can be found at
+\%https://projects.codexuniversalis.dev/C/LogC4/.
