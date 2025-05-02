@@ -6,7 +6,8 @@
   * @date 2025-04-24: Created @n @n
   * Changelog
   * - 2025-04-24: Refactored file from previous failed project.
-  * - 2025-04-26: Changed a couple of
+  * - 2025-04-26: Changed a couple of comments.
+  * - 2025-05-01: Fixed file comments and added logc4_stdInit().
   * @copyright Copyright (c) 2025
 */
 #pragma once
@@ -74,6 +75,14 @@ typedef struct{
     */
     bool timeZone;
 } logc4_file_t;
+
+/**
+  * @brief Sets the desired character type for printing to the standard output.
+  *
+  * @param charType @a 0 (false) for normal (@a ASCII) characters.
+  * @a 1 (true) for wide (@a UTF-8) characters.
+*/
+void logc4_stdInit(const bool charType);
 
 /**
   * @brief Logs the @a char* format to @a stdout or @a stderr with the given
