@@ -5,7 +5,8 @@ PROJECT_NUMBER         = 1.0.0
 PROJECT_BRIEF          = "A lightweight logger for the C language."
 OUTPUT_DIRECTORY       = out\doxyfile
 REPEAT_BRIEF           = NO
-ALIASES                = "exitcode=@b Exit @b Code ^^"
+ALIASES                = "exitcode{1}=@xrefitem exit-code \"Exit Code(s)\" \
+                         \"Exit Code List\" -\1: "
 OPTIMIZE_OUTPUT_FOR_C  = YES
 MARKDOWN_ID_STYLE      = GITHUB
 TYPEDEF_HIDES_STRUCT   = YES
@@ -23,5 +24,6 @@ SOURCE_BROWSER         = YES
 IGNORE_PREFIX          = logc4_ \
                          LOGC4_
 HTML_COLORSTYLE_SAT    = 255
-SITEMAP_URL            = https://projects.codexuniversalis.dev/C/LogC4/documentation
+SITEMAP_URL            = https://projects.codexuniversalis.dev/C/LogC4/docs
+GENERATE_LATEX         = NO
 MACRO_EXPANSION        = YES

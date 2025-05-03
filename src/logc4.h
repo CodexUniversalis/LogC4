@@ -16,11 +16,56 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <wchar.h>
+
+/**
+  * @brief An enum for the type of the @a logc4_string_t.
+*/
+typedef enum{
+    /**
+      * @brief A normal (@a ASCII) character string.
+    */
+    LOGC4_N_CHAR,
+    /**
+      * @brief A wide (@a UTF-8) character string.
+      *
+    */
+    LOGC4_W_CHAR
+} logc4_string_tag_t;
+
+/**
+  * @brief A union to store normal (@a ASCII) or wide (@a UTF-8) character
+  * strings.
+*/
+typedef union{
+    /**
+      * @brief A pointer to the normal (@a ASCII) character string.
+    */
+    char *nStr;
+    /**
+      * @brief A pointer to the wide (@a UTF-8) character string.
+      *
+    */
+    wchar_t *wStr;
+}logc4_str_val_t;
+
+/**
+  * @brief A struct containing the type and pointer to the string that is to
+  * be used library functions.
+*/
+typedef struct{
+    /**
+      * @brief The type of the @a logc4_str_val_t.
+    */
+    logc4_string_tag_t strType;
+    /**
+      * @brief The pointer to the string.
+    */
+    logc4_str_val_t str;
+}logc4_str_t;
 
 /**
   * @brief An enum of the @a LogC4 log message types.
-  *
-  * The @a LogC4 log message types.
 */
 typedef enum{
     /**
@@ -35,10 +80,12 @@ typedef enum{
       * @brief The log message is of type @a INFO.
     */
     LOGC4_INFO,
+#ifdef LOGC4_DEBUG_PROG
     /**
       * @brief The log message is of type @a DEBUG.
     */
     LOGC4_DEBUG
+#endif
 }logc4_msg_t;
 
 /**
@@ -63,15 +110,19 @@ typedef struct{
       * @brief The character type of the log files.
       *
       * The available values are:
-      * @a 0 (false) for normal characters. @a 1 (true) for wide characters.
+      * - @a 0 (@a false) for normal characters.
+      * - @a 1 (@a true) for wide characters.
     */
     bool charType;
     /**
       * @brief The timezone of the log message.
       *
-      * Whether to print time as military time (24-hour time) or normal
-      * time (12-hour) time. @a 0 (false) for normal (12-hour) time.
-      * @a 1 (true) for military (24-hour) time.
+      * The values are:
+      * - @a 0 (@a false) to use UTC time.
+      * - @a 1 (@a true) to use the computer's local time.
+      *
+      * > This will change in the future and the timezone will be able to be
+      * specified for values around the globe.
     */
     bool timeZone;
 } logc4_file_t;
@@ -79,8 +130,9 @@ typedef struct{
 /**
   * @brief Sets the desired character type for printing to the standard output.
   *
-  * @param charType @a 0 (false) for normal (@a ASCII) characters.
-  * @a 1 (true) for wide (@a UTF-8) characters.
+  * @param charType @a false to use wide characters
+  * (<a href="https://www.man7.org/linux/man-pages/man3/wchar_t.3type.html">
+  * wchar_t</a>). @a true to use normal (ASCII) characters.
 */
 void logc4_stdInit(const bool charType);
 
@@ -93,8 +145,16 @@ void logc4_stdInit(const bool charType);
   * to @a stderr. The filled out format string is appended to the message type
   * and date-time and printed to @a stdout.
   *
-  * @param msgType A valid @a logc4_msg_t enum value. If this value is not
-  * valid, then @a -1 is returned.
+  * The time of the message will always be the local time.
+  *
+  * > THIS CANNOT BE CHANGED.
+  *
+  * @exitcode 2 Hello world.
+  * @param msgType A valid @a logc4_msg_t enum value. If not valid, then @a -1
+  * is returned.
+  * @param charType @a false to use wide characters
+  * (<a href="https://www.man7.org/linux/man-pages/man3/wchar_t.3type.html">
+  * wchar_t</a>). @a true to use normal (@a ASCII) characters.
   * @param format The format string of the log message. This is equivalent to
   * the <a href="https://www.man7.org/linux/man-pages/man3/printf.3.html">
   * printf(3)</a> format string.
@@ -118,11 +178,13 @@ int logc4_stdLog(const logc4_msg_t msgType, const bool charType,
   * @param filePath The absolute/relative file path of the log file.
   * @param append @a false to overwrite and not append to the file. @a true to
   * append to the end of the file.
-  * @param charType @a false to use wide characters (@a wchar_t). @a true to
-  * use normal (ASCII) characters.
+  * @param charType @a false to use wide characters
+  * (<a href="https://www.man7.org/linux/man-pages/man3/wchar_t.3type.html">
+  * wchar_t</a>). @a true to use normal (ASCII) characters.
   * @param timeZone @a false to use UTC time. @a true to use the computer's
-  * local time. (This will change in the future and the timezone will be able
-  * to be specified.)
+  * local time.
+  * > This will change in the future and the timezone will be able to be
+  * specified for values around the globe.
   * @return logc4_file_t* A pointer to a @a logc4_file_t struct used in
   * logging.
 */
