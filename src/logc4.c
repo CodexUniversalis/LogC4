@@ -6,39 +6,69 @@
   * @date 2025-04-24: Created
   * Changelog:
   * - 2025-05-01: Worked on implementing functions from logc4.h.
+  * - 2025-05-19: Fixed some functions that were broken.
   * @copyright Copyright (c) 2025
 */
+#include <errno.h>
 #include <stdarg.h>
+#include <time.h>
 #include "logc4.h"
 
+/**
+  * @brief The maximum length of a formatted time string.
+*/
+static int TIME_STR_LEN = 28;
+/**
+  * @brief The character type of the standard outputs: @a stdout and @a stderr.
+  *
+*/
 static bool std_char_type = false;
 
+/**
+  * @brief Gets the current time from the generated timespec object.
+  *
+  * @param timeStr A pointer to the string for the formatted time string.
+  * @param len The length of @a timeStr.
+  * @return int Different values for different outcomes.
+*/
+// TODO: Fix return statement in Doxygen comment.
+static int getCurrentTimeFromTimeSpec(char *timeStr, int len){
+    struct timespec ts = {0};
+    int result = clock_gettime(0, &ts);
+    if(result == -1){
+        printf("getCurrentTimeFromTimespec() failed!\n");
+        return -1;
+    }
+    struct tm tm = {0};
+
+    // tzset();
+    if(gmtime_r(&(ts.tv_sec), &tm) == NULL){
+        return -2;
+    }
+
+    result = strftime(timeStr, len, "%F %T", &tm);
+    if(result == 0){
+        return -3;
+    }
+    len -= result - 1;
+
+    result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s", ts.tv_nsec / 1000000, tm.tm_zone);
+    if(result >= len){
+        return -4;
+    }
+
+    return 0;
+}
+
 /*
-This gets the current time string according to whether to use military
-(24-hour) time or not.
+This gets the current time string according to whether to use the user local
+time or UTC time.
 */
 static char *getCurrentTime(){
-    time_t now = time(NULL);
-    struct tm *info = localtime(&now);
-    if(milTime){
-        char *time = calloc(timeLength24, sizeof(char));
-        snprintf(time, timeLength24, "%02d:%02d:%02d", info->tm_hour,
-                 info->tm_min, info->tm_sec);
-        return time;
-    }
-    int hour = info->tm_hour;
-    char *hrAdd = "AM";
-    if(hour == 0){
-        hour = 12;
-    }
-    else if(hour > 12){
-        hour -= 12;
-        hrAdd = "PM";
-    }
-    char *time = calloc(timeLength12, sizeof(char));
-    snprintf(time, timeLength12, "%02d:%02d:%02d %s", hour, info->tm_min,
-             info->tm_sec, (char *)hrAdd);
-    return time;
+    // TODO: Handle outputs from getCurrentTimeFromTimeSpec()
+    char *timeStr = calloc(TIME_STR_LEN, sizeof(char));
+    int ret = getCurrentTimeFromTimeSpec(timeStr, TIME_STR_LEN);
+    return timeStr;
 }
 
 /**
