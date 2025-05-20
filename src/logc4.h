@@ -19,52 +19,6 @@
 #include <wchar.h>
 
 /**
-  * @brief An enum for the type of the @a logc4_string_t.
-*/
-typedef enum{
-    /**
-      * @brief A normal (@a ASCII) character string.
-    */
-    LOGC4_N_CHAR,
-    /**
-      * @brief A wide (@a UTF-8) character string.
-      *
-    */
-    LOGC4_W_CHAR
-} logc4_string_tag_t;
-
-/**
-  * @brief A union to store normal (@a ASCII) or wide (@a UTF-8) character
-  * strings.
-*/
-typedef union{
-    /**
-      * @brief A pointer to the normal (@a ASCII) character string.
-    */
-    char *nStr;
-    /**
-      * @brief A pointer to the wide (@a UTF-8) character string.
-      *
-    */
-    wchar_t *wStr;
-}logc4_str_val_t;
-
-/**
-  * @brief A struct containing the type and pointer to the string that is to
-  * be used library functions.
-*/
-typedef struct{
-    /**
-      * @brief The type of the @a logc4_str_val_t.
-    */
-    logc4_string_tag_t strType;
-    /**
-      * @brief The pointer to the string.
-    */
-    logc4_str_val_t str;
-}logc4_str_t;
-
-/**
   * @brief An enum of the @a LogC4 log message types.
 */
 typedef enum{
@@ -128,13 +82,30 @@ typedef struct{
 } logc4_file_t;
 
 /**
+  * @brief Converts a normal string (char *) to a wide character string
+  * (wchar_t *).
+  *
+  * @param str The normal string to convert.
+  * @return wchar_t* The normal string as a wide character string.
+*/
+wchar_t *logc4_stowcs(char *str);
+
+/**
+  * @brief Converts a wide character string (wchar_t *) to a normal string
+  * (char *).
+  *
+  * @param wStr The wide character string to convert.
+  * @return char* The wide character string as a normal string.
+*/
+char *logc4_wcstos(wchar_t *wStr);
+
+/**
   * @brief Sets the desired character type for printing to the standard output.
   *
-  * @param charType @a false to use wide characters
-  * (<a href="https://www.man7.org/linux/man-pages/man3/wchar_t.3type.html">
-  * wchar_t</a>). @a true to use normal (ASCII) characters.
+  * @param timeZone The desired time zone to use when printing the time to
+  * either @a stdout or @a stderr.
 */
-void logc4_stdInit(const bool charType);
+void logc4_stdInit(int timeZone);
 
 /**
   * @brief Logs the @a char* format to @a stdout or @a stderr with the given
@@ -145,22 +116,20 @@ void logc4_stdInit(const bool charType);
   * to @a stderr. The filled out format string is appended to the message type
   * and date-time and printed to @a stdout.
   *
-  * The time of the message will always be the local time.
+  * The time of the message will always be UTC time.
   *
   * > THIS CANNOT BE CHANGED.
   *
-  * @exitcode 2 Hello world.
   * @param msgType A valid @a logc4_msg_t enum value. If not valid, then @a -1
   * is returned.
-  * @param charType @a false to use wide characters
-  * (<a href="https://www.man7.org/linux/man-pages/man3/wchar_t.3type.html">
-  * wchar_t</a>). @a true to use normal (@a ASCII) characters.
+  * @param toStderr @a true if the message should be logged to @a stderr.
+  * @a false to log to @a stdout.
   * @param format The format string of the log message. This is equivalent to
   * the <a href="https://www.man7.org/linux/man-pages/man3/printf.3.html">
   * printf(3)</a> format string.
   * @param ... The variables to substitute into the format string.
 */
-int logc4_stdLog(const logc4_msg_t msgType, const bool charType,
+int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
                  const void *format, ...);
 
 /**
@@ -181,7 +150,7 @@ int logc4_stdLog(const logc4_msg_t msgType, const bool charType,
   * @param charType @a false to use wide characters
   * (<a href="https://www.man7.org/linux/man-pages/man3/wchar_t.3type.html">
   * wchar_t</a>). @a true to use normal (ASCII) characters.
-  * @param timeZone @a false to use UTC time. @a true to use the computer's
+  * @param timeZone @a 0 to use UTC time. @a 1 to use the computer's
   * local time.
   * > This will change in the future and the timezone will be able to be
   * specified for values around the globe.
@@ -189,7 +158,7 @@ int logc4_stdLog(const logc4_msg_t msgType, const bool charType,
   * logging.
 */
 logc4_file_t *logc4_fileOpen(const char *filePath, const bool append,
-                             const bool charType, const bool timeZone);
+                             const bool charType, const int timeZone);
 
 /**
   * @brief Closes the given log file.

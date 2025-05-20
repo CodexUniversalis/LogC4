@@ -16,10 +16,10 @@ library enum for message type
 .PP
 .EX
 struct logc4_msg_t {
-    LOGC4_ERROR,   /* Log message is of type ERROR */
-    LOGC4_WARNING, /* Log message is of type WARNING */
-    LOGC4_INFO,    /* Log message is of type INFO */
-    LOGC4_DEBUG    /* Log message is of type DEBUG */
+    LOGC4_ERROR,   /* Log message is of type ERROR. */
+    LOGC4_WARNING, /* Log message is of type WARNING. */
+    LOGC4_INFO,    /* Log message is of type INFO. */
+    LOGC4_DEBUG    /* Log message is of type DEBUG. */
 }
 .EE
 .PP

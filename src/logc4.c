@@ -14,25 +14,26 @@
 #include <time.h>
 #include "logc4.h"
 
-/**
-  * @brief The maximum length of a formatted time string.
-*/
-static int TIME_STR_LEN = 28;
-/**
-  * @brief The character type of the standard outputs: @a stdout and @a stderr.
-  *
-*/
-static bool std_char_type = false;
+/* The maximum length of a formatted time string. */
+static const int TIME_STR_LEN = 28;
+/* The time zone to use when getting the time. */
+static int TIME_ZONE = 0;
+/* A string literal of "NULL". */
+static const char *c_NULL = "NULL";
+/* A wide character string literal of L"NULL". */
+static const wchar_t *c_wNULL = L"NULL";
+/* The length of both the normal and wide character *NULL* string. */
+static const int c_NULL_LEN = 4;
 
 /**
   * @brief Gets the current time from the generated timespec object.
   *
   * @param timeStr A pointer to the string for the formatted time string.
   * @param len The length of @a timeStr.
-  * @return int Different values for different outcomes.
+  * @return Different values for different outcomes.
 */
-// TODO: Fix return statement in Doxygen comment.
 static int getCurrentTimeFromTimeSpec(char *timeStr, int len){
+    // TODO: Fix return statement in Doxygen comment.
     struct timespec ts = {0};
     int result = clock_gettime(0, &ts);
     if(result == -1){
@@ -52,7 +53,8 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len){
     }
     len -= result - 1;
 
-    result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s", ts.tv_nsec / 1000000, tm.tm_zone);
+    result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s",
+                      ts.tv_nsec / 1000000, tm.tm_zone);
     if(result >= len){
         return -4;
     }
@@ -65,6 +67,7 @@ This gets the current time string according to whether to use the user local
 time or UTC time.
 */
 static char *getCurrentTime(){
+    // TODO: Handle different timezones.
     // TODO: Handle outputs from getCurrentTimeFromTimeSpec()
     char *timeStr = calloc(TIME_STR_LEN, sizeof(char));
     int ret = getCurrentTimeFromTimeSpec(timeStr, TIME_STR_LEN);
@@ -86,7 +89,8 @@ static char *getCurrentTime(){
   * @return true There were no memory allocation problems.
   * @return false There was a memory allocation problem.
 */
-static bool internalCheckAlloc(void *ptr, char *intFuncName, int allocFunc){
+static bool internalCheckAlloc(void *ptr, char *intFuncName, int lineNumber,
+                               int allocFunc){
     if(!ptr || errno == ENOMEM){
         char *alloc;
         switch(allocFunc){
@@ -104,18 +108,10 @@ static bool internalCheckAlloc(void *ptr, char *intFuncName, int allocFunc){
                 break;
         }
         char *time = getCurrentTime();
-        if(logCharType){
-            fwprintf(logFileErr,
-                     L"%s [ERROR]{logc4.c/%s} Memory allocation function "
-                     L"'%salloc()' failed to allocate memory.\n", time,
-                     intFuncName, alloc);
-        }
-        else{
-            fprintf(logFileErr,
-                    "%s [ERROR]{logc4.c/%s} Memory allocation function "
-                    "'%salloc()' failed to allocate memory.\n", time,
-                    intFuncName, alloc);
-        }
+        fprintf(stderr,
+                "%s [ERROR]{%s/%s:%d} Memory allocation function "
+                "'%salloc()' failed to allocate memory.\n", time, __FILE__,
+                intFuncName, lineNumber, alloc);
         free(time);
         return false;
     }
@@ -128,13 +124,11 @@ static bool internalCheckAlloc(void *ptr, char *intFuncName, int allocFunc){
   * This function does not contain a call to @a internalLog() because
   * @a internalLog() calls this function.
   *
-  * @param charType @a false if the given file name and function name are
-  * normal string, @a true if they are wide character strings.
   * @param ptr The returned pointer from the above alloc functions.
-  * @param funcName The name of the function that called this function. Used in
-  * the log message.
   * @param intFuncname The internal @a LogC4 function name that called the
   * memory allocation function.
+  * @param lineNumber The line number within this file that failed to allocate
+  * the memory.
   * @param allocFunc The alloc function that caused the error. Used in the log
   * message. Can be one of three values:
   *     - @a 1: @a malloc() failed.
@@ -145,8 +139,8 @@ static bool internalCheckAlloc(void *ptr, char *intFuncName, int allocFunc){
   * is a memory error with @a calloc(), and @a -3 if there is a memory error
   * with @a realloc().
 */
-static void checkAlloc(bool charType, void *ptr, void *fileName,
-                       void *funcName, char *intFuncName, int allocFunc){
+static void checkAlloc(void *ptr, char *intFuncName, int lineNumber,
+                       int allocFunc, char *fileName, char *funcName){
     if(!ptr || errno == ENOMEM){
         char *alloc;
         switch(allocFunc){
@@ -164,144 +158,43 @@ static void checkAlloc(bool charType, void *ptr, void *fileName,
                 break;
         }
         char *time = getCurrentTime();
-        if(logCharType){
-            if(fileName == NULL || funcName == NULL){
-                fwprintf(logFileErr,
-                         L"%s [ERROR]{logc4.c/%s} Memory allocation function "
-                         L"'%salloc()' failed to allocate memory.\n", time,
-                         intFuncName, alloc);
-            }
-            else{
-                wchar_t *wFileName = (wchar_t *)fileName;
-                wchar_t *wFuncName = (wchar_t *)funcName;
-                if(!charType){
-                    size_t length = strlen((char *)fileName);
-                    wchar_t *wcs = calloc(length + 1, sizeof(wchar_t));
-                    if(!internalCheckAlloc(wcs, "checkAlloc", 2)){
-                        free(time);
-                        return;
-                    }
-                    int wLength = swprintf(wcs, length, L"%s",
-                                           (char *)fileName);
-                    if(wLength < 0 || (size_t)wLength < length){
-                        wchar_t *temp = realloc(wcs, (wLength + 1) *
-                                                sizeof(wchar_t));
-                        if(!internalCheckAlloc(temp, "checkAlloc", 3)){
-                            free(time);
-                            free(wcs);
-                            return;
-                        }
-                        wcs = temp;
-                    }
-                    wFileName = wcs;
-
-                    length = strlen((char *)fileName);
-                    wcs = calloc(length + 1, sizeof(wchar_t));
-                    if(!internalCheckAlloc(wcs, "checkAlloc", 2)){
-                        free(time);
-                        free(wFileName);
-                        return;
-                    }
-                    wLength = swprintf(wcs, length, L"%s",
-                                       (char *)fileName);
-                    if(wLength < 0 || (size_t)wLength < length){
-                        wchar_t *temp = realloc(wcs, (wLength + 1) *
-                                                sizeof(wchar_t));
-                        if(!internalCheckAlloc(temp, "checkAlloc", 3)){
-                            free(time);
-                            free(wcs);
-                            free(wFileName);
-                            return;
-                        }
-                        wcs = temp;
-                    }
-                    wFuncName = wcs;
-                }
-                fwprintf(logFileErr,
-                         L"%s [ERROR](%ls/%ls){logc4.c/%s} Memory allocation "
-                         L"function '%salloc()' failed to allocate memory.\n",
-                         time, wFileName, wFuncName, intFuncName, alloc);
-                if(!charType){
-                    free(wFileName);
-                    free(wFuncName);
-                }
-            }
+        char *ref = NULL;
+        if(fileName == NULL && funcName != NULL){
+            ref = funcName;
+        }
+        else if(fileName != NULL && funcName == NULL){
+            ref = fileName;
+        }
+        else if(fileName == NULL && funcName == NULL){
+            fprintf(stderr,
+                    "%s [ERROR]{%s/%s:%d} Memory allocation"
+                    "function '%salloc()' failed to allocate memory.\n",
+                    time, __FILE__, intFuncName, lineNumber, alloc);
+        }
+        if(ref == NULL){
+            fprintf(stderr,
+                    "%s [ERROR](%s/%s){%s/%s:%d} Memory allocation"
+                    "function '%salloc()' failed to allocate memory.\n",
+                    time, fileName, funcName, __FILE__, intFuncName,
+                    lineNumber, alloc);
         }
         else{
-            if(fileName == NULL || funcName == NULL){
-                fprintf(logFileErr,
-                        "%s [ERROR]{logc4.c/%s} Memory allocation function "
-                        "'%salloc()' failed to allocate memory.\n", time,
-                        intFuncName, alloc);
-            }
-            else{
-                char *nFileName = (char *)fileName;
-                char *nFuncName = (char *)funcName;
-                if(charType){
-                    size_t wLength = wcslen((wchar_t *)fileName);
-                    char *str = calloc(UTF8Bytes(wLength) + 1, sizeof(char));
-                    if(!internalCheckAlloc(str, "checkAlloc", 2)){
-                        free(time);
-                        return;
-                    }
-                    int length = wcstombs(str, (wchar_t *)fileName, 2 *
-                                          wLength);
-                    if(length < 0 || (size_t)length < UTF8Bytes(wLength)){
-                        char *temp = realloc(str, (length + 1) * sizeof(char));
-                        if(!internalCheckAlloc(temp, "checkAlloc", 3)){
-                            free(time);
-                            free(str);
-                            return;
-                        }
-                        str = temp;
-                    }
-                    nFileName = str;
-
-                    wLength = wcslen((wchar_t *)fileName);
-                    str = calloc(UTF8Bytes(wLength) + 1, sizeof(char));
-                    if(!internalCheckAlloc(str, "checkAlloc", 2)){
-                        free(time);
-                        free(nFileName);
-                        return;
-                    }
-                    length = wcstombs(str, (wchar_t *)fileName, 2 * wLength);
-                    if(length < 0 || (size_t)length < UTF8Bytes(wLength)){
-                        char *temp = realloc(str, (length + 1) * sizeof(char));
-                        if(!internalCheckAlloc(temp, "checkAlloc", 3)){
-                            free(time);
-                            free(str);
-                            free(nFileName);
-                            return;
-                        }
-                        str = temp;
-                    }
-                    nFuncName = str;
-                }
-                fprintf(logFileErr,
-                        "%s [ERROR](%s/%s){logc4.c/%s} Memory allocation"
-                        "function '%salloc()' failed to allocate memory.\n",
-                        time, nFileName, nFuncName, intFuncName, alloc);
-                if(charType){
-                    free(nFileName);
-                    free(nFuncName);
-                }
-            }
+            fprintf(stderr,
+                    "%s [ERROR](%s){%s/%s:%d} Memory allocation"
+                    "function '%salloc()' failed to allocate memory.\n",
+                    time, ref, __FILE__, intFuncName, lineNumber, alloc);
         }
         free(time);
     }
 }
 
-/**
-  * @brief Converts a normal string (char *) to a wide character string
-  * (wchar_t *).
-  *
-  * @param str The normal string to convert.
-  * @return wchar_t* The normal string as a wide character string.
+/*
+Converts a normal string (char *) to a wide character string (wchar_t *).
 */
-static wchar_t *stowcs(char *str){
+wchar_t *logc4_stowcs(char *str){
     int length = (int)strlen(str);
     char *copy = calloc(length + 1, sizeof(char));
-    checkAlloc(false, copy, NULL, NULL, "stowcs", 2);
+    checkAlloc(copy, __func__, __LINE__ - 1, 2, NULL, NULL);
     for(int i = 0; i < length; i++){
         signed char ch = str[i];
         if(ch < 0){
@@ -312,98 +205,77 @@ static wchar_t *stowcs(char *str){
         }
     }
     wchar_t *wcs = calloc(length + 1, sizeof(wchar_t));
-    checkAlloc(false, wcs, NULL, NULL, "stowcs", 2);
+    checkAlloc(wcs, __func__, __LINE__ - 1, 2, NULL, NULL);
     int wLength = swprintf(wcs, length + 1, L"%s", copy);
+    int lineNum = __LINE__ - 1;
     if(wLength == -1){
         free(wcs);
         free(copy);
         char *time = getCurrentTime();
-        if(logCharType){
-            fwprintf(logFileErr,
-                     L"%s [ERROR]{logc4.c/stowcs} The function swprintf() "
-                     L"returned with a value of -1.\n", time);
-        }
-        else{
-            fprintf(logFileErr,
-                    "%s [ERROR]{logc4.c/stowcs} The function swprintf() "
-                    "returned with a value of -1.\n", time);
-        }
+        fprintf(stderr,
+                "%s [ERROR]{%s/%s:%d} The function swprintf() "
+                "returned with a value of -1.\n", time, __FILE__, __func__,
+                lineNum);
         free(time);
         wchar_t *null = calloc(5, sizeof(wchar_t));
-        checkAlloc(false, null, NULL, NULL, "stowcs", 2);
+        checkAlloc(null, __func__, __LINE__ - 1, 2, NULL, NULL);
         wcsncat(null, c_wNULL, c_NULL_LEN);
         return null;
     }
     else if(wLength < length){
         wchar_t *temp = realloc(wcs, (wLength + 1) * sizeof(wchar_t));
-        checkAlloc(false, temp, NULL, NULL, "stowcs", 3);
+        checkAlloc(temp, __func__, __LINE__ - 1, 3, NULL, NULL);
         wcs = temp;
     }
     free(copy);
     return wcs;
 }
 
-/**
-  * @brief Converts a wide character string (wchar_t *) to a normal string
-  * (char *).
-  *
-  * @param wStr The wide character string to convert.
-  * @return char* The wide character string as a normal string.
+/*
+Converts a wide character string (wchar_t *) to a normal string (char *).
 */
-static char *wcstos(wchar_t *wStr){
+char *logc4_wcstos(wchar_t *wStr){
     size_t wLength = wcslen(wStr);
     char *str = calloc(UTF8Bytes(wLength) + 1, sizeof(char));
-    checkAlloc(false, str, NULL, NULL, "wcstos", 2);
+    checkAlloc(str, __func__, __LINE__ - 1, 2, NULL, NULL);
     size_t length = wcstombs(str, wStr, UTF8Bytes(wLength));
+    int lineNumber = __LINE__ - 1;
     if(length == (size_t)-1){
         free(str);
         char *time = getCurrentTime();
-        if(logCharType){
-            fwprintf(logFileErr,
-                     L"%s [ERROR]{logc4.c/wcstos} The function wcstombs() "
-                     L"returned with a value of -1. This means a wide "
-                     L"character was encountered that could not be "
-                     L"converted.\n", time);
-        }
-        else{
-            fprintf(logFileErr,
-                    "%s [ERROR]{logc4.c/wcstos} The function wcstombs() "
-                    "returned with a value of -1. This means a wide character "
-                    "was encountered that could not be converted.\n", time);
-        }
+        fprintf(stderr,
+                "%s [ERROR]{%s/%s:%d} The function wcstombs() "
+                "returned with a value of -1. This means a wide character "
+                "was encountered that could not be converted.\n", time,
+                __FILE__, __func__, lineNumber);
         free(time);
         char *null = calloc(5, sizeof(char));
-        checkAlloc(false, null, NULL, NULL, "wcstos", 2);
+        checkAlloc(null, __func__, __LINE__ - 1, 2, NULL, NULL);
         strncat(null, c_NULL, c_NULL_LEN);
         return null;
     }
     else if(length < UTF8Bytes(wLength)){
         char *temp = realloc(str, (length + 1) * sizeof(char));
-        checkAlloc(false, temp, NULL, NULL, "wcstos", 3);
+        checkAlloc(temp, __func__, __LINE__ - 1, 3, NULL, NULL);
         str = temp;
     }
     return str;
 }
 
 // Init stdout and stderr character type.
-void logc4_stdInit(const bool charType){
-    std_char_type = true;
+void logc4_stdInit(int timeZone){
+    // TODO: Implement
 }
 
-// Log formatted message to stdout and stderr from the given charType format
-// and function values .
-int logc4_stdLog(const logc4_msg_t msgType, const bool charType,
+// Log formatted message to stdout or stderr from the given format string
+// and function values.
+int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
                  const void *format, ...){
-    FILE *outFile = msgType == LOGC4_ERROR ? stderr : stdout;
+    FILE *outFile = toStderr ? stderr : stdout;
     int result = -1;
     va_list args;
     va_start(args, format);
-    if(charType){
-        result = vfwprintf(outFile, (wchar_t *)format, args);
-    }
-    else{
-        result = vfprintf(outFile, (char *)format, args);
-    }
+    result = vfprintf(outFile, (char *)format, args);
     va_end(args);
     return result;
 }
