@@ -8,6 +8,7 @@
   * - 2025-04-24: Refactored file from previous failed project.
   * - 2025-04-26: Changed a couple of comments.
   * - 2025-05-01: Fixed file comments and added logc4_stdInit().
+  * - 2025-05-19: Reworked some of the functions and removed unneeded structs.
   * @copyright Copyright (c) 2025
 */
 #pragma once

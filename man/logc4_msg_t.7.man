@@ -1,6 +1,7 @@
 .\" Copyright (c) 2024 CodexUniversalis (codexuniversalisprime@gmail.com)
 .\"
 .\" 2025-04-27 CodexUniversalis - Wrote the man page.
+.\" 2025-05-19 CodexUniversalis - Add periods to the example struct.
 .\"
 .TH LOGC4_MSG_T 7 2025-04-27 CodexUniversalis "LogC4 Library Manual"
 .SH NAME
