@@ -30,14 +30,13 @@ static const int c_NULL_LEN = 4;
   *
   * @param timeStr A pointer to the string for the formatted time string.
   * @param len The length of @a timeStr.
-  * @return Different values for different outcomes.
+  * @return int Different values for different outcomes.
 */
 static int getCurrentTimeFromTimeSpec(char *timeStr, int len){
     // TODO: Fix return statement in Doxygen comment.
     struct timespec ts = {0};
     int result = clock_gettime(0, &ts);
     if(result == -1){
-        printf("getCurrentTimeFromTimespec() failed!\n");
         return -1;
     }
     struct tm tm = {0};
@@ -68,7 +67,7 @@ time or UTC time.
 */
 static char *getCurrentTime(){
     // TODO: Handle different timezones.
-    // TODO: Handle outputs from getCurrentTimeFromTimeSpec()
+    // TODO: Handle returns from getCurrentTimeFromTimeSpec().
     char *timeStr = calloc(TIME_STR_LEN, sizeof(char));
     int ret = getCurrentTimeFromTimeSpec(timeStr, TIME_STR_LEN);
     return timeStr;
@@ -110,8 +109,8 @@ static bool internalCheckAlloc(void *ptr, char *intFuncName, int lineNumber,
         char *time = getCurrentTime();
         fprintf(stderr,
                 "%s [ERROR]{%s/%s:%d} Memory allocation function "
-                "'%salloc()' failed to allocate memory.\n", time, __FILE__,
-                intFuncName, lineNumber, alloc);
+                "'%salloc()' failed to allocate memory.\n",
+                time, __FILE__, intFuncName, lineNumber, alloc);
         free(time);
         return false;
     }
@@ -165,22 +164,22 @@ static void checkAlloc(void *ptr, char *intFuncName, int lineNumber,
         else if(fileName != NULL && funcName == NULL){
             ref = fileName;
         }
-        else if(fileName == NULL && funcName == NULL){
+        if(fileName == NULL && funcName == NULL){
             fprintf(stderr,
-                    "%s [ERROR]{%s/%s:%d} Memory allocation"
+                    "%s [ERROR]{%s/%s:%d} Memory allocation "
                     "function '%salloc()' failed to allocate memory.\n",
                     time, __FILE__, intFuncName, lineNumber, alloc);
         }
-        if(ref == NULL){
+        else if(ref == NULL){
             fprintf(stderr,
-                    "%s [ERROR](%s/%s){%s/%s:%d} Memory allocation"
+                    "%s [ERROR](%s/%s){%s/%s:%d} Memory allocation "
                     "function '%salloc()' failed to allocate memory.\n",
                     time, fileName, funcName, __FILE__, intFuncName,
                     lineNumber, alloc);
         }
         else{
             fprintf(stderr,
-                    "%s [ERROR](%s){%s/%s:%d} Memory allocation"
+                    "%s [ERROR](%s){%s/%s:%d} Memory allocation "
                     "function '%salloc()' failed to allocate memory.\n",
                     time, ref, __FILE__, intFuncName, lineNumber, alloc);
         }
@@ -214,8 +213,8 @@ wchar_t *logc4_stowcs(char *str){
         char *time = getCurrentTime();
         fprintf(stderr,
                 "%s [ERROR]{%s/%s:%d} The function swprintf() "
-                "returned with a value of -1.\n", time, __FILE__, __func__,
-                lineNum);
+                "returned with a value of -1.\n",
+                time, __FILE__, __func__, lineNum);
         free(time);
         wchar_t *null = calloc(5, sizeof(wchar_t));
         checkAlloc(null, __func__, __LINE__ - 1, 2, NULL, NULL);
@@ -246,8 +245,8 @@ char *logc4_wcstos(wchar_t *wStr){
         fprintf(stderr,
                 "%s [ERROR]{%s/%s:%d} The function wcstombs() "
                 "returned with a value of -1. This means a wide character "
-                "was encountered that could not be converted.\n", time,
-                __FILE__, __func__, lineNumber);
+                "was encountered that could not be converted.\n",
+                time, __FILE__, __func__, lineNumber);
         free(time);
         char *null = calloc(5, sizeof(char));
         checkAlloc(null, __func__, __LINE__ - 1, 2, NULL, NULL);
@@ -262,20 +261,176 @@ char *logc4_wcstos(wchar_t *wStr){
     return str;
 }
 
-// Init stdout and stderr character type.
+/*
+Init stdout and stderr:
+- timeZone
+*/
 void logc4_stdInit(int timeZone){
-    // TODO: Implement
+    // TODO: Implement.
 }
 
-// Log formatted message to stdout or stderr from the given format string
-// and function values.
+/* Gets the string representation of the logc4_msg*/
+static char *getMsgType(const logc4_msg_t msgType){
+    switch(msgType){
+        case LOGC4_ERROR:
+            return "ERROR";
+        case LOGC4_WARNING:
+            return "WARNING";
+        case LOGC4_INFO:
+            return "INFO";
+#ifdef LOGC4_DEBUG_PROG
+        case LOGC4_DEBUG:
+            return "DEBUG";
+#endif
+        default:
+            return "UNKNOWN";
+    }
+}
+
+/*
+Log formatted message to stdout or stderr from the given format string and
+function values.
+*/
 int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
-                 const void *format, ...){
+                 const char *fileName, const char *funcName,
+                 const char *format, ...){
     FILE *outFile = toStderr ? stderr : stdout;
     int result = -1;
+    char *buffer = calloc(1, sizeof(char));
+    checkAlloc(buffer, __func__, __LINE__ - 1, 2, NULL, NULL);
+
     va_list args;
     va_start(args, format);
-    result = vfprintf(outFile, (char *)format, args);
+    result = vsnprintf(buffer, 1, format, args);
     va_end(args);
+
+    free(buffer);
+    buffer = calloc(result + 1, sizeof(char));
+
+    va_start(args, format);
+    vsnprintf(buffer, 1, format, args);
+    va_end(args);
+
+    char *type = getMsgType(msgType);
+    char *time = getCurrentTime();
+    char *ref = NULL;
+    if(fileName == NULL && funcName != NULL){
+        ref = funcName;
+    }
+    else if(fileName != NULL && funcName == NULL){
+        ref = fileName;
+    }
+    if(fileName == NULL && funcName == NULL){
+        fprintf(outFile,
+                "%s [%s] %s\n",
+                time, type, buffer);
+    }
+    else if(ref == NULL){
+        fprintf(outFile,
+                "%s [%s](%s/%s) %s\n",
+                time, type, fileName, funcName, buffer);
+    }
+    else{
+        fprintf(outFile,
+                "%s [%s](%s) %s\n",
+                time, type, ref, buffer);
+    }
+    free(time);
+    free(buffer);
     return result;
+}
+
+/**
+  * @brief Gets the full absolute path of the given relative/symbolic path.
+  *
+  * If there was a problem allocating memory to get the full path, then this
+  * returns @a NULL instead.
+  *
+  * @param relPath The relative/symbolic path.
+  * @return char* The full path if possible. Otherwise, @a NULL.
+*/
+static char *getFullFilePath(char *relPath){
+    char *rp = realpath(relPath, NULL);
+    int lineNumber = __LINE__ - 1;
+    checkAlloc(rp, __func__, lineNumber, 1, NULL, NULL);
+    char *errStr = NULL;
+    switch(errno){
+        case EACCES:
+            errStr = "Read or search permission was denied for a component of "
+                "the path prefix.";
+            break;
+        case EIO:
+            errStr = "An I/O error occurred while reading from the "
+                "filesystem.";
+            break;
+        case ELOOP:
+            errStr = "Too many symbolic links were encountered in translating "
+                "the pathname.";
+            break;
+        case ENAMETOOLONG:
+            errStr = "A component of a pathname exceeded NAME_MAX characters, "
+                "or an entire pathname exceeded PATH_MAX characters.";
+            break;
+        case ENOENT:
+            fclose(fopen(relPath, "w"));
+            return getFullFilePath(relPath);
+        case ENOTDIR:
+            errStr = "A component of the path prefix is not a directory.";
+            break;
+        default:
+            // Do nothing if any other value.
+            break;
+    }
+    char *time = getCurrentTime();
+    fprintf(stderr,
+            "%s [ERROR]{%s/%s:%d} The function realpath(3) failed with the "
+            "following message: %s\n",
+            time, __FILE__, __func__, lineNumber, errStr);
+    free(time);
+    return rp;
+}
+
+/* Opens a log file with the given file path. */
+logc4_file_t *logc4_fileOpen(const char *filePath, const bool append,
+                             const int timeZone){
+    if(filePath == NULL){
+        return NULL;
+    }
+    logc4_file_t *fd = malloc(sizeof(logc4_file_t));
+    fd->filePath = getFullFilePath(filePath);
+    if(fd->filePath == NULL){
+        return NULL;
+    }
+    if(append){
+        fd->file = fopen(fd->filePath, "a");
+    }
+    else{
+        fd->file = fopen(fd->filePath, "w");
+    }
+    fd->timeZone = timeZone;
+    return fd;
+}
+
+/* Closes the given log file. */
+void logc4_fileClose(logc4_file_t *logFile){
+    if(logFile != NULL){
+        fclose(logFile->file);
+        logFile->file = NULL;
+        free(logFile->filePath);
+        logFile->filePath = NULL;
+        logFile->timeZone = 0;
+        free(logFile);
+        logFile = NULL;
+    }
+}
+
+/*
+Logs the given normal or wide-character format string with the given
+variables substituted.
+*/
+int logc4_fileLog(const logc4_file_t *logFile, const logc4_msg_t msgType,
+                  const char *fileName, const char *funcName,
+                  const char *format, ...){
+    // TODO: Implement.
+    return 0;
 }

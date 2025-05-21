@@ -19,6 +19,8 @@
 #include <stdbool.h>
 #include <wchar.h>
 
+// TODO: MAKE THREAD SAFE.
+
 /**
   * @brief An enum of the @a LogC4 log message types.
 */
@@ -62,14 +64,6 @@ typedef struct{
     */
     char *filePath;
     /**
-      * @brief The character type of the log files.
-      *
-      * The available values are:
-      * - @a 0 (@a false) for normal characters.
-      * - @a 1 (@a true) for wide characters.
-    */
-    bool charType;
-    /**
       * @brief The timezone of the log message.
       *
       * The values are:
@@ -79,12 +73,12 @@ typedef struct{
       * > This will change in the future and the timezone will be able to be
       * specified for values around the globe.
     */
-    bool timeZone;
+    int timeZone;
 } logc4_file_t;
 
 /**
   * @brief Converts a normal string (char *) to a wide character string
-  * (wchar_t *).
+  * (wchar_t *). The returned string should be freen when done being used.
   *
   * @param str The normal string to convert.
   * @return wchar_t* The normal string as a wide character string.
@@ -93,7 +87,7 @@ wchar_t *logc4_stowcs(char *str);
 
 /**
   * @brief Converts a wide character string (wchar_t *) to a normal string
-  * (char *).
+  * (char *). The returned string should be freen when done being used.
   *
   * @param wStr The wide character string to convert.
   * @return char* The wide character string as a normal string.
@@ -109,48 +103,56 @@ char *logc4_wcstos(wchar_t *wStr);
 void logc4_stdInit(int timeZone);
 
 /**
-  * @brief Logs the @a char* format to @a stdout or @a stderr with the given
+  * @brief Logs the formatted message to @a stdout or @a stderr with the given
   * message type.
   *
   * Logs the given string format to @a stdout with the given message type. If
-  * the given message type is @ref LOGC4_ERROR, then the log message is printed
-  * to @a stderr. The filled out format string is appended to the message type
-  * and date-time and printed to @a stdout.
+  * printing to @a stderr is wanted, then @a toStdErr argument must be @a true.
+  * If your own file name and/or function name is wanted to be printed with the
+  * log, then they can be passed in. If @a NULL is passed then that argument is
+  * ignored and not present in the log message. The filled out format string is
+  * appended to the message type and date-time and printed to @a stdout.
   *
-  * The time of the message will always be UTC time.
+  * > ONLY UTC TIME IS DISPLAYED AT THE MOMENT. THIS WILL CHANGE.
   *
-  * > THIS CANNOT BE CHANGED.
+  * To see more information about the format string, see
+  * <a href="https://www.man7.org/linux/man-pages/man3/printf.3.html">
+  * printf(3)</a>.
   *
   * @param msgType A valid @a logc4_msg_t enum value. If not valid, then @a -1
   * is returned.
   * @param toStderr @a true if the message should be logged to @a stderr.
   * @a false to log to @a stdout.
+  * @param fileName The name of the file that is calling this function. Can be
+  * @a NULL.
+  * @param funcName The name of the function that is calling this function. Can
+  * be @a NULL.
   * @param format The format string of the log message. This is equivalent to
   * the <a href="https://www.man7.org/linux/man-pages/man3/printf.3.html">
   * printf(3)</a> format string.
   * @param ... The variables to substitute into the format string.
 */
 int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
-                 const void *format, ...);
+                 const char *fileName, const char *funcName,
+                 const char *format, ...);
 
 /**
   * @brief Opens a log file with the given file path.
   *
   * Initialize a @a logc4_file_t with the given absolute/relative file path.
   * The path will be converted to the absolute path (if applicable). Whether to
-  * append the file will also need to be decided. Also, takes in the character
-  * type (normal or wide character) and whether to use military-time (24-hour
-  * time) or normal time (12-hour time).
+  * append the file will also need to be decided. Also, takes in the desired
+  * timezone designation string.
   *
-  * If the file could not be open, or has already been opened for logging, then
+  * > ONLY UTC TIME IS DISPLAYED AT THE MOMENT. THIS WILL CHANGE.
+  *
+  * If the file could not be open, the reason is printed to @a stderr and
+  * @a NULL is returned. If the file has already been opened for logging, then
   * this function returns @a NULL.
   *
   * @param filePath The absolute/relative file path of the log file.
   * @param append @a false to overwrite and not append to the file. @a true to
   * append to the end of the file.
-  * @param charType @a false to use wide characters
-  * (<a href="https://www.man7.org/linux/man-pages/man3/wchar_t.3type.html">
-  * wchar_t</a>). @a true to use normal (ASCII) characters.
   * @param timeZone @a 0 to use UTC time. @a 1 to use the computer's
   * local time.
   * > This will change in the future and the timezone will be able to be
@@ -159,25 +161,31 @@ int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
   * logging.
 */
 logc4_file_t *logc4_fileOpen(const char *filePath, const bool append,
-                             const bool charType, const int timeZone);
+                             const int timeZone);
 
 /**
   * @brief Closes the given log file.
   *
   * This closes the file stream and frees all allocated memory from
   * @a logc4_fileOpen(3). This also sets the given pointer to @a NULL so
-  * nothing funny happens.
+  * nothing funny happens. If passed @a NULL, then nothing happens.
   *
   * @param logFile The log file to close and free.
 */
 void logc4_fileClose(logc4_file_t *logFile);
 
 /**
-  * @brief Logs the given normal or wide-character format string with the given
-  * variables substituted.
+  * @brief Logs the formatted string to the given log file.
   *
-  * The format can be either be a normal (@a char*) or wide-character
-  * (@a wchar_t*) string.
+  * Logs the given string format to the log file with the given message type.
+  * If printing to @a stderr is wanted, then @a toStdErr argument must be
+  * @a true. If your own file name and/or function name is wanted to be printed
+  * with the log, then they can be passed in. If @a NULL is passed then that
+  * argument is ignored and not present in the log message. The filled out
+  * format string is appended to the message type and date-time and printed to
+  * @a stdout.
+  *
+  * > ONLY UTC TIME IS DISPLAYED AT THE MOMENT. THIS WILL CHANGE.
   *
   * To see more information about the format string, see
   * <a href="https://www.man7.org/linux/man-pages/man3/printf.3.html">
@@ -185,15 +193,18 @@ void logc4_fileClose(logc4_file_t *logFile);
   *
   * @param logFile The log file to print the formatted message to.
   * @param msgType The type of message to print to the log file.
+  * @param fileName The name of the file that is calling this function. Can be
+  * @a NULL.
+  * @param funcName The name of the function that is calling this function. Can
+  * be @a NULL.
   * @param format The format string of the log message. This is equivalent to
   * the <a href="https://www.man7.org/linux/man-pages/man3/printf.3.html">
-  * printf(3)</a> and or the
-  * <a href="https://www.man7.org/linux/man-pages/man3/wprintf.3.html">
-  * wprintf(3)</a> format string.
+  * printf(3)</a> format string.
   * @param ... The variables to substitute into the format string.
   * @return int The number of characters printed to the log file.
 */
 int logc4_fileLog(const logc4_file_t *logFile, const logc4_msg_t msgType,
-                  const void *format, ...);
+                  const char *fileName, const char *funcName,
+                  const char *format, ...);
 
 #endif
