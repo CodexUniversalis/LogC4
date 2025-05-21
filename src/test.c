@@ -17,6 +17,8 @@
 #include <string.h>
 #include <wchar.h>
 
+// TODO: Refactor to use new LogC4 functions and rewrite the tests.
+
 /**
   * @brief A wide character string.
 */
