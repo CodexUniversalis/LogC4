@@ -35,30 +35,10 @@ typedef struct{
     size_t len;
 } WStr;
 
-/**
-  * @brief Frees all of the allocated memory of the given @a WStr and sets
-  * all of the properties to default values.
-  *
-  * @param wStr The @a WStr to free.
-*/
-static void freeWStr(WStr wStr){
-    free(wStr.str);
-    wStr.str = NULL;
-    wStr.len = 0;
-}
-
 /* Whether to use wide characters in the output for the test. */
 static bool wideChars = false;
 /* The test file stream pointer. */
 static FILE *testFilePtr = NULL;
-/* The output file for stdout output. */
-static FILE *stdoutput = NULL;
-/* The relative path of stdoutput file. */
-static char *stdoutputPath = "../out/prog_out/stdout.log";
-/* The output file for stdout output. */
-static FILE *stderrout = NULL;
-/* The relative path of stdoutput file. */
-static char *stderroutPath = "../out/prog_out/stderr.log";
 /* The standard log output file. */
 static FILE *logOut = NULL;
 /* The absolute path of the standard log output file. */
@@ -75,51 +55,26 @@ static bool hasTestFile = false;
 static char *fullFilePath = NULL;
 /* The function aliases in the test file. */
 static WStr testFuncts[] = {
-    {L"char", 4},
-    {L"wchar", 5},
-    {L"init", 4},
-    {L"outputlog", 9},
-    {L"erroutlog", 9},
-    {L"uwc", 3},
-    {L"pim", 3},
-    {L"umt", 3},
-    {L"print", 5},
+    {L"stowcs", 6},
+    {L"wcstos", 6},
+    {L"stdInit", 7},
+    {L"stdLog", 6},
+    {L"fileOpen", 8},
+    {L"fileClose", 9},
+    {L"fileLog", 7},
     {0}
 };
 
-/*
-Checks if the given pointer has memory allocated to it.
+/**
+  * @brief Frees all of the allocated memory of the given @a WStr and sets
+  * all of the properties to default values.
+  *
+  * @param wStr The @a WStr to free.
 */
-static int checkAlloc(void *ptr, int allocFunc){
-    if(!ptr || errno == ENOMEM){
-        char *alloc;
-        switch(allocFunc){
-            case 1:
-                alloc = "m";
-                break;
-            case 2:
-                alloc = "c";
-                break;
-            case 3:
-                alloc = "re";
-                break;
-            default:
-                alloc = "unknown_";
-                break;
-        }
-        if(wideChars){
-            fwprintf(stderr,
-                     L"{test.c} Error: Memory allocation function '%salloc()' "
-                     L"failed to allocate memory.\n", alloc);
-        }
-        else{
-            fprintf(stderr,
-                    "{test.c} Error: Memory allocation function '%salloc()' "
-                    "failed to allocate memory.\n", alloc);
-        }
-        exit(-allocFunc);
-    }
-    return 0;
+static void freeWStr(WStr wStr){
+    free(wStr.str);
+    wStr.str = NULL;
+    wStr.len = 0;
 }
 
 /*
@@ -128,13 +83,11 @@ Gets the current line for the test file.
 static WStr getLine(FILE *filePtr){
     WStr line = {0};
     wchar_t *temp = calloc(LINE_LENGTH, sizeof(wchar_t));
-    checkAlloc(temp, 2);
     line.str = fgetws(temp, LINE_LENGTH, filePtr);
     if(line.str != NULL){
         line.len = wcslen(line.str) - 1;
         line.str[line.len] = L'\0';
         temp = realloc(line.str, (line.len + 1) * sizeof(wchar_t));
-        checkAlloc(temp, 3);
         line.str = temp;
     }
     else{
@@ -148,15 +101,16 @@ Opens the test file.
 */
 static void openTestFile(char *filePath){
     if(!hasTestFile){
+        size_t fpLen = strlen(filePath);
         testFilePtr = fopen(filePath, "r");
         fullFilePath = realpath(filePath, NULL);
+        size_t ffpLen = strlen(fullFilePath);
         if(fullFilePath == NULL){
-            fullFilePath = calloc(strlen(filePath) + 1, sizeof(char));
-            strncat(fullFilePath, filePath, strlen(filePath));
+            fullFilePath = calloc(fpLen + 1, sizeof(char));
+            strncat(fullFilePath, filePath, fpLen);
         }
         else{
-            char *temp = realloc(fullFilePath, strlen(fullFilePath) + 1);
-            checkAlloc(temp, 3);
+            char *temp = realloc(fullFilePath, ffpLen + 1);
             fullFilePath = temp;
         }
         if(!testFilePtr){
@@ -210,92 +164,36 @@ static void runTestFile(){
     while((line = getLine(testFilePtr)).len != 0){
         WStr func = getFunc(line);
         if(func.len != 0){
-            if(wcscmp(func.str, L"char") == 0){
-                wideChars = false;
+            if(wcscmp(func.str, L"stowcs") == 0){
+                // TODO: Implement.
             }
-            else if(wcscmp(func.str, L"wchar") == 0){
-                wideChars = true;
+            else if(wcscmp(func.str, L"wcstos") == 0){
+                // TODO: Implement.
             }
-            else if(wcscmp(func.str, L"init") == 0){
-                freeWStr(line);
-                line = getLine(testFilePtr);
-
-                int uwc = (int)(line.str[0] - L'0');
-                int pim = line.len > 1 ? (int)(line.str[1] - L'0') : 0;
-                int umt = line.len > 2 ? (int)(line.str[2] - L'0') : 0;
-                logc4_init(uwc, pim, umt);
+            else if(wcscmp(func.str, L"stdInit") == 0){
+                // TODO: Implement.
             }
-            else if(wcscmp(func.str, L"outputlog") == 0){
-
+            else if(wcscmp(func.str, L"stdLog") == 0){
+                // TODO: Implement.
             }
-            else if(wcscmp(func.str, L"erroutlog") == 0){
-
+            else if(wcscmp(func.str, L"fileOpen") == 0){
+                // TODO: Implement.
             }
-            else if(wcscmp(func.str, L"uwc") == 0){
-                if(wideChars){
-                    fwprintf(stdoutput, L"useWideChars: %d\n",
-                             logc4_logCharType());
-                }
-                else{
-                    fprintf(stdoutput, "useWideChars: %d\n",
-                            logc4_logCharType());
-                }
+            else if(wcscmp(func.str, L"fileClose") == 0){
+                // TODO: Implement.
             }
-            else if(wcscmp(func.str, L"pim") == 0){
-                if(wideChars){
-                    fwprintf(stdoutput, L"printInternalMessages: %d\n",
-                             logc4_logPrintIntMsgs());
-                }
-                else{
-                    fprintf(stdoutput, "printInternalMessages: %d\n",
-                            logc4_logPrintIntMsgs());
-                }
+            else if(wcscmp(func.str, L"fileLog") == 0){
+                // TODO: Implement.
             }
-            else if(wcscmp(func.str, L"umt") == 0){
-                if(wideChars){
-                    fwprintf(stdoutput, L"useMilitaryTime: %d\n",
-                             logc4_logTimeFormat());
-                }
-                else{
-                    fprintf(stdoutput, "useMilitaryTime: %d\n",
-                            logc4_logTimeFormat());
-                }
-            }
-            else if(wcscmp(func.str, L"print") == 0){
-                freeWStr(line);
-                line = getLine(testFilePtr);
-                int numLines = (int)wcstol(line.str, NULL, 10);
-                freeWStr(line);
-
-                WStr msgType = getLine(testFilePtr);
-                WStr fileName = getLine(testFilePtr);
-                WStr funcName = getLine(testFilePtr);
-
-                if(logOutPath != NULL){
-                    logc4_setLogFile(logOutPath, false);
-                }
-
-                for(int i = 0; i < numLines; i++){
-                    if(i != 0){
-                        freeWStr(line);
-                    }
-                    line = getLine(testFilePtr);
-                    logc4_print(true, msgType.str, fileName.str,
-                                funcName.str, L"%ls", line.str);
-                }
-                freeWStr(msgType);
-                freeWStr(fileName);
-                freeWStr(funcName);
-            }
+            freeWStr(line);
         }
-        freeWStr(line);
     }
 }
 
-/*
-Closes the test file stream and frees all memory allocated during test file
-testing.
-*/
+    /*
+    Closes the test file stream and frees all memory allocated during test file
+    testing.
+    */
 static void closeTestFile(){
     if(hasTestFile){
         fclose(testFilePtr);
@@ -310,30 +208,14 @@ static void closeTestFile(){
 }
 
 /**
-  * @brief Create all parent directories and open a file descriptor for the
-  * given absolute/relative path.
-  *
-  * @param filePath The absolute/relative file to create and open.
-  * @return FILE* @a NULL if there was a problem creating the parent
-  * directories or opening the file, or the file descriptor of the given file.
-*/
-static FILE *createAndOpen(char *filePath){
-    return fopen(filePath, "r");
-}
-
-/**
   * @brief Completely test the given test file.
   *
   * @param filePath The absolute/relative path of the test file.
 */
 static void testFile(char *filePath){
-    stdoutput = createAndOpen(stdoutputPath);
-    stderrout = createAndOpen(stderroutPath);
     openTestFile(filePath);
     runTestFile();
     closeTestFile();
-    fclose(stdoutput);
-    fclose(stderrout);
 }
 
 /**

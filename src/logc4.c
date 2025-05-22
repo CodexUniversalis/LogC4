@@ -6,7 +6,15 @@
   * @date 2025-04-24: Created
   * Changelog:
   * - 2025-05-01: Worked on implementing functions from logc4.h.
+  * (commit a2efdfb47228bbfdde5f36d7bd668304dfdc19b9).
+  * - 2025-05-03: Implemented mostly old code.
+  * (commit a2efdfb47228bbfdde5f36d7bd668304dfdc19b9).
   * - 2025-05-19: Fixed some functions that were broken.
+  * (commit 78f4278d8c60d382af35c1e65b7597f3d487d286).
+  * - 2025-05-20: Refactor. Implemented logc4_stdLog(3).
+  * (commit ea353fd037a713db521b873883e769dd967106a1).
+  * - 2025-05-21: Refactor. Implemented logc4_fileLog(3).
+  * (commit 1178c2d3db540b7e074684eae82cd47ca3e602a7).
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
