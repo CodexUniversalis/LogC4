@@ -3,7 +3,7 @@
   * @author CodexUniversalis (codexuniversalisprime@gmail.com)
   * @brief The source file for the @a logc4.h header file.
   * @version 0.1.0
-  * @date 2025-04-24: Created
+  * @date 2025-04-24: Created. @n @n
   * Changelog:
   * - 2025-05-01: Worked on implementing functions from logc4.h.
   * (commit a2efdfb47228bbfdde5f36d7bd668304dfdc19b9).

@@ -3,7 +3,12 @@
   * @author CodexUniversalis (codexuniversalisprime@gmail.com)
   * @brief The entry point for testing the @a LogC4 library.
   * @version 0.1.0
-  * @date 2025-04-24
+  * @date 2025-04-24: Created. @n @n
+  * - 2025-05-21: Light refactoring.
+  * (commit 11330ccad45e238314dca87fddfa75bc60ef920d).
+  * - 2025-05-22: Refactoring references to old LogC4 functions to the updated
+  * version.
+  * (commit ).
   * @copyright Copyright (c) 2025
 */
 #include "logc4.h"
@@ -35,8 +40,6 @@ typedef struct{
     size_t len;
 } WStr;
 
-/* Whether to use wide characters in the output for the test. */
-static bool wideChars = false;
 /* The test file stream pointer. */
 static FILE *testFilePtr = NULL;
 /* The standard log output file. */
@@ -114,27 +117,15 @@ static void openTestFile(char *filePath){
             fullFilePath = temp;
         }
         if(!testFilePtr){
-            if(wideChars){
-                fwprintf(stderr, L"{test.c} Error: Cannnot open test "
-                         "file: %s\n", fullFilePath);
-            }
-            else{
-                fprintf(stderr, "{test.c} Error: Cannnot open test file: %s\n",
-                        fullFilePath);
-            }
+            fprintf(stderr, "{test.c} Error: Cannnot open test file: %s\n",
+                    fullFilePath);
             return;
         }
         hasTestFile = true;
     }
     else{
-        if(wideChars){
-            fwprintf(stderr, L"{test.c} Error: Already opened test file: %s\n",
-                     fullFilePath);
-        }
-        else{
-            fprintf(stderr, "{test.c} Error: Already opened test file: %s\n",
-                    fullFilePath);
-        }
+        fprintf(stderr, "{test.c} Error: Already opened test file: %s\n",
+                fullFilePath);
     }
 }
 
@@ -190,15 +181,14 @@ static void runTestFile(){
     }
 }
 
-    /*
-    Closes the test file stream and frees all memory allocated during test file
-    testing.
-    */
+/*
+Closes the test file stream and frees all memory allocated during test file
+testing.
+*/
 static void closeTestFile(){
     if(hasTestFile){
         fclose(testFilePtr);
         testFilePtr = NULL;
-        logc4_closeLogFiles();
         hasTestFile = false;
     }
     if(fullFilePath != NULL){
@@ -229,9 +219,9 @@ static void testFile(char *filePath){
 */
 static bool getNextChar(wint_t *ch, WStr string, size_t *pos){
     if(*pos >= string.len){
-        logc4_printerr(false, LOGC4_ERROR, "test.c", "getNextChar",
-                       "Trying to access a character outside of the string's "
-                       "bounds.");
+        logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                     "Trying to access a character outside of the string's "
+                     "bounds.");
         return false;
     }
     *ch = string.str[++(*pos)];
@@ -386,14 +376,16 @@ Compares the given two files by either wide characters or normal characters.
 static int cmpFiles(const char *file1, const char *file2, const int wideChars){
     FILE *file1_fd = fopen(file1, "r");
     if(file1_fd == NULL){
-        logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpfiles", "Cannot open "
-                       "the first file: %s.", file1);
+        logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                     "Cannot open the first file: %s.",
+                     file1);
         return -1;
     }
     FILE *file2_fd = fopen(file2, "r");
     if(file2_fd == NULL){
-        logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpfiles", "Cannot open "
-                       "the second file: %s.", file2);
+        logc4_stdLog(false, LOGC4_ERROR, __FILE__, __func__,
+                     "Cannot open the second file: %s.",
+                     file2);
         fclose(file1_fd);
         return -1;
     }
@@ -416,9 +408,10 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             ch2 = line2[l2Pos];
             if(!wideChars){
                 if(ch1 > 127){
-                    logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
-                                   "The first file (%s) contains a non-ASCII "
-                                   "character.", file1);
+                    logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                                 "The first file (%s) contains a non-ASCII "
+                                 "character.",
+                                 file1);
                     fclose(file1_fd);
                     fclose(file2_fd);
                     free(line1);
@@ -426,9 +419,10 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     return 1;
                 }
                 else if(ch2 > 127){
-                    logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
-                                   "The second file (%s) contains a non-ASCII "
-                                   "character.", file1);
+                    logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                                 "The second file (%s) contains a non-ASCII "
+                                 "character.",
+                                 file1);
                     fclose(file1_fd);
                     fclose(file2_fd);
                     free(line1);
@@ -436,10 +430,10 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     return 1;
                 }
                 else if(ch1 != ch2){
-                    logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
-                                   "The first file (%s) and the second "
-                                   "file (%s) do not match ASCII characters.",
-                                   file1, file2);
+                    logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                                 "The first file (%s) and the second "
+                                 "file (%s) do not match ASCII characters.",
+                                 file1, file2);
                     fclose(file1_fd);
                     fclose(file2_fd);
                     free(line1);
@@ -466,22 +460,22 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     }, &l2Pos);
                     switch(retVal){
                         case 1:
-                            logc4_printerr(false, LOGC4_ERROR, "test.c",
-                                           "cmpFiles", "The second file (%s) "
-                                           "does not match the first "
-                                           "file (%s) because of a 12-hour "
-                                           "time format.", file2, file1);
+                            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                                         "The second file (%s) does not match "
+                                         "the first file (%s) because of a "
+                                         "12-hour time format.",
+                                         file2, file1);
                             fclose(file1_fd);
                             fclose(file2_fd);
                             free(line1);
                             free(line2);
                             return 1;
                         case 2:
-                            logc4_printerr(false, LOGC4_ERROR, "test.c",
-                                           "cmpFiles", "The second file (%s) "
-                                           "does not match the first "
-                                           "file (%s) because of a 24-hour "
-                                           "time format.", file2, file1);
+                            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                                         "The second file (%s) does not match "
+                                         "the first file (%s) because of a "
+                                         "24-hour time format.",
+                                         file2, file1);
                             fclose(file1_fd);
                             fclose(file2_fd);
                             free(line1);
@@ -512,22 +506,22 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     }, &l1Pos);
                     switch(retVal){
                         case 1:
-                            logc4_printerr(false, LOGC4_ERROR, "test.c",
-                                           "cmpFiles", "The first file (%s) "
-                                           "does not match the second "
-                                           "file (%s) because of a 12-hour "
-                                           "time format.", file1, file2);
+                            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                                         "The first file (%s) does not match "
+                                         "the second file (%s) because of a "
+                                         "12-hour time format.",
+                                         file1, file2);
                             fclose(file1_fd);
                             fclose(file2_fd);
                             free(line1);
                             free(line2);
                             return 1;
                         case 2:
-                            logc4_printerr(false, LOGC4_ERROR, "test.c",
-                                           "cmpFiles", "The first file (%s) "
-                                           "does not match the second "
-                                           "file (%s) because of a 24-hour "
-                                           "time format.", file1, file2);
+                            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                                         "The first file (%s) does not match "
+                                         "the second file (%s) because of a "
+                                         "24-hour time format.",
+                                         file1, file2);
                             fclose(file1_fd);
                             fclose(file2_fd);
                             free(line1);
@@ -543,9 +537,10 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                 }
             }
             if(ch1 != ch2){
-                logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
-                               "The first file (%s) and the second file (%s) "
-                               "do not match wide characters.", file1, file2);
+                logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                             "The first file (%s) and the second file (%s) do "
+                             "not match wide characters.",
+                             file1, file2);
                 fclose(file1_fd);
                 fclose(file2_fd);
                 free(line1);
@@ -556,10 +551,10 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             l2Pos++;
         }
         if(l1Pos == l1Len && l2Pos != l2Len){
-            logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
-                           "The second file (%s) does not match the first "
-                           "file (%s) because a line in the second file is "
-                           "longer.", file2, file1);
+            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                         "The second file (%s) does not match the first file "
+                         "(%s) because a line in the second file is longer.",
+                         file2, file1);
             fclose(file1_fd);
             fclose(file2_fd);
             free(line1);
@@ -567,10 +562,10 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             return 1;
         }
         else if(l1Pos != l1Len && l2Pos == l2Len){
-            logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
-                           "The first file (%s) does not match the second "
-                           "file (%s) because a line in the first file is "
-                           "longer.", file1, file2);
+            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                         "The first file (%s) does not match the second file "
+                         "(%s) because a line in the first file is longer.",
+                         file1, file2);
             fclose(file1_fd);
             fclose(file2_fd);
             free(line1);
@@ -581,9 +576,10 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
     if(l1Ret != NULL && l2Ret == NULL){
         l1Ret = fgetws(line1, numChars, file1_fd);
         if(l1Ret != NULL){
-            logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
-                           "The first file (%s) is longer than the second "
-                           "file (%s).", file1, file2);
+            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                         "The first file (%s) is longer than the second file "
+                         "(%s).",
+                         file1, file2);
             fclose(file1_fd);
             fclose(file2_fd);
             free(line1);
@@ -594,9 +590,10 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
     else if(l1Ret == NULL && l2Ret != NULL){
         l2Ret = fgetws(line2, numChars, file2_fd);
         if(l2Ret != NULL){
-            logc4_printerr(false, LOGC4_ERROR, "test.c", "cmpFiles",
-                           "The second file (%s) is longer than the first "
-                           "file (%s).", file2, file1);
+            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                         "The second file (%s) is longer than the first file "
+                         "(%s).",
+                         file2, file1);
             fclose(file1_fd);
             fclose(file2_fd);
             free(line1);
@@ -620,27 +617,30 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
 */
 int main(int argc, char **argv){
     if(argc <= 1){
-        printf("Usage: logc4_test (cmp | test) [FILE...].\n");
+        printf("Usage{test.c}: logc4_test (cmp | test) [FILE...].\n");
         return -1;
     }
-    setlocale(LC_ALL, "");
+    // Must be set to handle UTF-8 characters.
+    setlocale(LC_ALL, "en_US.UTF-8");
     if(strcmp("cmp", argv[1]) == 0){
-        logc4_init(1, 1, 1);
+        // TODO: Refactor and implement.
+        // logc4_init(1, 1, 1);
         if(argc <= 4){
-            printf("ERROR: The /cmp/ subcommand requires three (3) file "
-                   "paths. The first is the log output and the last two are "
-                   "the files to compare.\n");
+            printf("[ERROR]{test.c}: The /cmp/ subcommand requires three (3) "
+                   "file paths. The first is the log output and the last two "
+                   "are the files to compare.\n");
             return 2;
         }
-        logc4_setLogFile(argv[2], 0);
-        logc4_setErrLogFile(argv[2], 0);
+        // logc4_setLogFile(argv[2], 0);
+        // logc4_setErrLogFile(argv[2], 0);
         int retVal = cmpFiles(argv[3], argv[4], true);
-        logc4_closeLogFiles();
+        // logc4_closeLogFiles();
         return retVal;
     }
     else if(strcmp("test", argv[1]) == 0){
         if(argc == 2){
-            printf("ERROR: No file(s) passed to the /test/ subcommand.\n");
+            printf("[ERROR]{test.c}: No file(s) passed to the /test/ "
+                   "subcommand.\n");
             return 2;
         }
         // Assume all arguments after the second one to be test files.
@@ -649,6 +649,6 @@ int main(int argc, char **argv){
         }
         return 0;
     }
-    printf("ERROR: Unknown subcommand /%s/.\n", argv[1]);
+    printf("[ERROR]{test.c}: Unknown subcommand /%s/.\n", argv[1]);
     return 1;
 }

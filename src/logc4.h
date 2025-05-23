@@ -3,7 +3,7 @@
   * @author CodexUniversalis (codexuniversalisprime@gmail.com)
   * @brief The header file for the @a Logc4 library.
   * @version 0.1.0
-  * @date 2025-04-24: Created @n @n
+  * @date 2025-04-24: Created. @n @n
   * Changelog
   * - 2025-04-24: Refactored file from previous failed project.
   * - 2025-04-26: Changed a couple of comments.
