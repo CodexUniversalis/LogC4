@@ -8,15 +8,17 @@
   * - 2025-04-24: Refactored file from previous failed project.
   * - 2025-04-26: Changed a couple of comments.
   * - 2025-05-01: Fixed file comments and added logc4_stdInit().
-  * (commit a2efdfb47228bbfdde5f36d7bd668304dfdc19b9).
+  * Github <a href="@ghc/038b3387d1b05ff13556ba55e1489a5ac00d3af6">commit</a>.
   * - 2025-05-03: Implemented mostly old code.
-  * (commit a2efdfb47228bbfdde5f36d7bd668304dfdc19b9).
+  * Github <a href="@ghc/a2efdfb47228bbfdde5f36d7bd668304dfdc19b9">commit</a>.
   * - 2025-05-19: Reworked some of the functions and removed unneeded structs.
-  * (commit 78f4278d8c60d382af35c1e65b7597f3d487d286).
+  * Github <a href="@ghc/78f4278d8c60d382af35c1e65b7597f3d487d286">commit</a>.
   * - 2025-05-20: Refactor some function headers.
-  * (commit ea353fd037a713db521b873883e769dd967106a1).
+  * Github <a href="@ghc/ea353fd037a713db521b873883e769dd967106a1">commit</a>.
   * - 2025-05-21: Refactor some function headers.
-  * (commit 1178c2d3db540b7e074684eae82cd47ca3e602a7).
+  * Github <a href="@ghc/1178c2d3db540b7e074684eae82cd47ca3e602a7">commit</a>.
+  * - 2025-05-26: Worked on implementing timezones.
+  * Github <a href="@ghc">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #pragma once
@@ -51,7 +53,43 @@ typedef enum{
     */
     LOGC4_DEBUG
 #endif
-}logc4_msg_t;
+} logc4_msg_t;
+
+/**
+  * @brief An enum of the acceptable timezones.
+*/
+typedef enum{
+    /**
+      * @brief The timezone is the local timezone of the computer.
+    */
+    LOGC4_TZ_LOCAL = -1,
+    /**
+      * @brief The timezone is <i>Coordinated Universal Time</i> (@a UTC).
+    */
+    LOGC4_TZ_UTC
+} logc4_tz_t;
+
+/**
+  * @brief Different information to display in the log message.
+  *
+  * If any of the members are set to @a false, then they are not displayed.
+*/
+typedef struct{
+    /**
+      * @brief Whether to display the calender date in the time part of the
+      * log message.
+      *
+      * @a true to display it, @a false otherwise.
+    */
+    bool date;
+    /**
+      * @brief Whether to display the timezone in the time part of the log
+      * message.
+      *
+      * @a true to display it, @a false otherwise.
+    */
+    bool timezone;
+} logc4_display_t;
 
 /**
   * @brief A struct containing all of the information for a log file.
@@ -75,13 +113,20 @@ typedef struct{
       * @brief The timezone of the log message.
       *
       * The values are:
-      * - @a 0 (@a false) to use UTC time.
-      * - @a 1 (@a true) to use the computer's local time.
+      * - @a -1 to use the computer's local time.
+      * - @a 0 to use UTC time.
       *
-      * > This will change in the future and the timezone will be able to be
-      * specified for values around the globe.
+      * > NOT YET IMPLEMENTED. This will change in the future and the timezone
+      * will be able to be specified for values around the globe.
     */
     int timeZone;
+    /**
+      * @brief A @a logc4_display_t struct with the preferences of what to
+      * display in the log message.
+      *
+      * If any of the members are set to @a false, then they are not displayed.
+    */
+    logc4_display_t display;
 } logc4_file_t;
 
 /**
@@ -107,8 +152,10 @@ char *logc4_wcstos(wchar_t *wStr);
   *
   * @param timeZone The desired time zone to use when printing the time to
   * either @a stdout or @a stderr.
+  * @param display The @a logc4_display_t struct that is used to determine
+  * what information to display.
 */
-void logc4_stdInit(int timeZone);
+void logc4_stdInit(int timeZone, logc4_display_t display);
 
 /**
   * @brief Logs the formatted message to @a stdout or @a stderr with the given
@@ -165,11 +212,13 @@ int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
   * local time.
   * > This will change in the future and the timezone will be able to be
   * specified for values around the globe.
+  * @param display The @a logc4_display_t struct that is used to determine
+  * what information to display.
   * @return logc4_file_t* A pointer to a @a logc4_file_t struct used in
   * logging.
 */
 logc4_file_t *logc4_fileOpen(const char *filePath, const bool append,
-                             const int timeZone);
+                             const int timeZone, logc4_display_t display);
 
 /**
   * @brief Closes the given log file.

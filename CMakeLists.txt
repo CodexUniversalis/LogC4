@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.22)
 # Specify the project info.
 project(
 logc4
-VERSION 1.0.0
+VERSION 0.1.0
 DESCRIPTION "A lightweight logger for the C language."
 LANGUAGES C
 )

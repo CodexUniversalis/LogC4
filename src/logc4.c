@@ -6,15 +6,17 @@
   * @date 2025-04-24: Created. @n @n
   * Changelog:
   * - 2025-05-01: Worked on implementing functions from logc4.h.
-  * (commit a2efdfb47228bbfdde5f36d7bd668304dfdc19b9).
+  * Github <a href="@ghc/038b3387d1b05ff13556ba55e1489a5ac00d3af6">commit</a>.
   * - 2025-05-03: Implemented mostly old code.
-  * (commit a2efdfb47228bbfdde5f36d7bd668304dfdc19b9).
+  * Github <a href="@ghc/a2efdfb47228bbfdde5f36d7bd668304dfdc19b9">commit</a>.
   * - 2025-05-19: Fixed some functions that were broken.
-  * (commit 78f4278d8c60d382af35c1e65b7597f3d487d286).
-  * - 2025-05-20: Refactor. Implemented logc4_stdLog(3).
-  * (commit ea353fd037a713db521b873883e769dd967106a1).
-  * - 2025-05-21: Refactor. Implemented logc4_fileLog(3).
-  * (commit 1178c2d3db540b7e074684eae82cd47ca3e602a7).
+  * Github <a href="@ghc/78f4278d8c60d382af35c1e65b7597f3d487d286">commit</a>.
+  * - 2025-05-20: Refactor. Implemented logc4_stdLog().
+  * Github <a href="@ghc/ea353fd037a713db521b873883e769dd967106a1">commit</a>.
+  * - 2025-05-21: Refactor. Implemented logc4_fileLog().
+  * Github <a href="@ghc/1178c2d3db540b7e074684eae82cd47ca3e602a7">commit</a>.
+  * - 2025-05-26: Worked on implementing timezones.
+  * Github <a href="@ghc">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
@@ -24,9 +26,11 @@
 #include <time.h>
 #include "logc4.h"
 
-/*
-This multiplies the given length of a wide character string by 4 to get the
-maximum number of bytes a multibyte string can contain.
+/**
+  * @brief Multiplies the given length by 4.
+  *
+  * This multiplies the given length of a wide character string by 4 to get
+  * the maximum number of bytes a multibyte string can contain.
 */
 #define UTF8Bytes(len) (4 * len)
 
@@ -34,14 +38,67 @@ maximum number of bytes a multibyte string can contain.
 
 /* The maximum length of a formatted time string. */
 static const int TIME_STR_LEN = 28;
-/* The time zone to use when getting the time for a standard log. */
-static int TIME_ZONE = 0;
 /* A string literal of "NULL". */
 static const char *c_NULL = "NULL";
 /* A wide character string literal of L"NULL". */
 static const wchar_t *c_wNULL = L"NULL";
 /* The length of both the normal and wide character *NULL* string. */
 static const int c_NULL_LEN = 4;
+/* The logc4_file_t for logging to stdout or stderr. */
+static logc4_file_t STDLOG = {
+    .file = NULL,
+    .filePath = NULL,
+    .timeZone = 0,
+    .display = {
+        .date = true,
+        .timezone = true
+    }
+};
+/**
+  * @brief A struct that contains the relevant information for a timezone.
+  *
+  * All relevant information such as offset from @a UTC and the 3 character
+  * name are stored.
+*/
+static struct TZInfo{
+    /**
+      * The 3 character name of the timezone.
+    */
+    char *name;
+    /**
+      * The hour offset from @a UTC.
+    */
+    int hrOffset;
+    /**
+      * The minute offset from @a UTC.
+    */
+    int minOffset;
+    /**
+      * The second offset from @a UTC.
+    */
+    int secOffset;
+};
+/**
+  * The length of the timezone array @a TZS.
+*/
+static const int TZS_LEN = 2;
+/**
+  * An array of @a TZInfo structs.
+*/
+static struct TZInfo TZS[TZS_LEN] = {
+    {
+        .name = "UTC",
+        .hrOffset = 0,
+        .minOffset = 0,
+        .secOffset = 0
+    },
+    {
+        .name = NULL,
+        .hrOffset = 0,
+        .minOffset = 0,
+        .secOffset = 0
+    }
+};
 
 /**
   * @brief Checks if @a malloc(), @a calloc(), or @a realloc() failed.
@@ -59,7 +116,6 @@ static const int c_NULL_LEN = 4;
   *     - @a 1: @a malloc() failed.
   *     - @a 2: @a calloc() failed.
   *     - @a 3: @a realloc() failed.
-  *
 */
 static void timeCheckAlloc(const void *ptr, const char *intFuncName,
                            const int lineNumber, const int allocFunc,
@@ -118,31 +174,53 @@ static void timeCheckAlloc(const void *ptr, const char *intFuncName,
   *
   * @param timeStr A pointer to the string for the formatted time string.
   * @param len The length of @a timeStr.
+  * @param timezone The timezone to use.
+  * @param display The @a logc4_display_t struct that is used to determine
+  * what information to display.
   * @return int If the value is not @a 0, then an error occurred and the
   * contents of @a timeStr are undefined.
 */
-static int getCurrentTimeFromTimeSpec(char *timeStr, int len){
-    // TODO: Handle different timezones.
+static int getCurrentTimeFromTimeSpec(char *timeStr, int len, int timezone,
+                                      logc4_display_t display){
+    // TODO: Implement timezone differences.
     struct timespec ts = {0};
     int result = clock_gettime(0, &ts);
     if(result == -1){
         return -1;
     }
-    struct tm tm = {0};
 
-    // tzset();
+    if(timezone == -1){
+        extern char *tzname[2];
+        extern long timezone;
+        extern int daylight;
+        tzset();
+    }
+    struct tm tm = {0};
     if(gmtime_r(&(ts.tv_sec), &tm) == NULL){
         return -2;
     }
 
-    result = strftime(timeStr, len, "%F %T", &tm);
+    char *fmt = NULL;
+    if(display.date){
+        fmt = "%F %T";
+    }
+    else{
+        fmt = "%T";
+    }
+    result = strftime(timeStr, len, fmt, &tm);
     if(result == 0){
         return -3;
     }
     len -= result - 1;
 
-    result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s",
-                      ts.tv_nsec / 1000000, tm.tm_zone);
+    if(display.timezone){
+        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s",
+                          ts.tv_nsec / 1000000, getTimezoneString(timezone));
+    }
+    else{
+        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld",
+                          ts.tv_nsec / 1000000);
+    }
     if(result >= len){
         return -4;
     }
@@ -154,14 +232,21 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len){
   * @brief This gets the current time string according to the given timezone.
   *
   * @param timeZone The timezone to use when getting the time string.
+  * @param display The @a logc4_display_t struct that is used to determine
+  * what information to display.
+  * @param fileName The name of the file that is calling this function. Can be
+  * @a NULL.
+  * @param funcName The name of the function that is calling this function. Can
+  * be @a NULL.
   * @return char* The formatted timezone string.
 */
-static char *getCurrentTime(const int timeZone, const char *fileName,
-                            const char *funcName){
+static char *getCurrentTime(const int timeZone, logc4_display_t display,
+                            const char *fileName, const char *funcName){
     // TODO: Handle different timezones.
     char *timeStr = calloc(TIME_STR_LEN, sizeof(char));
     timeCheckAlloc(timeStr, __func__, __LINE__ - 1, 2, fileName, funcName);
-    int ret = getCurrentTimeFromTimeSpec(timeStr, TIME_STR_LEN);
+    int ret = getCurrentTimeFromTimeSpec(timeStr, TIME_STR_LEN, timeZone,
+                                         display);
     int lineNumber = __LINE__ - 1;
     if(ret != 0){
         int ref = 0;
@@ -215,6 +300,10 @@ static char *getCurrentTime(const int timeZone, const char *fileName,
   *     - @a 1: @a malloc() failed.
   *     - @a 2: @a calloc() failed.
   *     - @a 3: @a realloc() failed.
+  * @param fileName The name of the file that is calling this function. Can be
+  * @a NULL.
+  * @param funcName The name of the function that is calling this function. Can
+  * be @a NULL.
 */
 static void checkAlloc(const void *ptr, const char *intFuncName,
                        const int lineNumber, const int allocFunc,
@@ -235,7 +324,8 @@ static void checkAlloc(const void *ptr, const char *intFuncName,
                 alloc = "unknown_";
                 break;
         }
-        char *time = getCurrentTime(TIME_ZONE, NULL, NULL);
+        char *time = getCurrentTime(STDLOG.timeZone, STDLOG.display, NULL,
+                                    NULL);
         int ref = 0;
         if(fileName == NULL && funcName != NULL){
             ref = 2;
@@ -290,7 +380,8 @@ wchar_t *logc4_stowcs(char *str){
     if(wLength == -1){
         free(wcs);
         free(copy);
-        char *time = getCurrentTime(TIME_ZONE, NULL, NULL);
+        char *time = getCurrentTime(STDLOG.timeZone, STDLOG.display, NULL,
+                                    NULL);
         fprintf(stderr,
                 "%s [ERROR]{%s/%s:%d} The function swprintf() "
                 "returned with a value of -1.\n",
@@ -321,7 +412,8 @@ char *logc4_wcstos(wchar_t *wStr){
     int lineNumber = __LINE__ - 1;
     if(length == (size_t)-1){
         free(str);
-        char *time = getCurrentTime(TIME_ZONE, NULL, NULL);
+        char *time = getCurrentTime(STDLOG.timeZone, STDLOG.display, NULL,
+                                    NULL);
         fprintf(stderr,
                 "%s [ERROR]{%s/%s:%d} The function wcstombs() "
                 "returned with a value of -1. This means a wide character "
@@ -345,8 +437,9 @@ char *logc4_wcstos(wchar_t *wStr){
 Init stdout and stderr:
 - timeZone
 */
-void logc4_stdInit(int timeZone){
-    // TODO: Implement.
+void logc4_stdInit(int timeZone, logc4_display_t display){
+    STDLOG.timeZone = timeZone;
+    STDLOG.display = display;
 }
 
 /* Gets the string representation of the logc4_msg*/
@@ -392,7 +485,8 @@ int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
     va_end(args);
 
     char *type = getMsgType(msgType);
-    char *time = getCurrentTime(TIME_ZONE, NULL, NULL);
+    char *time = getCurrentTime(STDLOG.timeZone, STDLOG.display, NULL,
+                                NULL);
     int ref = 0;
     if(fileName == NULL && funcName != NULL){
         ref = 2;
@@ -461,7 +555,8 @@ static char *getFullFilePath(const char *relPath){
             // Do nothing if any other value.
             break;
     }
-    char *time = getCurrentTime(TIME_ZONE, NULL, NULL);
+    char *time = getCurrentTime(STDLOG.timeZone, STDLOG.display, NULL,
+                                NULL);
     fprintf(stderr,
             "%s [ERROR]{%s/%s:%d} The function realpath(3) failed with the "
             "following message: %s\n",
@@ -472,7 +567,8 @@ static char *getFullFilePath(const char *relPath){
 
 /* Opens a log file with the given file path. */
 logc4_file_t *logc4_fileOpen(const char *filePath, const bool append,
-                             const int timeZone){
+                             const int timeZone,
+                             const logc4_display_t display){
     if(filePath == NULL){
         return NULL;
     }
@@ -488,6 +584,7 @@ logc4_file_t *logc4_fileOpen(const char *filePath, const bool append,
         fd->file = fopen(fd->filePath, "w");
     }
     fd->timeZone = timeZone;
+    fd->display = display;
     return fd;
 }
 
@@ -499,6 +596,7 @@ void logc4_fileClose(logc4_file_t *logFile){
         free(logFile->filePath);
         logFile->filePath = NULL;
         logFile->timeZone = 0;
+        logFile->display = (logc4_display_t){0};
         free(logFile);
         logFile = NULL;
     }
@@ -528,7 +626,8 @@ int logc4_fileLog(const logc4_file_t *logFile, const logc4_msg_t msgType,
     va_end(args);
 
     char *type = getMsgType(msgType);
-    char *time = getCurrentTime(logFile->timeZone, fileName, funcName);
+    char *time = getCurrentTime(logFile->timeZone, logFile->display, fileName,
+                                funcName);
     int ref = 0;
     if(fileName == NULL && funcName != NULL){
         ref = 2;

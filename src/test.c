@@ -5,10 +5,12 @@
   * @version 0.1.0
   * @date 2025-04-24: Created. @n @n
   * - 2025-05-21: Light refactoring.
-  * (commit 11330ccad45e238314dca87fddfa75bc60ef920d).
+  * Github <a href="@ghc/11330ccad45e238314dca87fddfa75bc60ef920d">commit</a>.
   * - 2025-05-22: Refactoring references to old LogC4 functions to the updated
   * version.
-  * (commit ).
+  * Github <a href="@ghc/fa4effda02e18f016e3d597ae695543f35789e56">commit</a>.
+  * - 2025-05-26: Changed all old @a LogC4 functions to the new functions.
+  * Github <a href="@ghc">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include "logc4.h"
@@ -150,7 +152,6 @@ static void runTestFile(){
     if(!hasTestFile){
         return;
     }
-    bool wideChars = false;
     WStr line;
     while((line = getLine(testFilePtr)).len != 0){
         WStr func = getFunc(line);
@@ -379,7 +380,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
         logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
                      "Cannot open the first file: %s.",
                      file1);
-        return -1;
+        return 1;
     }
     FILE *file2_fd = fopen(file2, "r");
     if(file2_fd == NULL){
@@ -387,7 +388,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                      "Cannot open the second file: %s.",
                      file2);
         fclose(file1_fd);
-        return -1;
+        return 2;
     }
     int numChars = 250;
     wchar_t *line1 = calloc(numChars, sizeof(wchar_t));
@@ -416,7 +417,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     fclose(file2_fd);
                     free(line1);
                     free(line2);
-                    return 1;
+                    return 3;
                 }
                 else if(ch2 > 127){
                     logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
@@ -427,7 +428,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     fclose(file2_fd);
                     free(line1);
                     free(line2);
-                    return 1;
+                    return 4;
                 }
                 else if(ch1 != ch2){
                     logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
@@ -438,7 +439,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     fclose(file2_fd);
                     free(line1);
                     free(line2);
-                    return 1;
+                    return 5;
                 }
                 l1Pos++;
                 l2Pos++;
@@ -469,7 +470,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                             fclose(file2_fd);
                             free(line1);
                             free(line2);
-                            return 1;
+                            return 6;
                         case 2:
                             logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
                                          "The second file (%s) does not match "
@@ -480,7 +481,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                             fclose(file2_fd);
                             free(line1);
                             free(line2);
-                            return 1;
+                            return 7;
                         default:
                             l1Pos += 2;
                             l2Pos += 1;
@@ -515,7 +516,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                             fclose(file2_fd);
                             free(line1);
                             free(line2);
-                            return 1;
+                            return 8;
                         case 2:
                             logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
                                          "The first file (%s) does not match "
@@ -526,7 +527,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                             fclose(file2_fd);
                             free(line1);
                             free(line2);
-                            return 1;
+                            return 9;
                         default:
                             l2Pos += 2;
                             l1Pos += 1;
@@ -545,7 +546,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                 fclose(file2_fd);
                 free(line1);
                 free(line2);
-                return 1;
+                return 10;
             }
             l1Pos++;
             l2Pos++;
@@ -559,7 +560,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             fclose(file2_fd);
             free(line1);
             free(line2);
-            return 1;
+            return 11;
         }
         else if(l1Pos != l1Len && l2Pos == l2Len){
             logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
@@ -570,7 +571,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             fclose(file2_fd);
             free(line1);
             free(line2);
-            return 1;
+            return 12;
         }
     }
     if(l1Ret != NULL && l2Ret == NULL){
@@ -584,7 +585,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             fclose(file2_fd);
             free(line1);
             free(line2);
-            return 2;
+            return 13;
         }
     }
     else if(l1Ret == NULL && l2Ret != NULL){
@@ -598,7 +599,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             fclose(file2_fd);
             free(line1);
             free(line2);
-            return 2;
+            return 14;
         }
     }
     fclose(file1_fd);
@@ -617,8 +618,9 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
 */
 int main(int argc, char **argv){
     if(argc <= 1){
-        printf("Usage{test.c}: logc4_test (cmp | test) [FILE...].\n");
-        return -1;
+        logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                     "Usage{test.c}: logc4_test (cmp | test) [FILE...].");
+        return 2;
     }
     // Must be set to handle UTF-8 characters.
     setlocale(LC_ALL, "en_US.UTF-8");
@@ -626,22 +628,23 @@ int main(int argc, char **argv){
         // TODO: Refactor and implement.
         // logc4_init(1, 1, 1);
         if(argc <= 4){
-            printf("[ERROR]{test.c}: The /cmp/ subcommand requires three (3) "
-                   "file paths. The first is the log output and the last two "
-                   "are the files to compare.\n");
-            return 2;
+            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                         "The /cmp/ subcommand requires three (3) file paths. "
+                         "The first is the log output and the last two are "
+                         "the files to compare.");
+            return 3;
         }
         // logc4_setLogFile(argv[2], 0);
         // logc4_setErrLogFile(argv[2], 0);
         int retVal = cmpFiles(argv[3], argv[4], true);
         // logc4_closeLogFiles();
-        return retVal;
+        return retVal == 0 ? 0 : retVal + 4;
     }
     else if(strcmp("test", argv[1]) == 0){
         if(argc == 2){
-            printf("[ERROR]{test.c}: No file(s) passed to the /test/ "
-                   "subcommand.\n");
-            return 2;
+            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                         "No file(s) passed to the /test/ subcommand.");
+            return 4;
         }
         // Assume all arguments after the second one to be test files.
         for(int i = 2; i < argc; i++){
@@ -649,6 +652,8 @@ int main(int argc, char **argv){
         }
         return 0;
     }
-    printf("[ERROR]{test.c}: Unknown subcommand /%s/.\n", argv[1]);
+    logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                 "Unknown subcommand /%s/.",
+                 argv[1]);
     return 1;
 }
