@@ -16,7 +16,7 @@
   * - 2025-05-21: Refactor. Implemented logc4_fileLog().
   * Github <a href="@ghc/1178c2d3db540b7e074684eae82cd47ca3e602a7">commit</a>.
   * - 2025-05-26: Worked on implementing timezones.
-  * Github <a href="@ghc">commit</a>.
+  * Github <a href="@ghc/8c747b6b07242a5cb8baaaba6b414a38047fe5e6">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
@@ -33,11 +33,15 @@
   * the maximum number of bytes a multibyte string can contain.
 */
 #define UTF8Bytes(len) (4 * len)
+/**
+  * The length of the timezone array @a TZS.
+*/
+#define TZS_LEN 5
 
 // TODO: MAKE THREAD SAFE.
 
 /* The maximum length of a formatted time string. */
-static const int TIME_STR_LEN = 28;
+static const int TIME_STR_LEN = 31;
 /* A string literal of "NULL". */
 static const char *c_NULL = "NULL";
 /* A wide character string literal of L"NULL". */
@@ -57,14 +61,22 @@ static logc4_file_t STDLOG = {
 /**
   * @brief A struct that contains the relevant information for a timezone.
   *
-  * All relevant information such as offset from @a UTC and the 3 character
-  * name are stored.
+  * All relevant information such as offset from @a UTC and the abbreviation
+  * are stored.
 */
-static struct TZInfo{
+struct TZInfo{
     /**
       * The 3 character name of the timezone.
     */
     char *name;
+    /**
+      * The location of the timezone.
+    */
+    char *location;
+    /**
+      * Whether Daylight Savings Time (DST) is observed in the timezone.
+    */
+    bool isDST;
     /**
       * The hour offset from @a UTC.
     */
@@ -79,21 +91,21 @@ static struct TZInfo{
     int secOffset;
 };
 /**
-  * The length of the timezone array @a TZS.
-*/
-static const int TZS_LEN = 2;
-/**
   * An array of @a TZInfo structs.
 */
-static struct TZInfo TZS[TZS_LEN] = {
+static const struct TZInfo TZS[TZS_LEN] = {
     {
         .name = "UTC",
+        .location = "Coordinated Universal Time",
+        .isDST = 0,
         .hrOffset = 0,
         .minOffset = 0,
         .secOffset = 0
     },
     {
         .name = NULL,
+        .location = NULL,
+        .isDST = 0,
         .hrOffset = 0,
         .minOffset = 0,
         .secOffset = 0
@@ -215,7 +227,7 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len, int timezone,
 
     if(display.timezone){
         result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s",
-                          ts.tv_nsec / 1000000, getTimezoneString(timezone));
+                          ts.tv_nsec / 1000000, TZS[timezone].name);
     }
     else{
         result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld",

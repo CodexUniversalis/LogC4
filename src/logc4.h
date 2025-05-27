@@ -18,7 +18,7 @@
   * - 2025-05-21: Refactor some function headers.
   * Github <a href="@ghc/1178c2d3db540b7e074684eae82cd47ca3e602a7">commit</a>.
   * - 2025-05-26: Worked on implementing timezones.
-  * Github <a href="@ghc">commit</a>.
+  * Github <a href="@ghc/8c747b6b07242a5cb8baaaba6b414a38047fe5e6">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #pragma once
@@ -57,16 +57,212 @@ typedef enum{
 
 /**
   * @brief An enum of the acceptable timezones.
+  *
+  * These values are taken from
+  * <a href="https://www.timeanddate.com/time/zones/">timeanddate.com</a>. See
+  * this for all additional information.
 */
 typedef enum{
     /**
-      * @brief The timezone is the local timezone of the computer.
+      * The timezone (@a Local) is (@a UTC+??:??:??):
+      * - The local timezone of the computer.
     */
     LOGC4_TZ_LOCAL = -1,
     /**
-      * @brief The timezone is <i>Coordinated Universal Time</i> (@a UTC).
+      * The timezone (@a Universal) is (@a UTC):
+      * - Coordinated Universal Time (@a UTC).
     */
-    LOGC4_TZ_UTC
+    LOGC4_TZ_UTC,
+    /**
+      * The timezone (@a Military) is (@a UTC+1):
+      * - Alfa Time Zone.
+    */
+    LOGC4_TZ_A,
+    /**
+      * The timezone (@a Australia) is (@a UTC+10:30):
+      * - Australian Central Daylight Time
+      * - (@a CDT) Central Daylight Time
+      * - (@a CDST) Central Daylight Savings Time
+    */
+    LOGC4_TZ_ACDT,
+    /**
+      * The timezone (@a Australia) is (@a UTC+9:30):
+      * - Australian Central Standard Time
+      * - (@a CST) Central Setandard Timei
+    */
+    LOGC4_TZ_ACST,
+    /**
+      * The timezone (@a South America) is (@a UTC-5):
+      * - Acre Time
+    */
+    LOGC4_TZ_ACT1,
+    /**
+      * The timezone (@a Australia) is (@a UTC+9:30/+10:30):
+      * - Australian Central Time
+    */
+    LOGC4_TZ_ACT2,
+    /**
+      * The timezone (@a Australia) is (@a UTC+8:45):
+      * - Australian Central Western Standard Time
+    */
+    LOGC4_TZ_ACWST,
+    /**
+      * The timezone (@a Asia) is (@a UTC+4):
+      * - Arabia Dyalight Time
+      * - (@a AST) Arabia Summer Time
+    */
+    LOGC4_TZ_ADT1,
+    /**
+      * The timezone (@a North America / Atlantic) is (@a UTC-3):
+      * - Atlantic Daylight Time
+      * - (@a ADST) Atlantic Daylight Saving Time
+      * - (@a AST) Atlantic Summer Time
+      * - (@a HAA) Heure Avancée de l'Atlantique (French)
+    */
+    LOGC4_TZ_ADT2,
+    /**
+      * The timezone (@a Australia) is (@a UTC+11):
+      * - Australian Eastern Daylight Time
+      * - (@a EDT) Eastern Daylight Time
+      * - (@a EDST) Eastern Daylight Saving Time
+    */
+    LOGC4_TZ_AEDT,
+    /**
+      * The timezone (@a Australia) is (@a UTC+10):
+      * - Australian Eastern Standard Time
+      * - (@a EST) Eastern Standard Time
+      * - (@a AET) Australian Eastern Time
+    */
+    LOGC4_TZ_AEST,
+    /**
+      * The timezone (@a Australia) is (@a UTC+10/11):
+      * - Australian Eastern Time
+    */
+    LOGC4_TZ_AET,
+    /**
+      * The timezone (@a Asia) is (@a UTC+4:30):
+      * - Afghanistan Time
+    */
+    LOGC4_TZ_AFT,
+    /**
+      * The timezone (@a North America) is (@a UTC-8):
+      * - Alaska Daylight Time
+      * - (@a ADST) Alaska Daylight Saving Time
+    */
+    LOGC4_TZ_AKDT,
+    /**
+      * The timezone (@a North America) is (@a UTC-9):
+      * - Alaska Standard Time
+      * - (@a AT) Alaska Time
+    */
+    LOGC4_TZ_AKST,
+    /**
+      * The timezone (@a Asia) is (@a UTC+6):
+      * - Alma-Ata Time
+    */
+    LOGC4_TZ_ALMT,
+    /**
+      * The timezone (@a South America) is (@a UTC-3):
+      * - Amazon Summer Time
+    */
+    LOGC4_TZ_AMST1,
+    /**
+      * The timezone (@a Asia) is (@a UTC+5):
+      * - Armenia Summer Time
+      * - (@a AMDT) Armenia Daylight Time
+    */
+    LOGC4_TZ_AMST2,
+    /**
+      * The timezone (@a South America) is (@a UTC-4):
+      * - Amazon Time
+    */
+    LOGC4_TZ_AMT1,
+    /**
+      * The timezone (@a Asia) is (@a UTC+4):
+      * - Armenia Time
+    */
+    LOGC4_TZ_AMT2,
+    /**
+      * The timezone (@a Asia) is (@a UTC+12):
+      * - Anadyr Time
+    */
+    LOGC4_TZ_ANAST,
+    /**
+      * The timezone (@a Asia) is (@a UTC+12):
+      * - Anadyr Time
+    */
+    LOGC4_TZ_ANAT,
+    /**
+      * The timezone (@a Asia) is (@a UTC+5):
+      * - Aqtobe Time
+    */
+    LOGC4_TZ_AQTT,
+    /**
+      * The timezone (@a Antarctica / South America) is (@a UTC-3):
+      * - Argentina Time
+    */
+    LOGC4_TZ_ART,
+    /**
+      * The timezone (@a Asia) is (@a UTC+3):
+      * - Arabia Standard Time
+      * - (@a AST) Arabic Standard Time
+      * - (@a AST) Al Manamah Standard Time
+    */
+    LOGC4_TZ_AST1,
+    /**
+      * The timezone (@a North America / Atlantic / Caribbean) is (@a UTC-4):
+      * - Atlantic Standard Time
+      * - (@a AT) Atlantic Time
+      * - (@a AST) Tiempo Estándar del Atlántico (Spanish)
+      * - (@a HNA) Heure Normale de l'Atlantique (French)
+    */
+    LOGC4_TZ_AST2,
+    /**
+      * The timezone (@a North America / Atlantic) is (@a UTC-4/3):
+      * - Atlantic Time
+    */
+    LOGC4_TZ_AT,
+    /**
+      * The timezone (@a Australia) is (@a UTC+9):
+      * - Australian Western Daylight Time
+      * - (@a WDT) Western Daylight Time
+      * - (@a WST) Western Summer Time
+    */
+    LOGC4_TZ_AWDT,
+    /**
+      * The timezone (@a Australia) is (@a UTC+8):
+      * - Australian Western Standard Time
+      * - (@a WST) Western Standard Time
+      * - (@a WAT) Western Australia Time
+    */
+    LOGC4_TZ_AWST,
+    /**
+      * The timezone (@a Atlantic) is (@a UTC+0):
+      * - Azores Summer Time
+      * - (@a AZODT) Azores Daylight Time
+    */
+    LOGC4_TZ_AZOST,
+    /**
+      * The timezone (@a Atlantic) is (@a UTC-1):
+      * - Azores Time
+      * - (@a AZOST) Azores Standard Time
+    */
+    LOGC4_TZ_AZOT,
+    /**
+      * The timezone (@a Asia) is (@a UTC+5):
+      * - Azerbaijan Summer Time
+    */
+    LOGC4_TZ_AZST,
+    /**
+      * The timezone (@a Asia) is (@a UTC+4):
+      * - Azerbaijan Time
+    */
+    LOGC4_TZ_AZT,
+    /**
+      * The timezone (@a Pacific) is (@a UTC-12):
+      * - Anywhere on Earth
+    */
+    LOGC4_TZ_AoE
 } logc4_tz_t;
 
 /**
