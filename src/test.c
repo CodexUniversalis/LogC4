@@ -5,12 +5,12 @@
   * @version 0.1.0
   * @date 2025-04-24: Created. @n @n
   * - 2025-05-21: Light refactoring.
-  * Github <a href="@ghc/11330ccad45e238314dca87fddfa75bc60ef920d">commit</a>.
+  * GitHub <a href="@ghc/11330ccad45e238314dca87fddfa75bc60ef920d">commit</a>.
   * - 2025-05-22: Refactoring references to old LogC4 functions to the updated
   * version.
-  * Github <a href="@ghc/fa4effda02e18f016e3d597ae695543f35789e56">commit</a>.
+  * GitHub <a href="@ghc/fa4effda02e18f016e3d597ae695543f35789e56">commit</a>.
   * - 2025-05-26: Changed all old @a LogC4 functions to the new functions.
-  * Github <a href="@ghc/8c747b6b07242a5cb8baaaba6b414a38047fe5e6">commit</a>.
+  * GitHub <a href="@ghc/8c747b6b07242a5cb8baaaba6b414a38047fe5e6">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include "logc4.h"

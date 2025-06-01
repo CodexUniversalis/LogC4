@@ -6,17 +6,17 @@
   * @date 2025-04-24: Created. @n @n
   * Changelog:
   * - 2025-05-01: Worked on implementing functions from logc4.h.
-  * Github <a href="@ghc/038b3387d1b05ff13556ba55e1489a5ac00d3af6">commit</a>.
+  * GitHub <a href="@ghc/038b3387d1b05ff13556ba55e1489a5ac00d3af6">commit</a>.
   * - 2025-05-03: Implemented mostly old code.
-  * Github <a href="@ghc/a2efdfb47228bbfdde5f36d7bd668304dfdc19b9">commit</a>.
+  * GitHub <a href="@ghc/a2efdfb47228bbfdde5f36d7bd668304dfdc19b9">commit</a>.
   * - 2025-05-19: Fixed some functions that were broken.
-  * Github <a href="@ghc/78f4278d8c60d382af35c1e65b7597f3d487d286">commit</a>.
+  * GitHub <a href="@ghc/78f4278d8c60d382af35c1e65b7597f3d487d286">commit</a>.
   * - 2025-05-20: Refactor. Implemented logc4_stdLog().
-  * Github <a href="@ghc/ea353fd037a713db521b873883e769dd967106a1">commit</a>.
+  * GitHub <a href="@ghc/ea353fd037a713db521b873883e769dd967106a1">commit</a>.
   * - 2025-05-21: Refactor. Implemented logc4_fileLog().
-  * Github <a href="@ghc/1178c2d3db540b7e074684eae82cd47ca3e602a7">commit</a>.
+  * GitHub <a href="@ghc/1178c2d3db540b7e074684eae82cd47ca3e602a7">commit</a>.
   * - 2025-05-26: Worked on implementing timezones.
-  * Github <a href="@ghc/8c747b6b07242a5cb8baaaba6b414a38047fe5e6">commit</a>.
+  * GitHub <a href="@ghc/8c747b6b07242a5cb8baaaba6b414a38047fe5e6">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
