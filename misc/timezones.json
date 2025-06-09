@@ -1,0 +1,5994 @@
+{
+    "UTC": [
+        {
+            "abbreviation": "UTC",
+            "name": "Coordinated Universal Time",
+            "language": "English",
+            "locations": [
+                "Worldwide"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ],
+    "A": [
+        {
+            "abbreviation": "A",
+            "name": "Alfa Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "ACDT": [
+        {
+            "abbreviation": "ACDT",
+            "name": "Australian Central Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 30
+            }
+        }
+    ],
+    "ACST": [
+        {
+            "abbreviation": "ACST",
+            "name": "Australian Central Standard Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 30
+            }
+        }
+    ],
+    "ACT": [
+        {
+            "abbreviation": "ACT",
+            "name": "Acre Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "ACT",
+            "name": "Australian Central Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": true,
+                "west": false,
+                "hour": 9,
+                "minute": 30
+            }
+        }
+    ],
+    "ACWST": [
+        {
+            "abbreviation": "ACWST",
+            "name": "Australian Central Western Standard Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 45
+            }
+        }
+    ],
+    "ADST": [
+        {
+            "abbreviation": "ADST",
+            "name": "Atlantic Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "ADST",
+            "name": "Alaska Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "ADT": [
+        {
+            "abbreviation": "ADT",
+            "name": "Arabia Daylight Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "ADT",
+            "name": "Atlantic Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "AEDT": [
+        {
+            "abbreviation": "AEDT",
+            "name": "Australian Eastern Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "AEST": [
+        {
+            "abbreviation": "AEST",
+            "name": "Australian Eastern Standard Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "AET": [
+        {
+            "abbreviation": "AET",
+            "name": "Australian Eastern Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": true,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AET",
+            "name": "Australian Eastern Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "AFT": [
+        {
+            "abbreviation": "AFT",
+            "name": "Afghanistan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 30
+            }
+        }
+    ],
+    "AKDT": [
+        {
+            "abbreviation": "AKDT",
+            "name": "Alaska Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "AKST": [
+        {
+            "abbreviation": "AKST",
+            "name": "Alaska Standard Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "ALMT": [
+        {
+            "abbreviation": "ALMT",
+            "name": "Alma-Ata Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "AMDT": [
+        {
+            "abbreviation": "AMDT",
+            "name": "Armenia Daylight Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "AMST": [
+        {
+            "abbreviation": "AMST",
+            "name": "Amazon Summer Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AMST",
+            "name": "Armenia Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "AMT": [
+        {
+            "abbreviation": "AMT",
+            "name": "Amazon Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AMT",
+            "name": "Armenia Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "ANAST": [
+        {
+            "abbreviation": "ANAST",
+            "name": "Anadyr Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "ANAT": [
+        {
+            "abbreviation": "ANAT",
+            "name": "Anadyr Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "AQTT": [
+        {
+            "abbreviation": "AQTT",
+            "name": "Aqtobe Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "ART": [
+        {
+            "abbreviation": "ART",
+            "name": "Argentina Time",
+            "language": "English",
+            "locations": [
+                "Antarctica",
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "AST": [
+        {
+            "abbreviation": "AST",
+            "name": "Arabia Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AST",
+            "name": "Atlantic Standard Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Atlantic",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AST",
+            "name": "Arabia Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AST",
+            "name": "Atlantic Summer Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AST",
+            "name": "Arabic Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AST",
+            "name": "Al Manamah Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AST",
+            "name": "Tiempo Estándar del Atlántico",
+            "language": "Spanish",
+            "locations": [
+                "North America",
+                "Atlantic",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "AT": [
+        {
+            "abbreviation": "AT",
+            "name": "Atlantic Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": true,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AT",
+            "name": "Alaska Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 9,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AT",
+            "name": "Atlantic Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Atlantic",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "AWDT": [
+        {
+            "abbreviation": "AWDT",
+            "name": "Australian Western Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "AWST": [
+        {
+            "abbreviation": "AWST",
+            "name": "Australian Western Standard Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "AZODT": [
+        {
+            "abbreviation": "AZODT",
+            "name": "Azores Daylight Time",
+            "language": "English",
+            "locations": [
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ],
+    "AZOST": [
+        {
+            "abbreviation": "AZOST",
+            "name": "Azores Summer Time",
+            "language": "English",
+            "locations": [
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "AZOST",
+            "name": "Azores Standard Time",
+            "language": "English",
+            "locations": [
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "AZOT": [
+        {
+            "abbreviation": "AZOT",
+            "name": "Azores Time",
+            "language": "English",
+            "locations": [
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "AZST": [
+        {
+            "abbreviation": "AZST",
+            "name": "Azerbaijan Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "AZT": [
+        {
+            "abbreviation": "AZT",
+            "name": "Azerbaijan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "AoE": [
+        {
+            "abbreviation": "AoE",
+            "name": "Anywhere on Earth",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "B": [
+        {
+            "abbreviation": "B",
+            "name": "Bravo Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "BDST": [
+        {
+            "abbreviation": "BDST",
+            "name": "British Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "BDT": [
+        {
+            "abbreviation": "BDT",
+            "name": "Brunei Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "BDT",
+            "name": "British Daylight Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "BNT": [
+        {
+            "abbreviation": "BNT",
+            "name": "Brunei Darussalam Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "BOT": [
+        {
+            "abbreviation": "BOT",
+            "name": "Bolivia Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "BRST": [
+        {
+            "abbreviation": "BRST",
+            "name": "Brasília Summer Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "BRT": [
+        {
+            "abbreviation": "BRT",
+            "name": "Brasília Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "BST": [
+        {
+            "abbreviation": "BST",
+            "name": "Bangladesh Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "BST",
+            "name": "Bougainville Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "BST",
+            "name": "British Summer Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "BST",
+            "name": "Brazil Summer Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "BST",
+            "name": "Brazilian Summer Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "BT": [
+        {
+            "abbreviation": "BT",
+            "name": "Brazil Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "BT",
+            "name": "Brazilian Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "BTT": [
+        {
+            "abbreviation": "BTT",
+            "name": "Bhutan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "C": [
+        {
+            "abbreviation": "C",
+            "name": "Charlie Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "CAST": [
+        {
+            "abbreviation": "CAST",
+            "name": "Casey Time",
+            "language": "English",
+            "locations": [
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "CAT": [
+        {
+            "abbreviation": "CAT",
+            "name": "Central Africa Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "CCT": [
+        {
+            "abbreviation": "CCT",
+            "name": "Cocos Islands Time",
+            "language": "English",
+            "locations": [
+                "Indian Ocean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 30
+            }
+        }
+    ],
+    "CDST": [
+        {
+            "abbreviation": "CDST",
+            "name": "Central Daylight Savings Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 30
+            }
+        },
+        {
+            "abbreviation": "CDST",
+            "name": "Central Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "CDT": [
+        {
+            "abbreviation": "CDT",
+            "name": "Central Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CDT",
+            "name": "Cuba Daylight Time",
+            "language": "English",
+            "locations": [
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CDT",
+            "name": "Central Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 30
+            }
+        },
+        {
+            "abbreviation": "CDT",
+            "name": "Chatham Daylight Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 45
+            }
+        }
+    ],
+    "CEDT": [
+        {
+            "abbreviation": "CEDT",
+            "name": "Central European Daylight Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "CEST": [
+        {
+            "abbreviation": "CEST",
+            "name": "Central European Summer Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "CET": [
+        {
+            "abbreviation": "CET",
+            "name": "Central European Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CET",
+            "name": "Central Europe Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "CHADT": [
+        {
+            "abbreviation": "CHADT",
+            "name": "Chatham Island Daylight Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 45
+            }
+        }
+    ],
+    "CHAST": [
+        {
+            "abbreviation": "CHAST",
+            "name": "Chatham Island Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 45
+            }
+        }
+    ],
+    "CHODST": [
+        {
+            "abbreviation": "CHODST",
+            "name": "Choibalsan Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "CHODT": [
+        {
+            "abbreviation": "CHODT",
+            "name": "Choibalsan Daylight Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "CHOST": [
+        {
+            "abbreviation": "CHOST",
+            "name": "Choibalsan Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "CHOT": [
+        {
+            "abbreviation": "CHOT",
+            "name": "Choibalsan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "CHUT": [
+        {
+            "abbreviation": "CHUT",
+            "name": "Chuuk Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "CIDST": [
+        {
+            "abbreviation": "CIDST",
+            "name": "Cayman Islands Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "CIST": [
+        {
+            "abbreviation": "CIST",
+            "name": "Cayman Islands Standard Time",
+            "language": "English",
+            "locations": [
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "CIT": [
+        {
+            "abbreviation": "CIT",
+            "name": "Cayman Islands Time",
+            "language": "English",
+            "locations": [
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "CKT": [
+        {
+            "abbreviation": "CKT",
+            "name": "Cook Island Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "CLDT": [
+        {
+            "abbreviation": "CLDT",
+            "name": "Chile Daylight Time",
+            "language": "English",
+            "locations": [
+                "South America",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "CLST": [
+        {
+            "abbreviation": "CLST",
+            "name": "Chile Summer Time",
+            "language": "English",
+            "locations": [
+                "South America",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CLST",
+            "name": "Chile Standard Time",
+            "language": "English",
+            "locations": [
+                "South America",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "CLT": [
+        {
+            "abbreviation": "CLT",
+            "name": "Chile Standard Time",
+            "language": "English",
+            "locations": [
+                "South America",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "COT": [
+        {
+            "abbreviation": "COT",
+            "name": "Colombia Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "CST": [
+        {
+            "abbreviation": "CST",
+            "name": "Central Standard Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CST",
+            "name": "China Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CST",
+            "name": "Cuba Standard Time",
+            "language": "English",
+            "locations": [
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CST",
+            "name": "Central Standard Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 30
+            }
+        },
+        {
+            "abbreviation": "CST",
+            "name": "Tiempo Central Estándar",
+            "language": "Spanish",
+            "locations": [
+                "North America",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "CT": [
+        {
+            "abbreviation": "CT",
+            "name": "Central Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": true,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CT",
+            "name": "Chile Time",
+            "language": "English",
+            "locations": [
+                "South America",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "CT",
+            "name": "Central Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "CVT": [
+        {
+            "abbreviation": "CVT",
+            "name": "Cape Verde Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "CXT": [
+        {
+            "abbreviation": "CXT",
+            "name": "Christmas Island Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "ChST": [
+        {
+            "abbreviation": "ChST",
+            "name": "Chamorro Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "D": [
+        {
+            "abbreviation": "D",
+            "name": "Delta Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "DAVT": [
+        {
+            "abbreviation": "DAVT",
+            "name": "Davis Time",
+            "language": "English",
+            "locations": [
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "DDUT": [
+        {
+            "abbreviation": "DDUT",
+            "name": "Dumont-d'Urville Time",
+            "language": "English",
+            "locations": [
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "E": [
+        {
+            "abbreviation": "E",
+            "name": "Echo Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "EADT": [
+        {
+            "abbreviation": "EADT",
+            "name": "Easter Island Daylight Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "EASST": [
+        {
+            "abbreviation": "EASST",
+            "name": "Easter Island Summer Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "EAST": [
+        {
+            "abbreviation": "EAST",
+            "name": "Easter Island Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "EAT": [
+        {
+            "abbreviation": "EAT",
+            "name": "Eastern Africa Time",
+            "language": "English",
+            "locations": [
+                "Africa",
+                "Indian Ocean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "EAT",
+            "name": "East Africa Time",
+            "language": "English",
+            "locations": [
+                "Africa",
+                "Indian Ocean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "ECST": [
+        {
+            "abbreviation": "ECST",
+            "name": "European Central Summer Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "ECT": [
+        {
+            "abbreviation": "ECT",
+            "name": "Ecuador Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "ECT",
+            "name": "European Central Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "EDST": [
+        {
+            "abbreviation": "EDST",
+            "name": "Eastern Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "EDST",
+            "name": "Eastern Daylight Savings Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "EDT": [
+        {
+            "abbreviation": "EDT",
+            "name": "Eastern Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "EDT",
+            "name": "Eastern Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "EDT",
+            "name": "Tiempo de verano del Este",
+            "language": "Spanish",
+            "locations": [
+                "North America",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "EEDT": [
+        {
+            "abbreviation": "EEDT",
+            "name": "Eastern European Daylight Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Asia",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "EEST": [
+        {
+            "abbreviation": "EEST",
+            "name": "Eastern European Summer Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Asia",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "EET": [
+        {
+            "abbreviation": "EET",
+            "name": "Eastern European Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Asia",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "EFATE": [
+        {
+            "abbreviation": "EFATE",
+            "name": "Efate Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "EGST": [
+        {
+            "abbreviation": "EGST",
+            "name": "Eastern Greenland Summer Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "EGST",
+            "name": "East Greenland Summer Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ],
+    "EGT": [
+        {
+            "abbreviation": "EGT",
+            "name": "East Greenland Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 1,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "EGT",
+            "name": "Eastern Greenland Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "EST": [
+        {
+            "abbreviation": "EST",
+            "name": "Eastern Standard Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Caribbean",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "EST",
+            "name": "Eastern Standard Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "ET": [
+        {
+            "abbreviation": "ET",
+            "name": "Eastern Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": true,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "ET",
+            "name": "Eastern Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Caribbean",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "ET",
+            "name": "Tiempo del Este",
+            "language": "Spanish",
+            "locations": [
+                "North America",
+                "Caribbean",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "F": [
+        {
+            "abbreviation": "F",
+            "name": "Foxtrot Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "FET": [
+        {
+            "abbreviation": "FET",
+            "name": "Further-Eastern European Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "FJDT": [
+        {
+            "abbreviation": "FJDT",
+            "name": "Fiji Daylight Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 0
+            }
+        }
+    ],
+    "FJST": [
+        {
+            "abbreviation": "FJST",
+            "name": "Fiji Summer Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 0
+            }
+        }
+    ],
+    "FJT": [
+        {
+            "abbreviation": "FJT",
+            "name": "Fiji Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "FKDT": [
+        {
+            "abbreviation": "FKDT",
+            "name": "Falkland Island Daylight Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "FKST": [
+        {
+            "abbreviation": "FKST",
+            "name": "Falkland Islands Summer Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "FKST",
+            "name": "Falkland Island Standard Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "FKT": [
+        {
+            "abbreviation": "FKT",
+            "name": "Falkland Island Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "FNT": [
+        {
+            "abbreviation": "FNT",
+            "name": "Fernando de Noronha Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "G": [
+        {
+            "abbreviation": "G",
+            "name": "Golf Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "GALT": [
+        {
+            "abbreviation": "GALT",
+            "name": "Galapagos Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "GAMT": [
+        {
+            "abbreviation": "GAMT",
+            "name": "Gambier Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 9,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "GAMT",
+            "name": "Gambier Islands Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "GET": [
+        {
+            "abbreviation": "GET",
+            "name": "Georgia Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia",
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "GFT": [
+        {
+            "abbreviation": "GFT",
+            "name": "French Guiana Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "GILT": [
+        {
+            "abbreviation": "GILT",
+            "name": "Gilbert Island Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "GMT": [
+        {
+            "abbreviation": "GMT",
+            "name": "Greenwich Mean Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa",
+                "North America",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "GMT",
+            "name": "Greenwich Mean Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ],
+    "GST": [
+        {
+            "abbreviation": "GST",
+            "name": "Gulf Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "GST",
+            "name": "South Georgia Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "GST",
+            "name": "Guam Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "GT": [
+        {
+            "abbreviation": "GT",
+            "name": "Greenwich Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa",
+                "North America",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ],
+    "GYT": [
+        {
+            "abbreviation": "GYT",
+            "name": "Guyana Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "H": [
+        {
+            "abbreviation": "H",
+            "name": "Hotel Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "HAA": [
+        {
+            "abbreviation": "HAA",
+            "name": "Heure Avancée de l'Atlantique",
+            "language": "French",
+            "locations": [
+                "North America",
+                "Atlantic"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "HAC": [
+        {
+            "abbreviation": "HAC",
+            "name": "Heure Avancée du Centre",
+            "language": "French",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "HADT": [
+        {
+            "abbreviation": "HADT",
+            "name": "Hawaii Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "HAE": [
+        {
+            "abbreviation": "HAE",
+            "name": "Heure Avancée de l'Est",
+            "language": "French",
+            "locations": [
+                "North America",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "HAP": [
+        {
+            "abbreviation": "HAP",
+            "name": "Heure Avancée du Pacifique",
+            "language": "French",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "HAR": [
+        {
+            "abbreviation": "HAR",
+            "name": "Heure Avancée des Rocheuses",
+            "language": "French",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "HAST": [
+        {
+            "abbreviation": "HAST",
+            "name": "Hawaii-Aleutian Standard Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "HAT": [
+        {
+            "abbreviation": "HAT",
+            "name": "Heure Avancée de Terre-Neuve",
+            "language": "French",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 30
+            }
+        }
+    ],
+    "HDT": [
+        {
+            "abbreviation": "HDT",
+            "name": "Hawaii-Aleutian Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "HKT": [
+        {
+            "abbreviation": "HKT",
+            "name": "Hong Kong Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "HLV": [
+        {
+            "abbreviation": "HLV",
+            "name": "Hora Legal de Venezuela",
+            "language": "Spanish",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "HNA": [
+        {
+            "abbreviation": "HNA",
+            "name": "Heure Normale de l'Atlantique",
+            "language": "French",
+            "locations": [
+                "North America",
+                "Atlantic",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "HNC": [
+        {
+            "abbreviation": "HNC",
+            "name": "Heure Normale du Centre",
+            "language": "French",
+            "locations": [
+                "North America",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "HNE": [
+        {
+            "abbreviation": "HNE",
+            "name": "Heure Normale de l'Est",
+            "language": "French",
+            "locations": [
+                "North America",
+                "Caribbean",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "HNP": [
+        {
+            "abbreviation": "HNP",
+            "name": "Heure Normale du Pacifique",
+            "language": "French",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "HNR": [
+        {
+            "abbreviation": "HNR",
+            "name": "Heure Normale des Rocheuses",
+            "language": "French",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "HNT": [
+        {
+            "abbreviation": "HNT",
+            "name": "Heure Normale de Terre-Neuve",
+            "language": "French",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 30
+            }
+        }
+    ],
+    "HOVDST": [
+        {
+            "abbreviation": "HOVDST",
+            "name": "Hovd Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "HOVDT": [
+        {
+            "abbreviation": "HOVDT",
+            "name": "Hovd Daylight Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "HOVST": [
+        {
+            "abbreviation": "HOVST",
+            "name": "Hovd Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "HOVT": [
+        {
+            "abbreviation": "HOVT",
+            "name": "Hovd Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "HST": [
+        {
+            "abbreviation": "HST",
+            "name": "Hawaii Standard Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "I": [
+        {
+            "abbreviation": "I",
+            "name": "India Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "ICT": [
+        {
+            "abbreviation": "ICT",
+            "name": "Indochina Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "IDT": [
+        {
+            "abbreviation": "IDT",
+            "name": "Israel Daylight Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "IDT",
+            "name": "Iran Daylight Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 30
+            }
+        }
+    ],
+    "IOT": [
+        {
+            "abbreviation": "IOT",
+            "name": "Indian Chagos Time",
+            "language": "English",
+            "locations": [
+                "Indian Ocean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "IRDT": [
+        {
+            "abbreviation": "IRDT",
+            "name": "Iran Daylight Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 30
+            }
+        }
+    ],
+    "IRKST": [
+        {
+            "abbreviation": "IRKST",
+            "name": "Irkutsk Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "IRKT": [
+        {
+            "abbreviation": "IRKT",
+            "name": "Irkutsk Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "IRST": [
+        {
+            "abbreviation": "IRST",
+            "name": "Iran Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 30
+            }
+        },
+        {
+            "abbreviation": "IRST",
+            "name": "Iran Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 30
+            }
+        }
+    ],
+    "IST": [
+        {
+            "abbreviation": "IST",
+            "name": "India Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 30
+            }
+        },
+        {
+            "abbreviation": "IST",
+            "name": "Irish Standard Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "IST",
+            "name": "Israel Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "IST",
+            "name": "Indian Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 30
+            }
+        },
+        {
+            "abbreviation": "IST",
+            "name": "Irish Summer Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "IT": [
+        {
+            "abbreviation": "IT",
+            "name": "Iran Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 30
+            }
+        },
+        {
+            "abbreviation": "IT",
+            "name": "India Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 30
+            }
+        }
+    ],
+    "JST": [
+        {
+            "abbreviation": "JST",
+            "name": "Japan Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "K": [
+        {
+            "abbreviation": "K",
+            "name": "Kilo Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "KGT": [
+        {
+            "abbreviation": "KGT",
+            "name": "Kyrgyzstan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "KIT": [
+        {
+            "abbreviation": "KIT",
+            "name": "Kerguelen",
+            "language": "Islands",
+            "locations": [
+                "Indian Ocean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "KOST": [
+        {
+            "abbreviation": "KOST",
+            "name": "Kosrae Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "KRAST": [
+        {
+            "abbreviation": "KRAST",
+            "name": "Krasnoyarsk Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "KRAT": [
+        {
+            "abbreviation": "KRAT",
+            "name": "Krasnoyarsk Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "KST": [
+        {
+            "abbreviation": "KST",
+            "name": "Korea Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "KST",
+            "name": "Korean Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "KT": [
+        {
+            "abbreviation": "KT",
+            "name": "Korea Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "KUYT": [
+        {
+            "abbreviation": "KUYT",
+            "name": "Kuybyshev Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "L": [
+        {
+            "abbreviation": "L",
+            "name": "Lima Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "LHDT": [
+        {
+            "abbreviation": "LHDT",
+            "name": "Lord Howe Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "LHST": [
+        {
+            "abbreviation": "LHST",
+            "name": "Lord Howe Standard Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 30
+            }
+        }
+    ],
+    "LINT": [
+        {
+            "abbreviation": "LINT",
+            "name": "Line Islands Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 14,
+                "minute": 0
+            }
+        }
+    ],
+    "M": [
+        {
+            "abbreviation": "M",
+            "name": "Mike Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "MAGST": [
+        {
+            "abbreviation": "MAGST",
+            "name": "Magadan Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "MAGST",
+            "name": "Magadan Island Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "MAGT": [
+        {
+            "abbreviation": "MAGT",
+            "name": "Magadan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "MAGT",
+            "name": "Magadan Island Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "MART": [
+        {
+            "abbreviation": "MART",
+            "name": "Marquesas Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 9,
+                "minute": 30
+            }
+        }
+    ],
+    "MAWT": [
+        {
+            "abbreviation": "MAWT",
+            "name": "Mawson Time",
+            "language": "English",
+            "locations": [
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "MCK": [
+        {
+            "abbreviation": "MCK",
+            "name": "Moscow Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "MDST": [
+        {
+            "abbreviation": "MDST",
+            "name": "Mountain Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "MDT": [
+        {
+            "abbreviation": "MDT",
+            "name": "Mountain Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "MESZ": [
+        {
+            "abbreviation": "MESZ",
+            "name": "Mitteleuropäische Sommerzeit",
+            "language": "German",
+            "locations": [
+                "Europe",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "MEZ": [
+        {
+            "abbreviation": "MEZ",
+            "name": "Mitteleuropäische Zeit",
+            "language": "German",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "MHT": [
+        {
+            "abbreviation": "MHT",
+            "name": "Marshall Islands Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "MMT": [
+        {
+            "abbreviation": "MMT",
+            "name": "Myanmar Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 30
+            }
+        }
+    ],
+    "MSD": [
+        {
+            "abbreviation": "MSD",
+            "name": "Moscow Daylight Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "MSD",
+            "name": "Moscow Summer Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "MSK": [
+        {
+            "abbreviation": "MSK",
+            "name": "Moscow Standard Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "MST": [
+        {
+            "abbreviation": "MST",
+            "name": "Mountain Standard Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "MST",
+            "name": "Malaysian Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "MT": [
+        {
+            "abbreviation": "MT",
+            "name": "Mountain Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": true,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "MT",
+            "name": "Mountain Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "MUT": [
+        {
+            "abbreviation": "MUT",
+            "name": "Mauritius Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "MVT": [
+        {
+            "abbreviation": "MVT",
+            "name": "Maldives Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "MYT": [
+        {
+            "abbreviation": "MYT",
+            "name": "Malaysia Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "N": [
+        {
+            "abbreviation": "N",
+            "name": "November Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "NACDT": [
+        {
+            "abbreviation": "NACDT",
+            "name": "North American Central Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "NACST": [
+        {
+            "abbreviation": "NACST",
+            "name": "North American Central Standard Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "NAEDT": [
+        {
+            "abbreviation": "NAEDT",
+            "name": "North American Eastern Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Caribbean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "NAEST": [
+        {
+            "abbreviation": "NAEST",
+            "name": "North American Eastern Standard Time",
+            "language": "English",
+            "locations": [
+                "North America",
+                "Caribbean",
+                "Central America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "NAMDT": [
+        {
+            "abbreviation": "NAMDT",
+            "name": "North American Mountain Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "NAMST": [
+        {
+            "abbreviation": "NAMST",
+            "name": "North American Mountain Standard Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "NAPDT": [
+        {
+            "abbreviation": "NAPDT",
+            "name": "North American Pacific Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "NAPST": [
+        {
+            "abbreviation": "NAPST",
+            "name": "North American Pacific Standard Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "NCT": [
+        {
+            "abbreviation": "NCT",
+            "name": "New Caledonia Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "NDT": [
+        {
+            "abbreviation": "NDT",
+            "name": "Newfoundland Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 30
+            }
+        }
+    ],
+    "NFDT": [
+        {
+            "abbreviation": "NFDT",
+            "name": "Norfolk Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "NFDT",
+            "name": "Norfolk Island Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "NFT": [
+        {
+            "abbreviation": "NFT",
+            "name": "Norfolk Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "NFT",
+            "name": "Norfolk Island Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "NOVST": [
+        {
+            "abbreviation": "NOVST",
+            "name": "Novosibirsk Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "NOVST",
+            "name": "Novosibirsk Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "NOVT": [
+        {
+            "abbreviation": "NOVT",
+            "name": "Novosibirsk Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "NOVT",
+            "name": "Novosibirsk Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "NPT": [
+        {
+            "abbreviation": "NPT",
+            "name": "Nepal Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 45
+            }
+        }
+    ],
+    "NRT": [
+        {
+            "abbreviation": "NRT",
+            "name": "Nauru Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "NST": [
+        {
+            "abbreviation": "NST",
+            "name": "Newfoundland Standard Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 30
+            }
+        }
+    ],
+    "NUT": [
+        {
+            "abbreviation": "NUT",
+            "name": "Niue Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "NZDT": [
+        {
+            "abbreviation": "NZDT",
+            "name": "New Zealand Daylight Time",
+            "language": "English",
+            "locations": [
+                "Pacific",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 0
+            }
+        }
+    ],
+    "NZST": [
+        {
+            "abbreviation": "NZST",
+            "name": "New Zealand Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific",
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "O": [
+        {
+            "abbreviation": "O",
+            "name": "Oscar Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "OESZ": [
+        {
+            "abbreviation": "OESZ",
+            "name": "Osteuropäische Sommerzeit",
+            "language": "German",
+            "locations": [
+                "Europe",
+                "Asia",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "OEZ": [
+        {
+            "abbreviation": "OEZ",
+            "name": "Osteuropäische Zeit",
+            "language": "German",
+            "locations": [
+                "Europe",
+                "Asia",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "OMSST": [
+        {
+            "abbreviation": "OMSST",
+            "name": "Omsk Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "OMSST",
+            "name": "Omsk Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "OMST": [
+        {
+            "abbreviation": "OMST",
+            "name": "Omsk Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "OMST",
+            "name": "Omsk Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "OMST",
+            "name": "Omsk Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "ORAT": [
+        {
+            "abbreviation": "ORAT",
+            "name": "Oral Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "P": [
+        {
+            "abbreviation": "P",
+            "name": "Papa Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "PDST": [
+        {
+            "abbreviation": "PDST",
+            "name": "Pacific Daylight Saving Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "PDT": [
+        {
+            "abbreviation": "PDT",
+            "name": "Pacific Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "PET": [
+        {
+            "abbreviation": "PET",
+            "name": "Peru Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "PETST": [
+        {
+            "abbreviation": "PETST",
+            "name": "Kamchatka Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "PETT": [
+        {
+            "abbreviation": "PETT",
+            "name": "Kamchatka Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "PETT",
+            "name": "Petropavlovsk-Kamchatski Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "PGT": [
+        {
+            "abbreviation": "PGT",
+            "name": "Papua New Guinea Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "PHOT": [
+        {
+            "abbreviation": "PHOT",
+            "name": "Phoenix Island Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 0
+            }
+        }
+    ],
+    "PHT": [
+        {
+            "abbreviation": "PHT",
+            "name": "Philippine Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "PKT": [
+        {
+            "abbreviation": "PKT",
+            "name": "Pakistan Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "PKT",
+            "name": "Pakistan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "PMDT": [
+        {
+            "abbreviation": "PMDT",
+            "name": "Pierre & Miquelon Daylight Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "PMST": [
+        {
+            "abbreviation": "PMST",
+            "name": "Pierre & Miquelon Standard Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "PONT": [
+        {
+            "abbreviation": "PONT",
+            "name": "Pohnpei Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "PST": [
+        {
+            "abbreviation": "PST",
+            "name": "Pacific Standard Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "PST",
+            "name": "Pitcairn Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "PST",
+            "name": "Philippine Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "PT": [
+        {
+            "abbreviation": "PT",
+            "name": "Pacific Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": true,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "PT",
+            "name": "Pacific Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "PT",
+            "name": "Tiempo del Pacífico",
+            "language": "Spanish",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "PWT": [
+        {
+            "abbreviation": "PWT",
+            "name": "Palau Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "PYST": [
+        {
+            "abbreviation": "PYST",
+            "name": "Paraguay Summer Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "PYST",
+            "name": "Pyongyang Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 30
+            }
+        }
+    ],
+    "PYT": [
+        {
+            "abbreviation": "PYT",
+            "name": "Paraguay Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "PYT",
+            "name": "Pyongyang Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 30
+            }
+        }
+    ],
+    "Q": [
+        {
+            "abbreviation": "Q",
+            "name": "Quebec Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "QYZT": [
+        {
+            "abbreviation": "QYZT",
+            "name": "Qyzylorda Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "R": [
+        {
+            "abbreviation": "R",
+            "name": "Romeo Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "RET": [
+        {
+            "abbreviation": "RET",
+            "name": "Reunion Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "ROTT": [
+        {
+            "abbreviation": "ROTT",
+            "name": "Rothera Time",
+            "language": "English",
+            "locations": [
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "S": [
+        {
+            "abbreviation": "S",
+            "name": "Sierra Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "SAKT": [
+        {
+            "abbreviation": "SAKT",
+            "name": "Sakhalin Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "SAMST": [
+        {
+            "abbreviation": "SAMST",
+            "name": "Samara Summer Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "SAMT": [
+        {
+            "abbreviation": "SAMT",
+            "name": "Samara Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "SAMT",
+            "name": "Samara Standard Time",
+            "language": "English",
+            "locations": [
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "SAST": [
+        {
+            "abbreviation": "SAST",
+            "name": "South Africa Standard Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "SAST",
+            "name": "South African Standard Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "SBT": [
+        {
+            "abbreviation": "SBT",
+            "name": "Solomon Islands Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "SBT",
+            "name": "Solomon Island Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "SCT": [
+        {
+            "abbreviation": "SCT",
+            "name": "Seychelles Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "SGT": [
+        {
+            "abbreviation": "SGT",
+            "name": "Singapore Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "SRET": [
+        {
+            "abbreviation": "SRET",
+            "name": "Srednekolymsk Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "SRT": [
+        {
+            "abbreviation": "SRT",
+            "name": "Suriname Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "SST": [
+        {
+            "abbreviation": "SST",
+            "name": "Samoa Standard Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 11,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "SST",
+            "name": "Singapore Standard Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "ST": [
+        {
+            "abbreviation": "ST",
+            "name": "Samoa Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 0
+            }
+        }
+    ],
+    "SYOT": [
+        {
+            "abbreviation": "SYOT",
+            "name": "Syowa Time",
+            "language": "English",
+            "locations": [
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "T": [
+        {
+            "abbreviation": "T",
+            "name": "Tango Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "TAHT": [
+        {
+            "abbreviation": "TAHT",
+            "name": "Tahiti Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "TFT": [
+        {
+            "abbreviation": "TFT",
+            "name": "French Southern and Antarctic Time",
+            "language": "English",
+            "locations": [
+                "Indian Ocean"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "TJT": [
+        {
+            "abbreviation": "TJT",
+            "name": "Tajikistan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "TKT": [
+        {
+            "abbreviation": "TKT",
+            "name": "Tokelau Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 0
+            }
+        }
+    ],
+    "TLT": [
+        {
+            "abbreviation": "TLT",
+            "name": "East Timor Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "TMT": [
+        {
+            "abbreviation": "TMT",
+            "name": "Turkmenistan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "TOST": [
+        {
+            "abbreviation": "TOST",
+            "name": "Tonga Summer Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 14,
+                "minute": 0
+            }
+        }
+    ],
+    "TOT": [
+        {
+            "abbreviation": "TOT",
+            "name": "Tonga Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 0
+            }
+        }
+    ],
+    "TRT": [
+        {
+            "abbreviation": "TRT",
+            "name": "Turkey Time",
+            "language": "English",
+            "locations": [
+                "Asia",
+                "Europe"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "TVT": [
+        {
+            "abbreviation": "TVT",
+            "name": "Tuvalu Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "U": [
+        {
+            "abbreviation": "U",
+            "name": "Uniform Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "ULAST": [
+        {
+            "abbreviation": "ULAST",
+            "name": "Ulaanbaatar Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "ULAST",
+            "name": "Ulan Bator Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "ULAT": [
+        {
+            "abbreviation": "ULAT",
+            "name": "Ulaanbaatar Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "ULAT",
+            "name": "Ulan Bator Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "UYST": [
+        {
+            "abbreviation": "UYST",
+            "name": "Uruguay Summer Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "UYT": [
+        {
+            "abbreviation": "UYT",
+            "name": "Uruguay Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "UZT": [
+        {
+            "abbreviation": "UZT",
+            "name": "Uzbekistan Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "V": [
+        {
+            "abbreviation": "V",
+            "name": "Victor Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "VET": [
+        {
+            "abbreviation": "VET",
+            "name": "Venezuelan Standard Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 4,
+                "minute": 0
+            }
+        }
+    ],
+    "VLAST": [
+        {
+            "abbreviation": "VLAST",
+            "name": "Vladivostok Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "VLAT": [
+        {
+            "abbreviation": "VLAT",
+            "name": "Vladivostok Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "VOST": [
+        {
+            "abbreviation": "VOST",
+            "name": "Vostok Time",
+            "language": "English",
+            "locations": [
+                "Antarctica"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "VUT": [
+        {
+            "abbreviation": "VUT",
+            "name": "Vanuatu Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "W": [
+        {
+            "abbreviation": "W",
+            "name": "Whiskey Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "WAKT": [
+        {
+            "abbreviation": "WAKT",
+            "name": "Wake Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "WARST": [
+        {
+            "abbreviation": "WARST",
+            "name": "Western Argentine Summer Time",
+            "language": "English",
+            "locations": [
+                "South America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 3,
+                "minute": 0
+            }
+        }
+    ],
+    "WAST": [
+        {
+            "abbreviation": "WAST",
+            "name": "West Africa Summer Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "WAT": [
+        {
+            "abbreviation": "WAT",
+            "name": "West Africa Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WAT",
+            "name": "Western Australia Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "WDT": [
+        {
+            "abbreviation": "WDT",
+            "name": "Western Daylight Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "WEDT": [
+        {
+            "abbreviation": "WEDT",
+            "name": "Western European Daylight Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "WEST": [
+        {
+            "abbreviation": "WEST",
+            "name": "Western European Summer Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "WESZ": [
+        {
+            "abbreviation": "WESZ",
+            "name": "Westeuropäische Sommerzeit",
+            "language": "German",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "WET": [
+        {
+            "abbreviation": "WET",
+            "name": "Western European Time",
+            "language": "English",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ],
+    "WEZ": [
+        {
+            "abbreviation": "WEZ",
+            "name": "Westeuropäische Zeit",
+            "language": "German",
+            "locations": [
+                "Europe",
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ],
+    "WFT": [
+        {
+            "abbreviation": "WFT",
+            "name": "Wallis and Futuna Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "WGST": [
+        {
+            "abbreviation": "WGST",
+            "name": "Western Greenland Summer Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 1,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WGST",
+            "name": "West Greenland Summer Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 1,
+                "minute": 0
+            }
+        }
+    ],
+    "WGT": [
+        {
+            "abbreviation": "WGT",
+            "name": "Western Greenland Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WGT",
+            "name": "Western Greenland Time",
+            "language": "English",
+            "locations": [
+                "North America"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 2,
+                "minute": 0
+            }
+        }
+    ],
+    "WIB": [
+        {
+            "abbreviation": "WIB",
+            "name": "Western Indonesian Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WIB",
+            "name": "Waktu Indonesia Barat",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 7,
+                "minute": 0
+            }
+        }
+    ],
+    "WIT": [
+        {
+            "abbreviation": "WIT",
+            "name": "Eastern Indonesian Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WIT",
+            "name": "Waktu Indonesia Timur",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "WITA": [
+        {
+            "abbreviation": "WITA",
+            "name": "Central Indonesian Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WITA",
+            "name": "Waktu Indonesia Tengah",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "WST": [
+        {
+            "abbreviation": "WST",
+            "name": "West Samoa Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 13,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WST",
+            "name": "Western Sahara Summer Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 1,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WST",
+            "name": "Western Summer Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WST",
+            "name": "Western Standard Time",
+            "language": "English",
+            "locations": [
+                "Australia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 8,
+                "minute": 0
+            }
+        }
+    ],
+    "WT": [
+        {
+            "abbreviation": "WT",
+            "name": "Western Sahara Standard Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        },
+        {
+            "abbreviation": "WT",
+            "name": "Western Sahara Time",
+            "language": "English",
+            "locations": [
+                "Africa"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ],
+    "X": [
+        {
+            "abbreviation": "X",
+            "name": "X-ray Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 11,
+                "minute": 0
+            }
+        }
+    ],
+    "Y": [
+        {
+            "abbreviation": "Y",
+            "name": "Yankee Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": true,
+                "hour": 12,
+                "minute": 0
+            }
+        }
+    ],
+    "YAKST": [
+        {
+            "abbreviation": "YAKST",
+            "name": "Yakutsk Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "YAKT": [
+        {
+            "abbreviation": "YAKT",
+            "name": "Yakutsk Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 9,
+                "minute": 0
+            }
+        }
+    ],
+    "YAPT": [
+        {
+            "abbreviation": "YAPT",
+            "name": "Yap Time",
+            "language": "English",
+            "locations": [
+                "Pacific"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 10,
+                "minute": 0
+            }
+        }
+    ],
+    "YEKST": [
+        {
+            "abbreviation": "YEKST",
+            "name": "Yekaterinburg Summer Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 6,
+                "minute": 0
+            }
+        }
+    ],
+    "YEKT": [
+        {
+            "abbreviation": "YEKT",
+            "name": "Yekaterinburg Time",
+            "language": "English",
+            "locations": [
+                "Asia"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 5,
+                "minute": 0
+            }
+        }
+    ],
+    "Z": [
+        {
+            "abbreviation": "Z",
+            "name": "Zulu Time Zone",
+            "language": "English",
+            "locations": [
+                "Military"
+            ],
+            "offset": {
+                "dst": false,
+                "west": false,
+                "hour": 0,
+                "minute": 0
+            }
+        }
+    ]
+}

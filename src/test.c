@@ -11,6 +11,8 @@
   * GitHub <a href="@ghc/fa4effda02e18f016e3d597ae695543f35789e56">commit</a>.
   * - 2025-05-26: Changed all old @a LogC4 functions to the new functions.
   * GitHub <a href="@ghc/8c747b6b07242a5cb8baaaba6b414a38047fe5e6">commit</a>.
+  * - 2025-05-31: Made sure GitHub was spelled correctly.
+  * GitHub <a href="@ghc/e541157c808a9a20a7b611e696840db7d67d443e">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include "logc4.h"
