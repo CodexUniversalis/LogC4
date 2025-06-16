@@ -23,7 +23,7 @@
   * GitHub <a href="@ghc/e541157c808a9a20a7b611e696840db7d67d443e">commit</a>.
   * - 2025-06-08: Removed the timezone enum from this file and moved it to
   * @a timezones.h. Also renamed some instances of @a timeZone to @a timezone.
-  * GitHub <a href="@ghc/">commit</a>.
+  * GitHub <a href="@ghc/0c3f0c205507cf393e7a22e89a5bf8fd1aa9afe7">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #pragma once
@@ -33,31 +33,30 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <wchar.h>
-#include "timezones.h"
 
 // TODO: MAKE THREAD SAFE.
 
 /**
   * @brief An enum of the @a LogC4 log message types.
 */
-typedef enum{
+typedef enum logc4_msg_t{
     /**
       * @brief The log message is of type @a ERROR.
     */
-    LOGC4_ERROR,
+    LOGC4_MSG_ERROR,
     /**
       * @brief The log message is of type @a WARNING.
     */
-    LOGC4_WARNING,
+    LOGC4_MSG_WARNING,
     /**
       * @brief The log message is of type @a INFO.
     */
-    LOGC4_INFO,
-#ifdef LOGC4_DEBUG_PROG
+    LOGC4_MSG_INFO,
+#ifdef LOGC4_MSG_DEBUG_PROG
     /**
       * @brief The log message is of type @a DEBUG.
     */
-    LOGC4_DEBUG
+    LOGC4_MSG_DEBUG
 #endif
 } logc4_msg_t;
 
@@ -66,7 +65,7 @@ typedef enum{
   *
   * If any of the members are set to @a false, then they are not displayed.
 */
-typedef struct{
+typedef struct logc4_display_t{
     /**
       * @brief Whether to display the calender date in the time part of the
       * log message.
@@ -81,14 +80,38 @@ typedef struct{
       * @a true to display it, @a false otherwise.
     */
     bool timezone;
+    /**
+      * @brief Whether to display the time as proper (12-hour) or as
+      * communist (24-hr).
+      *
+      * @a true to use the proper format, @a false otherwise.
+      *
+    */
+    bool properTimeFormat;
 } logc4_display_t;
+
+/**
+  * @brief An enum of the acceptable timezones.
+  *
+  * The only acceptable timezones are local and @a UTC.
+*/
+typedef enum logc4_tz_t{
+    /**
+      * The local timezone.
+    */
+    LOGC4_TZ_LOCAL,
+    /**
+      * The timezone for <i>Coordinated Universal Time</i>.
+    */
+    LOGC4_TZ_UTC
+} logc4_tz_t;
 
 /**
   * @brief A struct containing all of the information for a log file.
   *
   * Contains all needed information that is needed to write to the log file.
 */
-typedef struct{
+typedef struct logc4_file_t{
     /**
       * @brief The @a FILE* struct of the log file.
       *
@@ -105,11 +128,8 @@ typedef struct{
       * @brief The timezone of the log message.
       *
       * The values are:
-      * - @a -1 to use the computer's local time.
-      * - @a 0 to use UTC time.
-      *
-      * > NOT YET IMPLEMENTED. This will change in the future and the timezone
-      * will be able to be specified for values around the globe.
+      * - @a logc4_tz_local to use the computer's local time.
+      * - @a logc4_tz_utc to use UTC time.
     */
     logc4_tz_t timezone;
     /**
@@ -142,12 +162,12 @@ char *logc4_wcstos(wchar_t *wStr);
 /**
   * @brief Sets the desired character type for printing to the standard output.
   *
-  * @param timeZone The desired time zone to use when printing the time to
-  * either @a stdout or @a stderr.
+  * @param timeZone @a logc4_tz_local to use the computer's local time.
+  * @a logc4_tz_utc to use UTC time.
   * @param display The @a logc4_display_t struct that is used to determine
   * what information to display.
 */
-void logc4_stdInit(int timeZone, logc4_display_t display);
+void logc4_stdInit(logc4_tz_t timeZone, logc4_display_t display);
 
 /**
   * @brief Logs the formatted message to @a stdout or @a stderr with the given
@@ -159,8 +179,6 @@ void logc4_stdInit(int timeZone, logc4_display_t display);
   * log, then they can be passed in. If @a NULL is passed then that argument is
   * ignored and not present in the log message. The filled out format string is
   * appended to the message type and date-time and printed to @a stdout.
-  *
-  * > ONLY UTC TIME IS DISPLAYED AT THE MOMENT. THIS WILL CHANGE.
   *
   * To see more information about the format string, see
   * <a href="https://www.man7.org/linux/man-pages/man3/printf.3.html">
@@ -191,8 +209,6 @@ int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
   * append the file will also need to be decided. Also, takes in the desired
   * timezone designation string.
   *
-  * > ONLY UTC TIME IS DISPLAYED AT THE MOMENT. THIS WILL CHANGE.
-  *
   * If the file could not be open, the reason is printed to @a stderr and
   * @a NULL is returned. If the file has already been opened for logging, then
   * this function returns @a NULL.
@@ -200,17 +216,16 @@ int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
   * @param filePath The absolute/relative file path of the log file.
   * @param append @a false to overwrite and not append to the file. @a true to
   * append to the end of the file.
-  * @param timeZone @a 0 to use UTC time. @a 1 to use the computer's
-  * local time.
-  * > This will change in the future and the timezone will be able to be
-  * specified for values around the globe.
+  * @param timeZone @a logc4_tz_local to use the computer's local time.
+  * @a logc4_tz_utc to use UTC time.
   * @param display The @a logc4_display_t struct that is used to determine
   * what information to display.
   * @return logc4_file_t* A pointer to a @a logc4_file_t struct used in
   * logging.
 */
 logc4_file_t *logc4_fileOpen(const char *filePath, const bool append,
-                             const int timeZone, logc4_display_t display);
+                             const logc4_tz_t timeZone,
+                             const logc4_display_t display);
 
 /**
   * @brief Closes the given log file.
@@ -233,8 +248,6 @@ void logc4_fileClose(logc4_file_t *logFile);
   * argument is ignored and not present in the log message. The filled out
   * format string is appended to the message type and date-time and printed to
   * @a stdout.
-  *
-  * > ONLY UTC TIME IS DISPLAYED AT THE MOMENT. THIS WILL CHANGE.
   *
   * To see more information about the format string, see
   * <a href="https://www.man7.org/linux/man-pages/man3/printf.3.html">

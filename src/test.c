@@ -222,7 +222,7 @@ static void testFile(char *filePath){
 */
 static bool getNextChar(wint_t *ch, WStr string, size_t *pos){
     if(*pos >= string.len){
-        logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+        logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                      "Trying to access a character outside of the string's "
                      "bounds.");
         return false;
@@ -379,14 +379,14 @@ Compares the given two files by either wide characters or normal characters.
 static int cmpFiles(const char *file1, const char *file2, const int wideChars){
     FILE *file1_fd = fopen(file1, "r");
     if(file1_fd == NULL){
-        logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+        logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                      "Cannot open the first file: %s.",
                      file1);
         return 1;
     }
     FILE *file2_fd = fopen(file2, "r");
     if(file2_fd == NULL){
-        logc4_stdLog(false, LOGC4_ERROR, __FILE__, __func__,
+        logc4_stdLog(false, LOGC4_MSG_ERROR, __FILE__, __func__,
                      "Cannot open the second file: %s.",
                      file2);
         fclose(file1_fd);
@@ -411,7 +411,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             ch2 = line2[l2Pos];
             if(!wideChars){
                 if(ch1 > 127){
-                    logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                    logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                                  "The first file (%s) contains a non-ASCII "
                                  "character.",
                                  file1);
@@ -422,7 +422,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     return 3;
                 }
                 else if(ch2 > 127){
-                    logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                    logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                                  "The second file (%s) contains a non-ASCII "
                                  "character.",
                                  file1);
@@ -433,7 +433,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     return 4;
                 }
                 else if(ch1 != ch2){
-                    logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                    logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                                  "The first file (%s) and the second "
                                  "file (%s) do not match ASCII characters.",
                                  file1, file2);
@@ -463,7 +463,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     }, &l2Pos);
                     switch(retVal){
                         case 1:
-                            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                                          "The second file (%s) does not match "
                                          "the first file (%s) because of a "
                                          "12-hour time format.",
@@ -474,7 +474,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                             free(line2);
                             return 6;
                         case 2:
-                            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                                          "The second file (%s) does not match "
                                          "the first file (%s) because of a "
                                          "24-hour time format.",
@@ -509,7 +509,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     }, &l1Pos);
                     switch(retVal){
                         case 1:
-                            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                                          "The first file (%s) does not match "
                                          "the second file (%s) because of a "
                                          "12-hour time format.",
@@ -520,7 +520,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                             free(line2);
                             return 8;
                         case 2:
-                            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                                          "The first file (%s) does not match "
                                          "the second file (%s) because of a "
                                          "24-hour time format.",
@@ -540,7 +540,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                 }
             }
             if(ch1 != ch2){
-                logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+                logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                              "The first file (%s) and the second file (%s) do "
                              "not match wide characters.",
                              file1, file2);
@@ -554,7 +554,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             l2Pos++;
         }
         if(l1Pos == l1Len && l2Pos != l2Len){
-            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                          "The second file (%s) does not match the first file "
                          "(%s) because a line in the second file is longer.",
                          file2, file1);
@@ -565,7 +565,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
             return 11;
         }
         else if(l1Pos != l1Len && l2Pos == l2Len){
-            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                          "The first file (%s) does not match the second file "
                          "(%s) because a line in the first file is longer.",
                          file1, file2);
@@ -579,7 +579,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
     if(l1Ret != NULL && l2Ret == NULL){
         l1Ret = fgetws(line1, numChars, file1_fd);
         if(l1Ret != NULL){
-            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                          "The first file (%s) is longer than the second file "
                          "(%s).",
                          file1, file2);
@@ -593,7 +593,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
     else if(l1Ret == NULL && l2Ret != NULL){
         l2Ret = fgetws(line2, numChars, file2_fd);
         if(l2Ret != NULL){
-            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                          "The second file (%s) is longer than the first file "
                          "(%s).",
                          file2, file1);
@@ -620,7 +620,7 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
 */
 int main(int argc, char **argv){
     if(argc <= 1){
-        logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+        logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                      "Usage{test.c}: logc4_test (cmp | test) [FILE...].");
         return 2;
     }
@@ -630,7 +630,7 @@ int main(int argc, char **argv){
         // TODO: Refactor and implement.
         // logc4_init(1, 1, 1);
         if(argc <= 4){
-            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                          "The /cmp/ subcommand requires three (3) file paths. "
                          "The first is the log output and the last two are "
                          "the files to compare.");
@@ -644,7 +644,7 @@ int main(int argc, char **argv){
     }
     else if(strcmp("test", argv[1]) == 0){
         if(argc == 2){
-            logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                          "No file(s) passed to the /test/ subcommand.");
             return 4;
         }
@@ -654,7 +654,7 @@ int main(int argc, char **argv){
         }
         return 0;
     }
-    logc4_stdLog(LOGC4_ERROR, true, __FILE__, __func__,
+    logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                  "Unknown subcommand /%s/.",
                  argv[1]);
     return 1;

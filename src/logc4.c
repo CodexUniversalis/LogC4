@@ -22,7 +22,7 @@
   * - 2025-06-08: Added the timezone enum from @a timezones.h and refactored
   * the layout for the timezone info. Also renamed some instances of
   * @a timeZone to @a timezone and moved @a TZInfo to @a timezones.h.
-  * GitHub <a href="@ghc/">commit</a>.
+  * GitHub <a href="@ghc/0c3f0c205507cf393e7a22e89a5bf8fd1aa9afe7">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
@@ -31,7 +31,6 @@
 #include <string.h>
 #include <time.h>
 #include "logc4.h"
-#include "timezones.h"
 
 /**
   * @brief Multiplies the given length by 4.
@@ -55,9 +54,10 @@ static const int c_NULL_LEN = 4;
 static logc4_file_t STDLOG = {
     .file = NULL,
     .filePath = NULL,
-    .timezone = 0,
+    .timezone = LOGC4_TZ_LOCAL,
     .display = {
         .date = true,
+        .properTimeFormat = true,
         .timezone = true
     }
 };
@@ -136,31 +136,48 @@ static void timeCheckAlloc(const void *ptr, const char *intFuncName,
   *
   * @param timeStr A pointer to the string for the formatted time string.
   * @param len The length of @a timeStr.
-  * @param timezone The timezone to use.
+  * @param tzEnum The timezone enum to use.
   * @param display The @a logc4_display_t struct that is used to determine
   * what information to display.
   * @return int If the value is not @a 0, then an error occurred and the
   * contents of @a timeStr are undefined.
 */
 static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
-                                      logc4_tz_t timezone,
+                                      logc4_tz_t tzEnum,
                                       logc4_display_t display){
-    // TODO: Implement timezone differences.
     struct timespec ts = {0};
     int result = clock_gettime(0, &ts);
     if(result == -1){
         return -1;
     }
 
-    if(timezone == -1){
-        extern char *tzname[2];
-        extern long timezone;
-        extern int daylight;
-        tzset();
-    }
+    char *UTCStr = "UTC";
+    char *proper = "";
+    extern char *tzname[2];
+    extern long timezone;
+    extern int daylight;
     struct tm tm = {0};
-    if(gmtime_r(&(ts.tv_sec), &tm) == NULL){
-        return -2;
+    if(tzEnum == LOGC4_TZ_LOCAL){
+        tzset();
+        if(localtime_r(&(ts.tv_sec), &tm) == NULL){
+            return -2;
+        }
+    }
+    else if(tzEnum == LOGC4_TZ_UTC){
+        if(gmtime_r(&(ts.tv_sec), &tm) == NULL){
+            return -3;
+        }
+    }
+
+    if(display.properTimeFormat){
+        proper = "AM ";
+        if(tm.tm_hour == 0){
+            tm.tm_hour = 12;
+        }
+        else if(tm.tm_hour > 12){
+            proper = "PM ";
+            tm.tm_hour -= 12;
+        }
     }
 
     char *fmt = NULL;
@@ -172,20 +189,22 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
     }
     result = strftime(timeStr, len, fmt, &tm);
     if(result == 0){
-        return -3;
+        return -4;
     }
     len -= result - 1;
 
     if(display.timezone){
-        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s",
-                          ts.tv_nsec / 1000000, TZS[timezone].name);
+        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s%s",
+                          ts.tv_nsec / 1000000, proper,
+                          tzEnum == LOGC4_TZ_LOCAL ?
+                          tzname[daylight != 0] : UTCStr);
     }
     else{
-        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld",
-                          ts.tv_nsec / 1000000);
+        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s",
+                          ts.tv_nsec / 1000000, proper);
     }
     if(result >= len){
-        return -4;
+        return -5;
     }
 
     return 0;
@@ -222,7 +241,7 @@ static char *getCurrentTime(const logc4_tz_t timezone, logc4_display_t display,
         if(fileName == NULL && funcName == NULL){
             fprintf(stderr,
                     "%s [ERROR]{%s/%s:%d} The function "
-                    "getCurrentTimeFromTimeSpec(3) returned a value of %d\n",
+                    "getCurrentTimeFromTimeSpec(3) returned a value of %d.\n",
                     c_NULL, __FILE__, __func__, lineNumber, ret);
         }
         else if(ref == 0){
@@ -408,25 +427,25 @@ void logc4_stdInit(logc4_tz_t timezone, logc4_display_t display){
 /* Gets the string representation of the logc4_msg*/
 static char *getMsgType(const logc4_msg_t msgType){
     switch(msgType){
-        case LOGC4_ERROR:
+        case LOGC4_MSG_ERROR:
             return "ERROR";
-        case LOGC4_WARNING:
+        case LOGC4_MSG_WARNING:
             return "WARNING";
-        case LOGC4_INFO:
+        case LOGC4_MSG_INFO:
             return "INFO";
 #ifdef LOGC4_DEBUG_PROG
-        case LOGC4_DEBUG:
+        case LOGC4_MSG_DEBUG:
             return "DEBUG";
 #endif
         default:
             return "UNKNOWN";
     }
-    }
+}
 
-    /*
-    Log formatted message to stdout or stderr from the given format string and
-    function values.
-    */
+/*
+Log formatted message to stdout or stderr from the given format string and
+function values.
+*/
 int logc4_stdLog(const logc4_msg_t msgType, const bool toStderr,
                  const char *fileName, const char *funcName,
                  const char *format, ...){
@@ -617,3 +636,5 @@ int logc4_fileLog(const logc4_file_t *logFile, const logc4_msg_t msgType,
     free(buffer);
     return result;
 }
+
+#undef UTF8Bytes
