@@ -23,6 +23,14 @@
   * the layout for the timezone info. Also renamed some instances of
   * @a timeZone to @a timezone and moved @a TZInfo to @a timezones.h.
   * GitHub <a href="@ghc/0c3f0c205507cf393e7a22e89a5bf8fd1aa9afe7">commit</a>.
+  * - 2025-06-15: The only timezones are @a LOGC4_TZ_LOCAL and @a LOGC4_TZ_UTC.
+  * Also added the ability to convert from communist (24-hour) to
+  * proper (12-hour) format.
+  * GitHub <a href="@ghc/cb907a7e6fd9236ef1244a7818c49f0a2b8126b7">commit</a>.
+  * - 2025-06-15: Removed mention of other timezones.
+  * GitHub <a href="@ghc/5f6d5bf8a59c241a1a851f8adc1d6919ef934bcb">commit</a>.
+  * - 2025-06-15: Updated comments for files.
+  * GitHub <a href="@ghc/">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
@@ -38,12 +46,12 @@
   * This multiplies the given length of a wide character string by 4 to get
   * the maximum number of bytes a multibyte string can contain.
 */
-#define UTF8Bytes(len) (4 * len)
+#define LOGC4_UTF8Bytes(len) (4 * len)
 
 // TODO: MAKE THREAD SAFE.
 
 /* The maximum length of a formatted time string. */
-static const int TIME_STR_LEN = 31;
+static const int TIME_STR_LEN = 40;
 /* A string literal of "NULL". */
 static const char *c_NULL = "NULL";
 /* A wide character string literal of L"NULL". */
@@ -169,6 +177,7 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
         }
     }
 
+
     if(display.properTimeFormat){
         proper = "AM ";
         if(tm.tm_hour == 0){
@@ -224,6 +233,7 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
 */
 static char *getCurrentTime(const logc4_tz_t timezone, logc4_display_t display,
                             const char *fileName, const char *funcName){
+    // TODO: Handle different timezones.
     char *timeStr = calloc(TIME_STR_LEN, sizeof(char));
     timeCheckAlloc(timeStr, __func__, __LINE__ - 1, 2, fileName, funcName);
     int ret = getCurrentTimeFromTimeSpec(timeStr, TIME_STR_LEN, timezone,
@@ -387,9 +397,9 @@ Converts a wide character string (wchar_t *) to a normal string (char *).
 */
 char *logc4_wcstos(wchar_t *wStr){
     size_t wLength = wcslen(wStr);
-    char *str = calloc(UTF8Bytes(wLength) + 1, sizeof(char));
+    char *str = calloc(LOGC4_UTF8Bytes(wLength) + 1, sizeof(char));
     checkAlloc(str, __func__, __LINE__ - 1, 2, NULL, NULL);
-    size_t length = wcstombs(str, wStr, UTF8Bytes(wLength));
+    size_t length = wcstombs(str, wStr, LOGC4_UTF8Bytes(wLength));
     int lineNumber = __LINE__ - 1;
     if(length == (size_t)-1){
         free(str);
@@ -406,7 +416,7 @@ char *logc4_wcstos(wchar_t *wStr){
         strncat(null, c_NULL, c_NULL_LEN);
         return null;
     }
-    else if(length < UTF8Bytes(wLength)){
+    else if(length < LOGC4_UTF8Bytes(wLength)){
         char *temp = realloc(str, (length + 1) * sizeof(char));
         checkAlloc(temp, __func__, __LINE__ - 1, 3, NULL, NULL);
         str = temp;
@@ -636,4 +646,4 @@ int logc4_fileLog(const logc4_file_t *logFile, const logc4_msg_t msgType,
     return result;
 }
 
-#undef UTF8Bytes
+#undef LOGC4_UTF8Bytes

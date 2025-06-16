@@ -13,6 +13,14 @@
   * GitHub <a href="@ghc/8c747b6b07242a5cb8baaaba6b414a38047fe5e6">commit</a>.
   * - 2025-05-31: Made sure GitHub was spelled correctly.
   * GitHub <a href="@ghc/e541157c808a9a20a7b611e696840db7d67d443e">commit</a>.
+  * - 2025-06-15: The only timezones are @a LOGC4_TZ_LOCAL and @a LOGC4_TZ_UTC.
+  * Also added the ability to convert from communist (24-hour) to
+  * proper (12-hour) format.
+  * GitHub <a href="@ghc/cb907a7e6fd9236ef1244a7818c49f0a2b8126b7">commit</a>.
+  * - 2025-06-15: Refactored the number of characters per line in test.c.
+  * GitHub <a href="@ghc/e4985b87be873c6977c31414c323d73f8f9c1cd8">commit</a>.
+  * - 2025-06-15: Updated comments for files.
+  * GitHub <a href="@ghc/">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include "logc4.h"

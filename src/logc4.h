@@ -24,6 +24,12 @@
   * - 2025-06-08: Removed the timezone enum from this file and moved it to
   * @a timezones.h. Also renamed some instances of @a timeZone to @a timezone.
   * GitHub <a href="@ghc/0c3f0c205507cf393e7a22e89a5bf8fd1aa9afe7">commit</a>.
+  * - 2025-06-15: The only timezones are @a LOGC4_TZ_LOCAL and @a LOGC4_TZ_UTC.
+  * Also added the ability to convert from communist (24-hour) to
+  * proper (12-hour) format.
+  * GitHub <a href="@ghc/cb907a7e6fd9236ef1244a7818c49f0a2b8126b7">commit</a>.
+  * - 2025-06-15: Updated comments for files.
+  * GitHub <a href="@ghc/">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #pragma once
