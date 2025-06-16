@@ -224,7 +224,6 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
 */
 static char *getCurrentTime(const logc4_tz_t timezone, logc4_display_t display,
                             const char *fileName, const char *funcName){
-    // TODO: Handle different timezones.
     char *timeStr = calloc(TIME_STR_LEN, sizeof(char));
     timeCheckAlloc(timeStr, __func__, __LINE__ - 1, 2, fileName, funcName);
     int ret = getCurrentTimeFromTimeSpec(timeStr, TIME_STR_LEN, timezone,
