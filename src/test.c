@@ -463,7 +463,8 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     }, &l2Pos);
                     switch(retVal){
                         case 1:
-                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
+                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__,
+                                         __func__,
                                          "The second file (%s) does not match "
                                          "the first file (%s) because of a "
                                          "12-hour time format.",
@@ -474,7 +475,8 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                             free(line2);
                             return 6;
                         case 2:
-                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
+                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__,
+                                         __func__,
                                          "The second file (%s) does not match "
                                          "the first file (%s) because of a "
                                          "24-hour time format.",
@@ -509,7 +511,8 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                     }, &l1Pos);
                     switch(retVal){
                         case 1:
-                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
+                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__,
+                                         __func__,
                                          "The first file (%s) does not match "
                                          "the second file (%s) because of a "
                                          "12-hour time format.",
@@ -520,7 +523,8 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
                             free(line2);
                             return 8;
                         case 2:
-                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
+                            logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__,
+                                         __func__,
                                          "The first file (%s) does not match "
                                          "the second file (%s) because of a "
                                          "24-hour time format.",
