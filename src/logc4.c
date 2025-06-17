@@ -30,7 +30,9 @@
   * - 2025-06-15: Removed mention of other timezones.
   * GitHub <a href="@ghc/5f6d5bf8a59c241a1a851f8adc1d6919ef934bcb">commit</a>.
   * - 2025-06-15: Updated comments for files.
-  * GitHub <a href="@ghc/">commit</a>.
+  * GitHub <a href="@ghc/525644530ddb5cba5235f930ecbfd615283f1296">commit</a>.
+  * - 2025-06-16: Removed the logc4_stowcs() and logc4_wcstos() functions.
+  * Github <a href="@ghc/">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
@@ -349,84 +351,9 @@ static void checkAlloc(const void *ptr, const char *intFuncName,
 }
 
 /*
-Converts a normal string (char *) to a wide character string (wchar_t *).
-*/
-wchar_t *logc4_stowcs(char *str){
-    int length = (int)strlen(str);
-    char *copy = calloc(length + 1, sizeof(char));
-    checkAlloc(copy, __func__, __LINE__ - 1, 2, NULL, NULL);
-    for(int i = 0; i < length; i++){
-        signed char ch = str[i];
-        if(ch < 0){
-            copy[i] = (-ch) % 94 + 33;
-        }
-        else{
-            copy[i] = ch;
-        }
-    }
-    wchar_t *wcs = calloc(length + 1, sizeof(wchar_t));
-    checkAlloc(wcs, __func__, __LINE__ - 1, 2, NULL, NULL);
-    int wLength = swprintf(wcs, length + 1, L"%s", copy);
-    int lineNum = __LINE__ - 1;
-    if(wLength == -1){
-        free(wcs);
-        free(copy);
-        char *time = getCurrentTime(STDLOG.timezone, STDLOG.display, NULL,
-                                    NULL);
-        fprintf(stderr,
-                "%s [ERROR]{%s/%s:%d} The function swprintf() "
-                "returned with a value of -1.\n",
-                time, __FILE__, __func__, lineNum);
-        free(time);
-        wchar_t *null = calloc(c_NULL_LEN + 1, sizeof(wchar_t));
-        checkAlloc(null, __func__, __LINE__ - 1, 2, NULL, NULL);
-        wcsncat(null, c_wNULL, c_NULL_LEN);
-        return null;
-    }
-    else if(wLength < length){
-        wchar_t *temp = realloc(wcs, (wLength + 1) * sizeof(wchar_t));
-        checkAlloc(temp, __func__, __LINE__ - 1, 3, NULL, NULL);
-        wcs = temp;
-    }
-    free(copy);
-    return wcs;
-}
-
-/*
-Converts a wide character string (wchar_t *) to a normal string (char *).
-*/
-char *logc4_wcstos(wchar_t *wStr){
-    size_t wLength = wcslen(wStr);
-    char *str = calloc(LOGC4_UTF8Bytes(wLength) + 1, sizeof(char));
-    checkAlloc(str, __func__, __LINE__ - 1, 2, NULL, NULL);
-    size_t length = wcstombs(str, wStr, LOGC4_UTF8Bytes(wLength));
-    int lineNumber = __LINE__ - 1;
-    if(length == (size_t)-1){
-        free(str);
-        char *time = getCurrentTime(STDLOG.timezone, STDLOG.display, NULL,
-                                    NULL);
-        fprintf(stderr,
-                "%s [ERROR]{%s/%s:%d} The function wcstombs() "
-                "returned with a value of -1. This means a wide character "
-                "was encountered that could not be converted.\n",
-                time, __FILE__, __func__, lineNumber);
-        free(time);
-        char *null = calloc(c_NULL_LEN + 1, sizeof(char));
-        checkAlloc(null, __func__, __LINE__ - 1, 2, NULL, NULL);
-        strncat(null, c_NULL, c_NULL_LEN);
-        return null;
-    }
-    else if(length < LOGC4_UTF8Bytes(wLength)){
-        char *temp = realloc(str, (length + 1) * sizeof(char));
-        checkAlloc(temp, __func__, __LINE__ - 1, 3, NULL, NULL);
-        str = temp;
-    }
-    return str;
-}
-
-/*
 Init stdout and stderr:
 - timezone
+- display
 */
 void logc4_stdInit(logc4_tz_t timezone, logc4_display_t display){
     STDLOG.timezone = timezone;

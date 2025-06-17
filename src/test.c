@@ -20,8 +20,8 @@
   * - 2025-06-15: Refactored the number of characters per line in test.c.
   * GitHub <a href="@ghc/e4985b87be873c6977c31414c323d73f8f9c1cd8">commit</a>.
   * - 2025-06-15: Updated comments for files.
-  * GitHub <a href="@ghc/">commit</a>.
-  * @copyright Copyright (c) 2025
+  * GitHub <a href="@ghc/525644530ddb5cba5235f930ecbfd615283f1296">commit</a>.
+  * @copyright Copyright (c) 2025s
 */
 #include "logc4.h"
 #include <errno.h>

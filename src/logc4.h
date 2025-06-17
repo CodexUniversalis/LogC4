@@ -29,7 +29,9 @@
   * proper (12-hour) format.
   * GitHub <a href="@ghc/cb907a7e6fd9236ef1244a7818c49f0a2b8126b7">commit</a>.
   * - 2025-06-15: Updated comments for files.
-  * GitHub <a href="@ghc/">commit</a>.
+  * GitHub <a href="@ghc/525644530ddb5cba5235f930ecbfd615283f1296">commit</a>.
+  * - 2025-06-16: Removed the logc4_stowcs() and logc4_wcstos() functions.
+  * Github <a href="@ghc/">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #pragma once
@@ -146,24 +148,6 @@ typedef struct logc4_file_t{
     */
     logc4_display_t display;
 } logc4_file_t;
-
-/**
-  * @brief Converts a normal string (char *) to a wide character string
-  * (wchar_t *). The returned string should be freen when done being used.
-  *
-  * @param str The normal string to convert.
-  * @return wchar_t* The normal string as a wide character string.
-*/
-wchar_t *logc4_stowcs(char *str);
-
-/**
-  * @brief Converts a wide character string (wchar_t *) to a normal string
-  * (char *). The returned string should be freen when done being used.
-  *
-  * @param wStr The wide character string to convert.
-  * @return char* The wide character string as a normal string.
-*/
-char *logc4_wcstos(wchar_t *wStr);
 
 /**
   * @brief Sets the desired character type for printing to the standard output.
