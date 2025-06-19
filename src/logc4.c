@@ -38,6 +38,9 @@
   * GitHub <a href="@ghc/525644530ddb5cba5235f930ecbfd615283f1296">commit</a>.
   * - 2025-06-16: Removed the logc4_stowcs() and logc4_wcstos() functions.
   * Github <a href="@ghc/28e89b59e944fecf5a74264726772faf85e29143">commit</a>.
+  * - 2025-06-19: Changed the file comment and changed some staic variables
+  * into macros.
+  * Github <a href="@ghc/6e4e54ceb18ae90967fd68c6beaba373717fbed6">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
