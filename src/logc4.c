@@ -2,6 +2,11 @@
   * @file logc4.c
   * @author CodexUniversalis (codexuniversalisprime@gmail.com)
   * @brief The source file for the @a logc4.h header file.
+  *
+  * For proper handling of @a UTF-8 characters, ensure that
+  * <i>setlocale(LC_ALL, "en_US,UTF-8")</i> is called before using this
+  * library.
+  *
   * @version 0.1.0
   * @date 2025-04-24: Created. @n @n
   * Changelog:
@@ -32,7 +37,7 @@
   * - 2025-06-15: Updated comments for files.
   * GitHub <a href="@ghc/525644530ddb5cba5235f930ecbfd615283f1296">commit</a>.
   * - 2025-06-16: Removed the logc4_stowcs() and logc4_wcstos() functions.
-  * Github <a href="@ghc/">commit</a>.
+  * Github <a href="@ghc/28e89b59e944fecf5a74264726772faf85e29143">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
@@ -42,24 +47,15 @@
 #include <time.h>
 #include "logc4.h"
 
-/**
-  * @brief Multiplies the given length by 4.
-  *
-  * This multiplies the given length of a wide character string by 4 to get
-  * the maximum number of bytes a multibyte string can contain.
-*/
-#define LOGC4_UTF8Bytes(len) (4 * len)
-
 // TODO: MAKE THREAD SAFE.
 
 /* The maximum length of a formatted time string. */
-static const int TIME_STR_LEN = 40;
+#define TIME_STR_LEN 40
 /* A string literal of "NULL". */
-static const char *c_NULL = "NULL";
-/* A wide character string literal of L"NULL". */
-static const wchar_t *c_wNULL = L"NULL";
+#define c_NULL "NULL"
 /* The length of both the normal and wide character *NULL* string. */
-static const int c_NULL_LEN = 4;
+#define c_NULL_LEN 4
+
 /* The logc4_file_t for logging to stdout or stderr. */
 static logc4_file_t STDLOG = {
     .file = NULL,
@@ -67,7 +63,7 @@ static logc4_file_t STDLOG = {
     .timezone = LOGC4_TZ_LOCAL,
     .display = {
         .date = true,
-        .properTimeFormat = true,
+        .properTimeFormat = false,
         .timezone = true
     }
 };
@@ -181,12 +177,12 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
 
 
     if(display.properTimeFormat){
-        proper = "AM ";
+        proper = " AM ";
         if(tm.tm_hour == 0){
             tm.tm_hour = 12;
         }
         else if(tm.tm_hour > 12){
-            proper = "PM ";
+            proper = " PM ";
             tm.tm_hour -= 12;
         }
     }
@@ -205,13 +201,13 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
     len -= result - 1;
 
     if(display.timezone){
-        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s%s",
+        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld%s%s",
                           ts.tv_nsec / 1000000, proper,
                           tzEnum == LOGC4_TZ_LOCAL ?
                           tzname[daylight != 0] : UTCStr);
     }
     else{
-        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s",
+        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld%s",
                           ts.tv_nsec / 1000000, proper);
     }
     if(result >= len){
@@ -235,12 +231,11 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
 */
 static char *getCurrentTime(const logc4_tz_t timezone, logc4_display_t display,
                             const char *fileName, const char *funcName){
-    // TODO: Handle different timezones.
     char *timeStr = calloc(TIME_STR_LEN, sizeof(char));
     timeCheckAlloc(timeStr, __func__, __LINE__ - 1, 2, fileName, funcName);
     int ret = getCurrentTimeFromTimeSpec(timeStr, TIME_STR_LEN, timezone,
                                          display);
-    int lineNumber = __LINE__ - 1;
+    int lineNumber = __LINE__ - 2;
     if(ret != 0){
         int ref = 0;
         if(fileName == NULL && funcName != NULL){
@@ -573,4 +568,6 @@ int logc4_fileLog(const logc4_file_t *logFile, const logc4_msg_t msgType,
     return result;
 }
 
-#undef LOGC4_UTF8Bytes
+#undef TIME_STR_LEN
+#undef c_NULL
+#undef c_NULL_LEN

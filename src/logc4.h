@@ -2,6 +2,11 @@
   * @file logc4.h
   * @author CodexUniversalis (codexuniversalisprime@gmail.com)
   * @brief The header file for the @a Logc4 library.
+  *
+  * For proper handling of @a UTF-8 characters, ensure that
+  * <i>setlocale(LC_ALL, "en_US,UTF-8")</i> is called before using this
+  * library.
+  *
   * @version 0.1.0
   * @date 2025-04-24: Created. @n @n
   * Changelog
@@ -31,7 +36,7 @@
   * - 2025-06-15: Updated comments for files.
   * GitHub <a href="@ghc/525644530ddb5cba5235f930ecbfd615283f1296">commit</a>.
   * - 2025-06-16: Removed the logc4_stowcs() and logc4_wcstos() functions.
-  * Github <a href="@ghc/">commit</a>.
+  * Github <a href="@ghc/28e89b59e944fecf5a74264726772faf85e29143">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #pragma once

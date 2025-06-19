@@ -631,6 +631,12 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
   * @return int The exit code of the program.
 */
 int main(int argc, char **argv){
+    logc4_display_t display = {
+        .date = true,
+        .properTimeFormat = false,
+        .timezone = false
+    };
+    logc4_stdInit(LOGC4_TZ_UTC, display);
     if(argc <= 1){
         logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                      "Usage{test.c}: logc4_test (cmp | test) [FILE...].");
