@@ -24,7 +24,7 @@
   * - 2025-06-25: Added TODO to refactor the tests to use the
   * <a href="https://criterion.readthedocs.io/en/master/">Criterion</a> testing
   * framework. Making public.
-  * GitHub <a href="@ghc/">commit</a>.
+  * GitHub <a href="@ghc/a011d39fe5e2ef9db0c7e1038b50450a7774a06e">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include "logc4.h"

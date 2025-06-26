@@ -42,7 +42,7 @@
   * into macros.
   * Github <a href="@ghc/6e4e54ceb18ae90967fd68c6beaba373717fbed6">commit</a>.
   * - 2025-06-25: Slight refactoring. Making public.
-  * Github <a href="@ghc/">commit</a>.
+  * Github <a href="@ghc/a011d39fe5e2ef9db0c7e1038b50450a7774a06e">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>

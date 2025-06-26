@@ -40,7 +40,7 @@
   * - 2025-06-19: Changed the file comment.
   * Github <a href="@ghc/6e4e54ceb18ae90967fd68c6beaba373717fbed6">commit</a>.
   * - 2025-06-25: Making public.
-  * Github <a href="@ghc/"></a>.
+  * Github <a href="@ghc/a011d39fe5e2ef9db0c7e1038b50450a7774a06e"></a>.
   * @copyright Copyright (c) 2025
 */
 #pragma once
