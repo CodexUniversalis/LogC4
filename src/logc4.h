@@ -39,6 +39,8 @@
   * Github <a href="@ghc/28e89b59e944fecf5a74264726772faf85e29143">commit</a>.
   * - 2025-06-19: Changed the file comment.
   * Github <a href="@ghc/6e4e54ceb18ae90967fd68c6beaba373717fbed6">commit</a>.
+  * - 2025-06-25: Making public.
+  * Github <a href="@ghc/"></a>.
   * @copyright Copyright (c) 2025
 */
 #pragma once
@@ -67,11 +69,17 @@ typedef enum logc4_msg_t{
       * @brief The log message is of type @a INFO.
     */
     LOGC4_MSG_INFO,
-#ifdef LOGC4_MSG_DEBUG_PROG
+#ifdef LOGC4_DEBUG_PROG
     /**
       * @brief The log message is of type @a DEBUG.
     */
-    LOGC4_MSG_DEBUG
+    LOGC4_MSG_DEBUG,
+#endif
+#ifdef LOGC4_TEST_PROG
+    /**
+      * @brief The log message is of type @a TEST.
+    */
+    LOGC4_MSG_TEST,
 #endif
 } logc4_msg_t;
 
@@ -114,7 +122,7 @@ typedef enum logc4_tz_t{
     /**
       * The local timezone.
     */
-    LOGC4_TZ_LOCAL,
+    LOGC4_TZ_LOCAL = -1,
     /**
       * The timezone for <i>Coordinated Universal Time</i>.
     */
@@ -142,9 +150,8 @@ typedef struct logc4_file_t{
     /**
       * @brief The timezone of the log message.
       *
-      * The values are:
-      * - @a logc4_tz_local to use the computer's local time.
-      * - @a logc4_tz_utc to use UTC time.
+      * The values are @a LOGC4_TZ_LOCAL, to use the computer's local time, and
+      * @a LOGC4_TZ_UTC, to use UTC time.
     */
     logc4_tz_t timezone;
     /**
@@ -159,8 +166,8 @@ typedef struct logc4_file_t{
 /**
   * @brief Sets the desired character type for printing to the standard output.
   *
-  * @param timeZone @a logc4_tz_local to use the computer's local time.
-  * @a logc4_tz_utc to use UTC time.
+  * @param timeZone The timezone of the log message. @a LOGC4_TZ_LOCAL to use
+  * the computer's local time. @a LOGC4_TZ_UTC to use UTC time.
   * @param display The @a logc4_display_t struct that is used to determine
   * what information to display.
 */

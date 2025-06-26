@@ -21,7 +21,11 @@
   * GitHub <a href="@ghc/e4985b87be873c6977c31414c323d73f8f9c1cd8">commit</a>.
   * - 2025-06-15: Updated comments for files.
   * GitHub <a href="@ghc/525644530ddb5cba5235f930ecbfd615283f1296">commit</a>.
-  * @copyright Copyright (c) 2025s
+  * - 2025-06-25: Added TODO to refactor the tests to use the
+  * <a href="https://criterion.readthedocs.io/en/master/">Criterion</a> testing
+  * framework. Making public.
+  * GitHub <a href="@ghc/">commit</a>.
+  * @copyright Copyright (c) 2025
 */
 #include "logc4.h"
 #include <errno.h>
@@ -33,6 +37,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
+
+/* TODO: Implement Criterion testing framework
+(https://criterion.readthedocs.io/en/master/) */
 
 // TODO: Refactor to use new LogC4 functions and rewrite the tests.
 
@@ -631,12 +638,6 @@ static int cmpFiles(const char *file1, const char *file2, const int wideChars){
   * @return int The exit code of the program.
 */
 int main(int argc, char **argv){
-    logc4_display_t display = {
-        .date = true,
-        .properTimeFormat = false,
-        .timezone = false
-    };
-    logc4_stdInit(LOGC4_TZ_UTC, display);
     if(argc <= 1){
         logc4_stdLog(LOGC4_MSG_ERROR, true, __FILE__, __func__,
                      "Usage{test.c}: logc4_test (cmp | test) [FILE...].");

@@ -41,6 +41,8 @@
   * - 2025-06-19: Changed the file comment and changed some staic variables
   * into macros.
   * Github <a href="@ghc/6e4e54ceb18ae90967fd68c6beaba373717fbed6">commit</a>.
+  * - 2025-06-25: Slight refactoring. Making public.
+  * Github <a href="@ghc/">commit</a>.
   * @copyright Copyright (c) 2025
 */
 #include <errno.h>
@@ -180,12 +182,12 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
 
 
     if(display.properTimeFormat){
-        proper = " AM ";
+        proper = " AM";
         if(tm.tm_hour == 0){
             tm.tm_hour = 12;
         }
         else if(tm.tm_hour > 12){
-            proper = " PM ";
+            proper = " PM";
             tm.tm_hour -= 12;
         }
     }
@@ -204,13 +206,13 @@ static int getCurrentTimeFromTimeSpec(char *timeStr, int len,
     len -= result - 1;
 
     if(display.timezone){
-        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld%s%s",
+        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld%s %s",
                           ts.tv_nsec / 1000000, proper,
                           tzEnum == LOGC4_TZ_LOCAL ?
                           tzname[daylight != 0] : UTCStr);
     }
     else{
-        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld%s",
+        result = snprintf(&timeStr[strlen(timeStr)], len, ".%03ld %s",
                           ts.tv_nsec / 1000000, proper);
     }
     if(result >= len){
@@ -269,7 +271,7 @@ static char *getCurrentTime(const logc4_tz_t timezone, logc4_display_t display,
         }
         char *null = calloc(c_NULL_LEN + 1, sizeof(char));
         timeCheckAlloc(null, __func__, __LINE__ - 1, 2, fileName, funcName);
-        strncat(null, c_NULL, c_NULL_LEN);
+        strncat(null, c_NULL, c_NULL_LEN + 1);
         return null;
     }
     return timeStr;

@@ -2,6 +2,7 @@ CC=gcc
 CFLAGS=-Wall -Wextra -pedantic -ggdb2
 INCLUDES=-Isrc
 LIBS=
+TESTLIBS=-lcriterion
 
 SRCDIR=src
 BUILDDIR=build
@@ -43,16 +44,19 @@ ${$@_DIR}/${$@_RMPAT3}"
 	rm -rf "${$@_DIR}/${$@_RMPAT3}"
 endef
 
-.PHONY: all setup clean destroy
-
-all: $(MAKEDIR)/$(OBJ) $(LOGC4TEST)
-
-$(LOGC4TEST): $(MAKEDIR)/$(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(LOGC4TEST) $(OBJ) $(LIBS)
+.PHONY: all
+all: $(MAKEDIR)/$(OBJ)
 
 $(MAKEDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) -c $< -o $@
 
+.PHONY: test
+test: $(LOGC4TEST)
+
+$(LOGC4TEST): $(MAKEDIR)/$(OBJ)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(LOGC4TEST) $(OBJ) $(TESTLIBS)
+
+.PHONY: setup
 setup:
 	mkdir -p $(MAKEDIR)
 	mkdir -p $(CMAKEDIR)
@@ -63,6 +67,7 @@ setup:
 	mkdir -p $(TESTSGIVDIR)
 	mkdir -p $(TESTSGENDIR)
 
+.PHONY: clean
 clean:
 	@$(call rm_wild,$(MAKEDIR))
 	@$(call rm_wild,$(CMAKEDIR))
@@ -71,6 +76,7 @@ clean:
 	@$(call rm_wild,$(VLGDIR))
 	@$(call rm_wild,$(TESTSGENDIR))
 
+.PHONY: destroy
 destroy:
 	rm -rf $(BUILDDIR)
 	rm -rf $(PROGOUTDIR)
